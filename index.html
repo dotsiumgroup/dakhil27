@@ -2646,356 +2646,199 @@
       }
     }
 
-    /* Video Player Page Styles */
-    #video-player-page {
-      display: none;
-      background: #f8f9fa;
-      color: var(--text);
-      font-family: var(--font-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    /* ===== Video Player Page ===== */
+#video-player-page .wrap { max-width: 980px; margin: 0 auto; padding: 16px; box-sizing: border-box; }
+#video-player-page .player-card { background: #ffffff; padding: 16px; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+#video-player-page .player-card:hover { transform: translateY(-4px); }
+#video-player-page .top-buttons { display: flex; justify-content: space-between; margin-bottom: 16px; gap: 10px; position: relative; z-index: 10; }
+#video-player-page .custom-btn { background: linear-gradient(135deg, #6c63ff, #a29bfe); padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(108,99,255,0.3); color: #fff; font-family: Arial, sans-serif; width: 48%; transition: all 0.25s ease; border: none; user-select: none; }
+#video-player-page .custom-btn:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(108,99,255,0.45); }
+#video-player-page .custom-btn:active { transform: scale(0.96); }
+#video-player-page .custom-btn small { font-size: 11px; display: block; opacity: 0.8; font-weight: 300; }
+#video-player-page .custom-btn span { font-size: 16px; font-weight: 700; display: block; }
+#video-player-page .custom-btn.disabled-btn { background: #dc3545 !important; box-shadow: 0 4px 14px rgba(220,53,69,0.4) !important; cursor: not-allowed !important; opacity: 0.9; }
+#video-player-page .custom-btn.disabled-btn:hover { transform: none !important; }
+#video-player-page .video-box { border-radius: 14px; overflow: hidden; background: #0f0f1a; box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+#video-player-page .aspect { position: relative; width: 100%; padding-top: 56.25%; background: #000; overflow: hidden; }
+#video-player-page .aspect.portrait { padding-top: 177.78%; }
+#video-player-page #player { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+#video-player-page .blocker { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 40; pointer-events: auto; background: transparent; cursor: pointer; }
+#video-player-page #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; z-index: 30; color: #fff; opacity: 1; transition: opacity 0.5s ease; pointer-events: none; }
+#video-player-page #loading.hidden { opacity: 0; pointer-events: none; }
+#video-player-page #loading.error-state .spinner { display: none; }
+#video-player-page #loading.error-state p { color: #ff6b6b; font-weight: 500; }
+#video-player-page #loading.error-state p .error-icon { display: inline-block; font-size: 24px; margin-bottom: 8px; color: #ff4757; }
+#video-player-page .spinner { border: 4px solid rgba(255,255,255,0.15); border-top: 4px solid #ff4d4d; border-radius: 50%; width: 44px; height: 44px; animation: spin 1s linear infinite; margin: 0 auto 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#video-player-page #loading p { font-size: 14px; margin: 5px 0; opacity: 0.85; font-weight: 300; line-height: 1.6; }
+#video-player-page .controls-panel { background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); padding: 12px 16px 16px 16px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+#video-player-page .panel-progress-container { width: 100%; height: 8px; background: rgba(255,255,255,0.12); border-radius: 4px; cursor: pointer; position: relative; transition: height 0.15s ease; }
+#video-player-page .panel-progress-container:hover { height: 10px; }
+#video-player-page .panel-progress-bar { height: 100%; background: linear-gradient(90deg, #ff4d4d, #ff6b6b); border-radius: 4px; width: 0%; position: relative; transition: width 0.1s linear; box-shadow: 0 0 12px rgba(255,77,77,0.25); }
+#video-player-page .panel-progress-thumb { position: absolute; top: -3px; right: -7px; width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); cursor: grab; z-index: 10; transition: transform 0.15s ease; }
+#video-player-page .panel-progress-thumb:hover { transform: scale(1.12); }
+#video-player-page .panel-progress-thumb:active { cursor: grabbing; }
+#video-player-page .panel-time-row { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 400; letter-spacing: 0.3px; padding: 0 2px; margin-top: -4px; }
+#video-player-page .panel-controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 2px; }
+#video-player-page .panel-fullscreen-row { display: flex; justify-content: center; margin-top: 10px; }
+#video-player-page .panel-btn { background: rgba(255,255,255,0.07); border: none; color: #fff; padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 40px; height: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.05); font-family: 'Poppins', sans-serif; }
+#video-player-page .panel-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.04); }
+#video-player-page .panel-btn:active { transform: scale(0.94); }
+#video-player-page .panel-btn.play-btn { background: #4caf50; padding: 8px 22px; font-size: 15px; font-weight: 600; border-color: #4caf50; box-shadow: 0 4px 16px rgba(76,175,80,0.3); }
+#video-player-page .panel-btn.play-btn:hover { background: #43a047; transform: scale(1.05); }
+#video-player-page .panel-btn.speed-btn { background: rgba(255,255,255,0.08); min-width: 52px; font-weight: 600; font-size: 13px; letter-spacing: 0.2px; border-color: rgba(255,255,255,0.08); }
+#video-player-page .panel-btn.speed-btn:hover { background: rgba(255,255,255,0.18); }
+#video-player-page .panel-btn.fullscreen-btn { background: rgba(77,121,255,0.2); border-color: rgba(77,121,255,0.15); gap: 6px; padding: 8px 20px; }
+#video-player-page .panel-btn.fullscreen-btn:hover { background: rgba(77,121,255,0.35); }
+#video-player-page .panel-btn i { font-size: 14px; opacity: 0.9; }
+#video-player-page .panel-btn .btn-text { font-size: 13px; font-weight: 600; }
+#video-player-page .panel-btn.refresh-btn { background: #ff6b35; border-color: #ff6b35; box-shadow: 0 4px 16px rgba(255,107,53,0.35); }
+#video-player-page .panel-btn.refresh-btn:hover { background: #e55a2b; transform: scale(1.05); }
 
-    #video-player-page .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 16px;
-      box-sizing: border-box;
-    }
+#video-player-page #fs-controls { position: absolute; left: 0; bottom: 0; width: 100%; z-index: 50; pointer-events: none; opacity: 0; transition: opacity 0.35s ease, transform 0.35s ease; transform: translateY(20px); padding: 0 16px 16px 16px; box-sizing: border-box; }
+#video-player-page #fs-controls.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+#video-player-page #fs-controls .fs-bg { position: absolute; left: 0; bottom: 0; width: 100%; height: 220%; background: linear-gradient(0deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: 0; }
+#video-player-page #fs-controls .fs-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 40px; }
+#video-player-page .fs-progress-row { display: flex; align-items: center; gap: 12px; width: 100%; }
+#video-player-page .fs-time { color: #fff; font-size: 13px; font-weight: 500; min-width: 44px; text-align: center; text-shadow: 0 1px 6px rgba(0,0,0,0.6); flex-shrink: 0; letter-spacing: 0.2px; }
+#video-player-page .fs-progress-container { flex: 1; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; cursor: pointer; position: relative; min-height: 6px; }
+#video-player-page .fs-progress-container:hover { height: 6px; }
+#video-player-page .fs-progress-bar { height: 100%; background: linear-gradient(90deg, #ff4d4d, #ff6b6b); border-radius: 3px; width: 0%; position: relative; transition: width 0.1s linear; box-shadow: 0 0 14px rgba(255,77,77,0.25); }
+#video-player-page .fs-progress-thumb { position: absolute; top: -4px; right: -8px; width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 12px rgba(0,0,0,0.6); cursor: grab; z-index: 10; transition: transform 0.15s ease; }
+#video-player-page .fs-progress-thumb:hover { transform: scale(1.12); }
+#video-player-page .fs-controls-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+#video-player-page .fs-btn { background: rgba(255,255,255,0.10); border: none; color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 17px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 2px 12px rgba(0,0,0,0.2); flex-shrink: 0; }
+#video-player-page .fs-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+#video-player-page .fs-btn:active { transform: scale(0.92); }
+#video-player-page .fs-btn.fs-play-btn { width: 56px; height: 56px; font-size: 24px; background: #ff4d4d; border-color: #ff4d4d; box-shadow: 0 4px 24px rgba(255,77,77,0.35); }
+#video-player-page .fs-btn.fs-play-btn:hover { background: #ff3333; border-color: #ff3333; transform: scale(1.10); }
+#video-player-page .fs-btn.fs-exit-btn { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.10); }
+#video-player-page .fs-btn.fs-exit-btn:hover { background: rgba(255,77,77,0.25); border-color: #ff4d4d; }
+#video-player-page .fs-btn.fs-speed-btn { font-size: 13px; font-weight: 600; letter-spacing: 0.2px; min-width: 48px; width: auto; padding: 0 10px; border-radius: 24px; font-family: 'Poppins', sans-serif; }
+#video-player-page .fs-btn.fs-speed-btn:hover { background: rgba(255,255,255,0.20); }
+#video-player-page .fs-btn.fs-rotate-btn { font-size: 19px; }
+#video-player-page .fs-btn.fs-rotate-btn:hover { background: rgba(255,255,255,0.18); }
+#video-player-page .fs-btn i { pointer-events: none; }
 
-    #video-player-page h1 {
-      font-size: 22px;
-      text-align: center;
-      margin: 10px 0 15px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+/* Note Box */
+#video-player-page .note-box { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06); transition: box-shadow 0.3s ease, transform 0.3s ease; background: linear-gradient(145deg, #fdf6e3, #fef9ef); border: 1px solid #f0e4d0; }
+#video-player-page .note-box:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.10); }
+#video-player-page .note-box-header { background: linear-gradient(135deg, #f7971e, #ffd200); color: #2d3436; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+#video-player-page .note-box-header .title-wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; letter-spacing: 0.3px; }
+#video-player-page .note-box-header .title-wrap i { font-size: 20px; color: #2d3436; }
+#video-player-page .note-box-header .title-wrap .badge { background: rgba(0,0,0,0.08); padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; color: #2d3436; white-space: nowrap; }
+#video-player-page .note-edit-toggle { background: rgba(255,255,255,0.40); border: none; color: #2d3436; padding: 6px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.25); }
+#video-player-page .note-edit-toggle:hover { background: rgba(255,255,255,0.65); transform: scale(1.04); }
+#video-player-page .note-edit-toggle:active { transform: scale(0.94); }
+#video-player-page .note-edit-toggle i { font-size: 14px; }
+#video-player-page .note-body { padding: 16px 20px 20px 20px; min-height: 70px; position: relative; background: rgba(255,252,245,0.5); }
+#video-player-page .note-display { max-height: 180px; overflow-y: auto; padding-right: 6px; font-size: 15px; line-height: 1.8; color: #2d3436; white-space: pre-wrap; word-break: break-word; }
+#video-player-page .note-display::-webkit-scrollbar { width: 5px; }
+#video-player-page .note-display::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+#video-player-page .note-display::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+#video-player-page .note-display::-webkit-scrollbar-thumb:hover { background: #b0b5bd; }
+#video-player-page .note-display.empty { color: #b0b5bd; font-style: italic; font-weight: 300; text-align: center; padding: 18px 0; font-size: 15px; }
+#video-player-page .note-display .note-text { display: block; }
+#video-player-page .note-display .empty-icon { display: block; font-size: 28px; margin-bottom: 6px; color: #d1d5db; }
+#video-player-page .note-textarea-wrap { display: none; flex-direction: column; gap: 12px; }
+#video-player-page .note-textarea-wrap.active { display: flex; }
+#video-player-page .note-textarea { width: 100%; min-height: 110px; max-height: 220px; padding: 14px 16px; border: 2px solid #e8ecf0; border-radius: 12px; font-size: 15px; font-family: 'Poppins', sans-serif; line-height: 1.7; resize: vertical; transition: border-color 0.25s ease, box-shadow 0.25s ease; background: #fafbfc; color: #2d3436; }
+#video-player-page .note-textarea:focus { outline: none; border-color: #f7971e; box-shadow: 0 0 0 4px rgba(247,151,30,0.15); background: #ffffff; }
+#video-player-page .note-textarea::-webkit-scrollbar { width: 5px; }
+#video-player-page .note-textarea::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+#video-player-page .note-textarea::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+#video-player-page .note-actions { display: none; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
+#video-player-page .note-actions.active { display: flex; }
+#video-player-page .note-save-btn { background: linear-gradient(135deg, #4caf50, #66bb6a); border: none; color: #fff; padding: 10px 28px; border-radius: 30px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 14px rgba(76,175,80,0.3); }
+#video-player-page .note-save-btn:hover { transform: scale(1.04); box-shadow: 0 6px 24px rgba(76,175,80,0.4); }
+#video-player-page .note-save-btn:active { transform: scale(0.94); }
+#video-player-page .note-cancel-btn { background: #e8ecf0; border: none; color: #2d3436; padding: 10px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; font-family: 'Poppins', sans-serif; }
+#video-player-page .note-cancel-btn:hover { background: #d5d9e0; transform: scale(1.02); }
+#video-player-page .note-cancel-btn:active { transform: scale(0.94); }
+#video-player-page .note-delete-btn { background: #ff6b6b; border: none; color: #fff; padding: 10px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(255,107,107,0.25); }
+#video-player-page .note-delete-btn:hover { transform: scale(1.04); background: #ff5252; }
+#video-player-page .note-delete-btn:active { transform: scale(0.94); }
 
-    #video-player-page .player-card {
-      background: #ffffff;
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
+/* Important Info Box */
+#video-player-page .note-section { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.07); background: linear-gradient(145deg, #e8f0fe, #dde6f7); border: 1px solid #c5d5ea; transition: box-shadow 0.3s ease; }
+#video-player-page .note-section:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.10); }
+#video-player-page .note-header { background: linear-gradient(135deg, #2d3436, #434a4e); color: #ffffff; padding: 14px 18px; font-weight: 700; font-size: 16px; text-align: center; letter-spacing: 0.3px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; gap: 10px; }
+#video-player-page .note-header i { font-size: 18px; color: #ffd200; }
+#video-player-page .note-table { padding: 4px 0; }
+#video-player-page .note-row { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
+#video-player-page .note-row:last-child { border-bottom: none; }
+#video-player-page .note-cell { flex: 1; padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px; font-size: 14px; line-height: 1.7; color: #2d3436; }
+#video-player-page .note-cell i:not(.rotate-icon) { font-size: 20px; color: #2d3436; flex-shrink: 0; margin-top: 2px; background: rgba(255,255,255,0.5); padding: 6px; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+#video-player-page .note-cell .rotate-icon { display: inline-block; font-size: 10px; color: #2d3436; margin: 0 2px; background: transparent !important; padding: 0 !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
+#video-player-page .note-cell .bold-msg { font-weight: 700; color: #ffffff; display: block; margin-top: 8px; font-size: 14px; background: #c0392b; padding: 10px 14px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(192,57,43,0.25); }
 
-    #video-player-page .player-card:hover {
-      transform: translateY(-5px);
-    }
+/* Fullscreen styles */
+.fullscreen-landscape { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 99999 !important; background: #000 !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; }
+.fullscreen-landscape .video-box { border-radius: 0 !important; box-shadow: none !important; width: 100% !important; height: 100% !important; display: flex !important; flex-direction: column !important; background: #000 !important; }
+.fullscreen-landscape .aspect { flex: 1 !important; padding-top: 0 !important; height: 100% !important; position: relative !important; }
+.fullscreen-landscape .controls-panel { display: none !important; }
+.fullscreen-landscape .top-buttons { display: none !important; }
+.fullscreen-landscape .note-box { display: none !important; }
+.fullscreen-landscape .note-section { display: none !important; }
+.fullscreen-landscape iframe, .fullscreen-landscape video { width: 100% !important; height: 100% !important; object-fit: contain !important; transition: transform 0.25s ease; }
+body.fullscreen-active { overflow: hidden !important; touch-action: none !important; }
 
-    #video-player-page .aspect {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    #video-player-page .aspect.portrait {
-      padding-top: 177.78%; /* 9:16 */
-    }
-
-    #video-player-page #player {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    #video-player-page .blocker {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 40;
-      pointer-events: auto;
-      background: transparent;
-    }
-
-    /* Loading Indicator */
-    #video-player-page #loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 30;
-      color: #fff;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
-
-    #video-player-page #loading.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    #video-player-page .spinner {
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top: 4px solid #ff4d4d;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 10px;
-    }
-
-    #video-player-page #loading p {
-      font-size: 14px;
-      margin: 5px 0;
-      opacity: 0.8;
-    }
-
-    #video-player-page #loading-progress {
-      width: 200px;
-      height: 6px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 3px;
-      overflow: hidden;
-      margin: 10px auto;
-    }
-
-    #video-player-page #loading-progress-bar {
-      width: 0%;
-      height: 100%;
-      background: #ff4d4d;
-      transition: width 0.3s ease;
-    }
-
-    #video-player-page .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      justify-content: center;
-      margin-top: 14px;
-    }
-
-    #video-player-page .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    #video-player-page .btn {
-      background: #ff4d4d;
-      border: 0;
-      padding: 10px 14px;
-      border-radius: 10px;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: all 0.2s ease;
-    }
-
-    #video-player-page .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    }
-
-    #video-player-page .btn.secondary {
-      background: #4d79ff;
-    }
-
-    #video-player-page .btn.small {
-      padding: 8px 12px;
-      font-size: 14px;
-    }
-
-    #video-player-page .btn.big-btn {
-      padding: 12px 24px;
-      font-size: 18px;
-    }
-
-    #video-player-page #youtubeBtn {
-  background: linear-gradient(135deg, #4a90e2, #357abd); /* নীল শেড */
-  /* চাইলে অন্য যেকোনো গ্রেডিয়েন্ট বা সলিড কালার দিন */
-      }
-
-    #video-player-page .btn.play-btn {
-      background: #4caf50;
-    }
-
-    /* Updated note styles - more attractive and table-like */
-    #video-player-page .note-section {
-      margin-top: 20px;
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-    }
-
-    #video-player-page .note-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    #video-player-page .note-header {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 12px 16px;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    #video-player-page .note-row {
-      display: flex;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    #video-player-page .note-row:last-child {
-      border-bottom: none;
-    }
-
-    #video-player-page .note-cell {
-      flex: 1;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    #video-player-page .note-cell i {
-      font-size: 18px;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    #video-player-page * {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-    }
-
-    /* Portrait fullscreen style - FIXED */
-    #video-player-page .fullscreen-portrait {
-      position: fixed !important;
-      left: 50% !important;
-      top: 50% !important;
-      width: 100vh !important;
-      height: 100vw !important;
-      z-index: 9999 !important;
-      transform: translate(-50%, -50%) rotate(90deg);
-      transform-origin: center center;
-      border-radius: 10px !important;
-      padding-top: 0 !important;
-      max-width: none !important;
-      max-height: none !important;
-      margin: 0 !important;
-    }
-
-    /* Additional fix for mobile devices */
-    @media (max-width: 768px) {
-      #video-player-page .fullscreen-portrait {
-        width: 100vh !important;
-        height: 100vw !important;
-      }
-    }
-
-    #video-player-page body.fullscreen-locked {
-      overflow: hidden;
-      touch-action: none;
-    }
-
-    @media (max-width: 520px) {
-      #video-player-page .wrap { padding: 10px; }
-      #video-player-page h1 { font-size: 18px; }
-      #video-player-page .btn { padding: 8px 12px; }
-      #video-player-page .note-cell {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    /* Progress bar styles - UPDATED */
-    #video-player-page #progress-container {
-      width: 100%;
-      height: 12px;
-      background: rgba(0,0,0,0.1);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: height 0.2s ease;
-      margin-top: 10px;
-      position: relative;
-    }
-
-    #video-player-page #progress-container:hover {
-      height: 16px;
-    }
-
-    #video-player-page #progress-bar {
-      height: 100%;
-      background: #ff4d4d;
-      border-radius: 6px;
-      width: 0%;
-      transition: width 0.1s linear;
-      position: relative;
-    }
-
-    #video-player-page #progress-thumb {
-      position: absolute;
-      top: -2px;
-      right: -6px;
-      width: 16px;
-      height: 16px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 5px rgba(0,0,0,0.5);
-      cursor: grab;
-      z-index: 10;
-    }
-
-    #video-player-page #progress-thumb:active {
-      cursor: grabbing;
-    }
-
-    /* Top buttons styles */
-    #video-player-page .top-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      gap: 10px;
-    }
-
-    #video-player-page .custom-btn {
-      background: linear-gradient(135deg, #ff7e5f, #feb47b);
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      color: #fff;
-      font-family: Arial, sans-serif;
-      width: 48%;
-      transition: all 0.2s ease;
-    }
-
-    #video-player-page .custom-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    }
-
-    #video-player-page .custom-btn small {
-      font-size: 11px;
-      display: block;
-      opacity: 0.8;
-    }
-
-    #video-player-page .custom-btn span {
-      font-size: 16px;
-      font-weight: bold;
-      display: block;
-    }
+/* Responsive */
+@media (max-width: 640px) {
+    #video-player-page .wrap { padding: 10px; }
+    #video-player-page .player-card { padding: 12px; }
+    #video-player-page .custom-btn { padding: 10px 8px; width: 50%; }
+    #video-player-page .custom-btn span { font-size: 14px; }
+    #video-player-page .controls-panel { padding: 10px 12px 14px 12px; }
+    #video-player-page .panel-btn { padding: 6px 8px; font-size: 12px; min-width: 34px; height: 36px; gap: 4px; }
+    #video-player-page .panel-btn.play-btn { padding: 6px 14px; font-size: 13px; }
+    #video-player-page .panel-btn.speed-btn { min-width: 42px; font-size: 12px; }
+    #video-player-page .panel-btn.fullscreen-btn { padding: 6px 14px; font-size: 12px; }
+    #video-player-page .panel-btn .btn-text { font-size: 11px; }
+    #video-player-page .panel-progress-container { height: 6px; }
+    #video-player-page .panel-progress-container:hover { height: 8px; }
+    #video-player-page .panel-progress-thumb { width: 12px; height: 12px; top: -3px; right: -6px; }
+    #video-player-page .fs-btn { width: 38px; height: 38px; font-size: 14px; }
+    #video-player-page .fs-btn.fs-play-btn { width: 48px; height: 48px; font-size: 20px; }
+    #video-player-page .fs-btn.fs-speed-btn { font-size: 11px; min-width: 38px; padding: 0 6px; height: 36px; }
+    #video-player-page .fs-btn.fs-rotate-btn { font-size: 17px; width: 38px; height: 38px; }
+    #video-player-page .fs-time { font-size: 11px; min-width: 36px; }
+    #video-player-page #fs-controls { padding: 0 10px 12px 10px; }
+    #video-player-page .fs-progress-container { height: 5px; min-height: 5px; }
+    #video-player-page .fs-progress-thumb { width: 12px; height: 12px; top: -3.5px; right: -6px; }
+    #video-player-page .note-cell { flex-direction: column; text-align: center; padding: 12px 14px; align-items: center; }
+    #video-player-page .note-cell i:not(.rotate-icon) { margin-top: 0; }
+    #video-player-page .panel-time-row { font-size: 10px; }
+    #video-player-page .fs-controls-row { gap: 6px; }
+    #video-player-page .note-cell .bold-msg { font-size: 13px; text-align: center; }
+    #video-player-page .note-box-header { padding: 12px 16px; }
+    #video-player-page .note-box-header .title-wrap { font-size: 15px; }
+    #video-player-page .note-box-header .title-wrap .badge { font-size: 11px; padding: 2px 10px; }
+    #video-player-page .note-body { padding: 14px 16px 16px 16px; }
+    #video-player-page .note-display { font-size: 14px; max-height: 150px; }
+    #video-player-page .note-textarea { font-size: 14px; min-height: 90px; max-height: 170px; padding: 12px 14px; }
+}
+@media (max-width: 400px) {
+    #video-player-page .fs-controls-row { gap: 4px; }
+    #video-player-page .fs-btn { width: 32px; height: 32px; font-size: 12px; }
+    #video-player-page .fs-btn.fs-play-btn { width: 42px; height: 42px; font-size: 17px; }
+    #video-player-page .fs-btn.fs-speed-btn { font-size: 10px; min-width: 32px; height: 30px; padding: 0 4px; }
+    #video-player-page .fs-btn.fs-rotate-btn { font-size: 15px; width: 32px; height: 32px; }
+    #video-player-page .fs-time { font-size: 10px; min-width: 30px; }
+    #video-player-page .panel-btn { font-size: 11px; min-width: 30px; height: 32px; padding: 4px 6px; gap: 3px; }
+    #video-player-page .panel-btn.play-btn { padding: 4px 12px; font-size: 12px; }
+    #video-player-page .panel-btn.speed-btn { min-width: 36px; font-size: 11px; }
+    #video-player-page .panel-btn.fullscreen-btn { padding: 4px 10px; font-size: 11px; }
+    #video-player-page .panel-btn .btn-text { font-size: 10px; }
+    #video-player-page .panel-fullscreen-row { margin-top: 8px; }
+    #video-player-page .panel-controls-row { gap: 8px; }
+    #video-player-page .note-cell .bold-msg { font-size: 12px; }
+    #video-player-page #loading p { font-size: 12px; }
+    #video-player-page .note-box-header .title-wrap { font-size: 13px; }
+    #video-player-page .note-box-header .title-wrap .badge { font-size: 10px; padding: 2px 8px; }
+    #video-player-page .note-display { font-size: 13px; max-height: 120px; }
+    #video-player-page .note-textarea { font-size: 13px; min-height: 80px; max-height: 140px; padding: 10px 12px; }
+}
 
     /* Drive Player Page Styles */
     #drive-player-page {
@@ -4142,84 +3985,111 @@
   
   <div id="video-player-page" style="display: none;">
     <div class="wrap">
-      <div class="player-card">
-        <!-- নতুন বাটনগুলো ভিডিও বক্সের উপরে -->
-        <div class="top-buttons">
-          <div class="custom-btn" id="youtubeBtn">
-            <small>Download &</small>
-            <span>YouTube Play</span>
-          </div>
-          <div class="custom-btn" id="folderBtn">
-            <small>Back to</small>
-            <span>Folder Page</span>
-          </div>
-        </div>
-        <div id="aspect" class="aspect">
-          <div id="player"></div>
-          <!-- লোডিং ইন্ডিকেটর -->
-          <div id="loading">
-            <div class="spinner"></div>
-            <p id="loading-text">ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন</p>
-            <div id="loading-progress">
-              <div id="loading-progress-bar"></div>
+        <div class="player-card">
+
+            <!-- Top Buttons -->
+            <div class="top-buttons" id="topButtons">
+                <button class="custom-btn" id="youtubeBtn">
+                    <small>Download &</small>
+                    <span>YouTube Play</span>
+                </button>
+                <button class="custom-btn" id="folderBtn">
+                    <small>Back to</small>
+                    <span>Folder Page</span>
+                </button>
             </div>
-          </div>
-          <!-- ব্লকার: iframe-এ সরাসরি টাচ/ক্লিক যাবে না; এটাই ট্যাপ ধরে portrait->landscape পরিবর্তন করবে -->
-          <div id="blocker" class="blocker" title="কোনো কন্ট্রোল করতে নিচের বোতন ব্যবহার করুন"></div>
-        </div>
-        <!-- প্রগ্রেস বার ভিডিওর নিচে - UPDATED -->
-        <div id="progress-container">
-          <div id="progress-bar">
-            <div id="progress-thumb"></div>
-          </div>
-        </div>
-        <div class="controls" style="margin-top:12px">
-          <!-- প্লে/পজ বাটন আলাদা লাইনে, বড় এবং ভিন্ন কালার -->
-          <div class="control-row">
-            <button class="btn play-btn big-btn" id="togglePlayBtn">PLAY</button>
-          </div>
-          <!-- অন্য বাটনগুলো এক লাইনে -->
-          <div class="control-row">
-            <button class="btn" id="stopBtn">Stop</button>
-            <button class="btn" id="rewindBtn">« 10s</button>
-            <button class="btn" id="forwardBtn">10s »</button>
-            <button class="btn" id="muteBtn">Mute</button>
-          </div>
-          <!-- পোর্ট্রেট বাটন আলাদা লাইনে, বড় -->
-          <div class="control-row">
-            <button class="btn secondary big-btn" id="portraitBtn">
-  <i class="fas fa-sync-alt"></i> ROTATE <span style="margin: 0 4px;"></span> <i class="fas fa-expand-arrows-alt"></i> FULLSCREEN
-            </button>
-          </div>
-        </div>
-        
-        <!-- Updated note section with table-like structure -->
-        <div class="note-section">
-          <div class="note-header bangla-font">গুরুত্বপূর্ণ তথ্য</div>
-          <div class="note-table">
-            <div class="note-row">
-              <div class="note-cell">
-                <i class="fas fa-info-circle"></i>
-                <span class="bangla-font">
-          ভিডিওটি ফুলস্ক্রিন করার পর আপনার মোবাইল ফোন যেদিকে কাত করবেন, ভিডিও ফ্রেম সেদিকেই ঘুরে ফুলস্ক্রিনে দেখাবে। 
-          কারো কারো ফোনে এটি স্বয়ংক্রিয়ভাবে কাজ নাও করতে পারে। সেক্ষেত্রে স্ক্রিনের উপরের ডান পাশে থাকা <strong>↻ (রোটেট)</strong> বাটনে চাপ দিয়ে ভিডিও ম্যানুয়ালি ঘুরিয়ে নিন। 
-          অটো-রোটেশন কাজ করলে ম্যানুয়াল বাটন ব্যবহার না করাই ভালো, কারণ এতে ভিডিও দেখার অভিজ্ঞতা নষ্ট হতে পারে।
-                </span>
-              </div>
+
+            <!-- Video Box -->
+            <div class="video-box" id="videoBox">
+                <div id="aspect" class="aspect">
+                    <div id="player"></div>
+                    <div id="loading">
+                        <div class="spinner"></div>
+                        <p id="loading-text">ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন</p>
+                    </div>
+                    <div id="blocker" class="blocker" title="ট্যাপ করে কন্ট্রোল দেখুন"></div>
+
+                    <!-- Fullscreen Controls Overlay -->
+                    <div id="fs-controls">
+                        <div class="fs-bg"></div>
+                        <div class="fs-content">
+                            <div class="fs-progress-row">
+                                <span class="fs-time" id="fs-current-time">0:00</span>
+                                <div class="fs-progress-container" id="fs-progress-container">
+                                    <div class="fs-progress-bar" id="fs-progress-bar">
+                                        <div class="fs-progress-thumb" id="fs-progress-thumb"></div>
+                                    </div>
+                                </div>
+                                <span class="fs-time" id="fs-total-time">0:00</span>
+                            </div>
+                            <div class="fs-controls-row">
+                                <button class="fs-btn fs-rotate-btn" id="fs-rotate"><i class="fas fa-sync-alt"></i></button>
+                                <button class="fs-btn fs-speed-btn" id="fs-speed">1x</button>
+                                <button class="fs-btn" id="fs-rewind"><i class="fas fa-backward"></i></button>
+                                <button class="fs-btn fs-play-btn" id="fs-togglePlay"><i class="fas fa-play"></i></button>
+                                <button class="fs-btn" id="fs-forward"><i class="fas fa-forward"></i></button>
+                                <button class="fs-btn" id="fs-mute"><i class="fas fa-volume-up"></i></button>
+                                <button class="fs-btn fs-exit-btn" id="fs-exit"><i class="fas fa-compress"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls Panel -->
+                <div class="controls-panel">
+                    <div class="panel-progress-container" id="panelProgressContainer">
+                        <div class="panel-progress-bar" id="panelProgressBar">
+                            <div class="panel-progress-thumb" id="panelProgressThumb"></div>
+                        </div>
+                    </div>
+                    <div class="panel-time-row">
+                        <span id="panelCurrentTime">0:00</span>
+                        <span id="panelTotalTime">0:00</span>
+                    </div>
+                    <div class="panel-controls-row">
+                        <button class="panel-btn speed-btn" id="panelSpeed">1x</button>
+                        <button class="panel-btn" id="panelRewind"><i class="fas fa-backward"></i> 10s</button>
+                        <button class="panel-btn play-btn" id="panelTogglePlay"><i class="fas fa-play"></i> <span class="btn-text">PLAY</span></button>
+                        <button class="panel-btn" id="panelForward">10s <i class="fas fa-forward"></i></button>
+                        <button class="panel-btn" id="panelMute"><i class="fas fa-volume-up"></i></button>
+                    </div>
+                    <div class="panel-fullscreen-row">
+                        <button class="panel-btn fullscreen-btn" id="panelFullscreen"><i class="fas fa-sync-alt"></i> & <i class="fas fa-expand-arrows-alt"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="note-row">
-              <div class="note-cell">
-                <i class="fas fa-wifi"></i>
-                <span class="bangla-font">
-          সেরা ভিডিও মান উপভোগ করতে আপনার ইন্টারনেট সংযোগ স্থির ও দ্রুত রাখুন। এই প্লেয়ারটি আপনার ইন্টারনেট গতির উপর ভিত্তি করে ভিডিওর কোয়ালিটি স্বয়ংক্রিয়ভাবে সমন্বয় করে। নেটওয়ার্ক ভালো থাকলে কিছুক্ষণের মধ্যে ভিডিও ধীরে ধীরে HD মানে চলে যাবে, যা দেখতে আরও পরিষ্কার ও স্পষ্ট হবে।
-                </span>
-              </div>
+
+            <!-- Note Box -->
+            <div class="note-box" id="noteBox">
+                <div class="note-box-header">
+                    <div class="title-wrap"><i class="fas fa-sticky-note"></i><span>আমার নোট</span><span class="badge" id="noteVideoBadge">এই ক্লাসের নোট লিখে রাখুন</span></div>
+                    <button class="note-edit-toggle" id="noteEditToggle"><i class="fas fa-pen"></i> <span id="noteEditLabel">নোট লিখুন</span></button>
+                </div>
+                <div class="note-body">
+                    <div class="note-display" id="noteDisplay"><span class="empty-icon"><i class="fas fa-feather-alt"></i></span><span class="note-text">কোন নোট নেই</span></div>
+                    <div class="note-textarea-wrap" id="noteTextareaWrap">
+                        <textarea class="note-textarea" id="noteTextarea" placeholder="আপনার নোট লিখুন..."></textarea>
+                        <div class="note-actions" id="noteActions">
+                            <button class="note-save-btn" id="noteSaveBtn"><i class="fas fa-save"></i> সংরক্ষণ করুন</button>
+                            <button class="note-cancel-btn" id="noteCancelBtn">বাতিল</button>
+                            <button class="note-delete-btn" id="noteDeleteBtn"><i class="fas fa-trash-alt"></i> মুছুন</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <!-- Important Info Box -->
+            <div class="note-section">
+                <div class="note-header bangla-font"><i class="fas fa-lightbulb"></i> গুরুত্বপূর্ণ তথ্য</div>
+                <div class="note-table">
+                    <div class="note-row"><div class="note-cell"><i class="fas fa-info-circle"></i><span class="bangla-font">ভিডিওটি ফুলস্ক্রিন করার পর আপনার মোবাইল ফোন যেদিকে কাত করবেন, ভিডিও ফ্রেম সেদিকেই ঘুরে ফুলস্ক্রিনে দেখাবে। কারো কারো ফোনে এটি স্বয়ংক্রিয়ভাবে কাজ নাও করতে পারে। সেক্ষেত্রে ফুলস্ক্রিনের কন্ট্রোল প্যানেলের <i class="fas fa-sync-alt rotate-icon"></i> (রোটেট) বাটনে চাপ দিয়ে ভিডিও ম্যানুয়ালি ঘুরিয়ে নিন। <strong class="bold-msg">যদি ফোনে অটো রুট সাপোর্ট করে তাহলে এই বাটন ব্যবহার করা থেকে বিরত থাকুন।</strong></span></div></div>
+                    <div class="note-row"><div class="note-cell"><i class="fas fa-wifi"></i><span class="bangla-font">সেরা ভিডিও মান উপভোগ করতে আপনার ইন্টারনেট সংযোগ স্থির ও দ্রুত রাখুন। এই প্লেয়ারটি আপনার ইন্টারনেট গতির উপর ভিত্তি করে ভিডিওর কোয়ালিটি স্বয়ংক্রিয়ভাবে সমন্বয় করে।</span></div></div>
+                </div>
+            </div>
+
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
   <!-- Drive Player Page -->
   <div id="drive-player-page" style="display: none;">
@@ -4888,7 +4758,7 @@ const documentsPage = $('#documents-page');
     let allClasses = [];
     let groupedClassesCache = {};
     let mainScrollPosition = 0; // To save main page scroll position
-    let subjectScrollPosition = 0; // To save subject page scroll position
+     // To save subject page scroll position
     let driveScrollPosition = 0; // To save drive player page scroll position
 
     // নতুন: ডেটা লোড ব্যর্থতা ব্যনার সম্পর্কিত ভেরিয়েবল
@@ -5003,25 +4873,14 @@ const documentsPage = $('#documents-page');
       NOTES: 'alim26_dashboard_notes'
     };
 
-    // Video player tracking variables
-    let videoPlayer = null;
-    let videoTrackId = null;
-    let videoType = null;
-    let videoUrl = null;
-    let videoDuration = 0;
-    let videoWatchTime = 0;
-    let videoCheckInterval = null;
-    let videoIsYouTube = false;
-    let isPortraitMode = false; // Track portrait mode status
-    let progressUpdateInterval = null; // For updating progress bar
-    let isDraggingProgress = false; // Track if user is dragging progress thumb
+    
 
     // Drive player variables
     let driveUrl = null;
     let driveTrackId = null;
     let driveType = null;
     let driveLoadingTimeout = null;
-    let videoLoadingTimeout = null; // Video loading timeout
+    
 
     // Back button history state management
     let currentPageState = 'default';
@@ -6323,382 +6182,466 @@ function renderDocumentsPage() {
       currentPageState = 'main';
     }
 
-    // Video Player Functions
-    function extractVideoId(url) {
-      const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/);
-      return match ? match[1] : '';
-    }
+    // ============================================================
+//  🔧 CONFIGURATION — YouTube button enable/disable
+// ============================================================
+const ENABLE_YOUTUBE_BUTTON = true; // true = enabled, false = disabled
 
-    function openVideoPlayer(url, trackId, type) {
-      videoUrl = url;
-      videoTrackId = trackId;
-      videoType = type;
-      videoIsYouTube = url.includes('youtube.com') || url.includes('youtu.be');
-      
-      // Save current scroll position
-      subjectScrollPosition = window.scrollY;
-      
-      if (videoIsYouTube) {
-        // Show video player page for YouTube videos
-        subjectPage.style.display = 'none';
-        videoPlayerPage.style.display = 'block';
-        
-        // Set up back button immediately - FIX FOR ISSUE 1
-        document.getElementById('folderBtn').addEventListener('click', () => {
-          // Return to subject page and reset video player
-          closeVideoPlayer();
-        });
-        
-        // Push state to history for back button navigation
-        history.pushState({ page: 'video', url: url, trackId: trackId, type: type }, '');
-        currentPageState = 'video';
-        
-        // Always start from top when opening video player
-        window.scrollTo(0, 0);
-        
-        // Initialize YouTube player
-        const videoId = extractVideoId(url);
-        if (videoId) {
-          initializeYouTubePlayer(videoId);
-          
-          // Set timeout for loading message - FIX FOR ISSUE 2
-          videoLoadingTimeout = setTimeout(() => {
-            const loadingText = document.getElementById('loading-text');
-            if (loadingText) {
-              loadingText.innerHTML = "সম্ভবত নেটওয়ার্ক জনিত সমস্যা হচ্ছে!<br>দয়া করে আরো কিছুক্ষণ অপেক্ষা করুন অথবা পুনরায় চেষ্টা করুন..";
-            }
-          }, 20000); // 20 seconds
-        } else {
-          showNotification("ভিডিও লোড করতে সমস্যা হয়েছে", true);
-        }
-      } else {
-        // For non-YouTube links, track immediately and open in new tab
-        trackAndOpenLink(url, trackId, type);
-      }
-    }
+// ===== Configuration =====
+const SPEEDS = [1, 1.25, 1.5, 2];
+const NOTE_STORAGE_PREFIX = 'video_note_';
 
-    function initializeYouTubePlayer(videoId) {
-      // YouTube IFrame API initialization
-      if (typeof YT === 'undefined') {
-        // Load YouTube API if not already loaded
+// ===== DOM References =====
+const playerDiv = document.getElementById('player');
+const loadingDiv = document.getElementById('loading');
+const loadingText = document.getElementById('loading-text');
+const blocker = document.getElementById('blocker');
+const aspect = document.getElementById('aspect');
+
+const panelProgressContainer = document.getElementById('panelProgressContainer');
+const panelProgressBar = document.getElementById('panelProgressBar');
+const panelProgressThumb = document.getElementById('panelProgressThumb');
+const panelTogglePlay = document.getElementById('panelTogglePlay');
+const panelSpeed = document.getElementById('panelSpeed');
+const panelRewind = document.getElementById('panelRewind');
+const panelForward = document.getElementById('panelForward');
+const panelMute = document.getElementById('panelMute');
+const panelFullscreen = document.getElementById('panelFullscreen');
+const panelCurrentTime = document.getElementById('panelCurrentTime');
+const panelTotalTime = document.getElementById('panelTotalTime');
+
+const fsControls = document.getElementById('fs-controls');
+const fsProgressContainer = document.getElementById('fs-progress-container');
+const fsProgressBar = document.getElementById('fs-progress-bar');
+const fsProgressThumb = document.getElementById('fs-progress-thumb');
+const fsTogglePlay = document.getElementById('fs-togglePlay');
+const fsSpeed = document.getElementById('fs-speed');
+const fsRewind = document.getElementById('fs-rewind');
+const fsForward = document.getElementById('fs-forward');
+const fsMute = document.getElementById('fs-mute');
+const fsExit = document.getElementById('fs-exit');
+const fsRotate = document.getElementById('fs-rotate');
+const fsCurrentTime = document.getElementById('fs-current-time');
+const fsTotalTime = document.getElementById('fs-total-time');
+
+const youtubeBtn = document.getElementById('youtubeBtn');
+const folderBtn = document.getElementById('folderBtn');
+const notification = document.getElementById('notification');
+
+// Note System DOM
+const noteDisplay = document.getElementById('noteDisplay');
+const noteTextarea = document.getElementById('noteTextarea');
+const noteTextareaWrap = document.getElementById('noteTextareaWrap');
+const noteActions = document.getElementById('noteActions');
+const noteEditToggle = document.getElementById('noteEditToggle');
+const noteEditLabel = document.getElementById('noteEditLabel');
+const noteSaveBtn = document.getElementById('noteSaveBtn');
+const noteCancelBtn = document.getElementById('noteCancelBtn');
+const noteDeleteBtn = document.getElementById('noteDeleteBtn');
+
+// ===== State =====
+let player = null;
+let videoId = null;
+let isDraggingProgress = false;
+let isDraggingFsProgress = false;
+let progressUpdateInterval = null;
+let isPortraitMode = false;
+let videoLoadingTimeout = null;
+let fsVisible = false;
+let fsHideTimeout = null;
+let isFsControlsInteracting = false;
+let currentSpeedIndex = 0;
+let videoLoaded = false;
+let isReloading = false;
+let isPlayerReady = false;
+let isNoteEditing = false;
+let currentNote = '';
+let currentVideoId = '';
+
+// ===== Helpers =====
+function showNotification(message, isError = false, isWarning = false) {
+    notification.innerHTML = "<i class=\"" + (isError ? 'fas fa-exclamation-circle' : isWarning ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle') + "\"></i> " + message;
+    notification.className = 'notification ' + (isError ? 'error' : isWarning ? 'warning' : 'success');
+    notification.classList.add('show');
+    clearTimeout(notification._timeout);
+    notification._timeout = setTimeout(() => notification.classList.remove('show'), 3200);
+}
+
+function formatTime(seconds) {
+    if (!seconds || isNaN(seconds) || seconds < 0) return '0:00';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function getNextSpeedIndex() { return (currentSpeedIndex + 1) % SPEEDS.length; }
+function getSpeedLabel() { return SPEEDS[currentSpeedIndex] + 'x'; }
+
+// ===== Note System =====
+function getNoteKey(vid) { return NOTE_STORAGE_PREFIX + (vid || currentVideoId || 'default'); }
+function loadNoteFromStorage(vid) { const key = getNoteKey(vid); const stored = localStorage.getItem(key); return stored !== null ? stored : ''; }
+function saveNoteToStorage(vid, content) { const key = getNoteKey(vid); if (content && content.trim().length > 0) { localStorage.setItem(key, content); } else { localStorage.removeItem(key); } }
+function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+
+function renderNoteDisplay(content) {
+    if (!content || content.trim().length === 0) {
+        noteDisplay.className = 'note-display empty';
+        noteDisplay.innerHTML = `<span class="empty-icon"><i class="fas fa-feather-alt"></i></span><span class="note-text">কোন নোট নেই</span>`;
+    } else {
+        noteDisplay.className = 'note-display';
+        noteDisplay.innerHTML = `<span class="note-text">${escapeHtml(content)}</span>`;
+    }
+    const hasNote = content && content.trim().length > 0;
+    noteEditLabel.textContent = hasNote ? 'এডিট' : 'নোট লিখুন';
+}
+
+function refreshNoteDisplay() {
+    const vid = currentVideoId || getVideoIdFromURL();
+    currentNote = loadNoteFromStorage(vid);
+    renderNoteDisplay(currentNote);
+    noteTextarea.value = currentNote;
+    if (isNoteEditing) exitEditMode(false);
+    else { noteDisplay.style.display = 'block'; noteTextareaWrap.classList.remove('active'); noteActions.classList.remove('active'); }
+}
+
+function enterEditMode() {
+    isNoteEditing = true;
+    noteDisplay.style.display = 'none';
+    noteTextareaWrap.classList.add('active');
+    noteActions.classList.add('active');
+    noteEditLabel.textContent = 'বন্ধ';
+    setTimeout(() => noteTextarea.focus(), 100);
+    noteTextarea.style.height = 'auto';
+    noteTextarea.style.height = Math.min(noteTextarea.scrollHeight, 220) + 'px';
+}
+
+function exitEditMode(save = false) {
+    if (save) {
+        const content = noteTextarea.value;
+        const vid = currentVideoId || getVideoIdFromURL();
+        saveNoteToStorage(vid, content);
+        currentNote = content;
+        renderNoteDisplay(content);
+        showNotification('নোট সংরক্ষণ করা হয়েছে ✅', false);
+    } else {
+        const vid = currentVideoId || getVideoIdFromURL();
+        currentNote = loadNoteFromStorage(vid);
+        renderNoteDisplay(currentNote);
+        noteTextarea.value = currentNote;
+    }
+    isNoteEditing = false;
+    noteDisplay.style.display = 'block';
+    noteTextareaWrap.classList.remove('active');
+    noteActions.classList.remove('active');
+}
+
+function deleteNote() {
+    if (confirm('আপনার নোটটি মুছে ফেলতে চান?')) {
+        const vid = currentVideoId || getVideoIdFromURL();
+        const key = getNoteKey(vid);
+        localStorage.removeItem(key);
+        currentNote = '';
+        renderNoteDisplay('');
+        noteTextarea.value = '';
+        if (isNoteEditing) exitEditMode(false);
+        showNotification('নোট মুছে ফেলা হয়েছে 🗑️', false, true);
+    }
+}
+
+// ===== Update main button =====
+function updateMainButton() {
+    const icon = panelTogglePlay.querySelector('i');
+    const textSpan = panelTogglePlay.querySelector('.btn-text');
+    if (!videoLoaded) {
+        if (icon) icon.className = 'fas fa-sync-alt';
+        if (textSpan) textSpan.textContent = 'REFRESH';
+        panelTogglePlay.className = 'panel-btn play-btn refresh-btn';
+    } else {
+        panelTogglePlay.className = 'panel-btn play-btn';
+        if (player && isPlayerReady) {
+            const state = player.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) { if (icon) icon.className = 'fas fa-pause'; if (textSpan) textSpan.textContent = 'PAUSE'; }
+            else { if (icon) icon.className = 'fas fa-play'; if (textSpan) textSpan.textContent = 'PLAY'; }
+        } else { if (icon) icon.className = 'fas fa-play'; if (textSpan) textSpan.textContent = 'PLAY'; }
+    }
+}
+
+// ===== Recreate player =====
+function recreatePlayer() {
+    const oldIframe = playerDiv.querySelector('iframe');
+    if (oldIframe) oldIframe.remove();
+    player = null;
+    isPlayerReady = false;
+    if (typeof YT !== 'undefined' && YT.Player) {
+        try {
+            player = new YT.Player('player', {
+                height: '100%', width: '100%', videoId: videoId,
+                playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, fs: 0, playsinline: 1 },
+                events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
+            });
+        } catch(e) { console.error('Failed to recreate player:', e); showNotification('ভিডিও রিলোড করতে সমস্যা হয়েছে', true); isReloading = false; }
+    } else {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        
-        // Wait for API to load
-        window.onYouTubeIframeAPIReady = function() {
-          createYouTubePlayer(videoId);
-        };
-      } else {
-        createYouTubePlayer(videoId);
-      }
+        document.head.appendChild(tag);
+        window.onYouTubeIframeAPIReady = function() { recreatePlayer(); };
     }
+}
 
-    function createYouTubePlayer(videoId) {
-      videoPlayer = new YT.Player('player', {
-        height: '100%',
-        width: '100%',
-        videoId: videoId,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-          iv_load_policy: 3,
-          disablekb: 1,
-          fs: 0,
-          playsinline: 1
-        },
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange,
-          onPlaybackQualityChange: onPlaybackQualityChange,
-          onPlaybackRateChange: onPlaybackRateChange,
-          onError: onPlayerError
+// ===== Refresh / reload video =====
+function refreshVideo() {
+    videoLoaded = false; isPlayerReady = false; isReloading = true;
+    loadingDiv.classList.remove('hidden', 'error-state');
+    loadingText.innerHTML = 'ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন';
+    clearTimeout(videoLoadingTimeout);
+    videoLoadingTimeout = setTimeout(() => {
+        if (!videoLoaded) { loadingText.innerHTML = 'সম্ভবত নেটওয়ার্ক জনিত সমস্যা হচ্ছে!<br>দয়া করে আরো কিছুক্ষণ অপেক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিয়ে রিলোড করুন।'; }
+    }, 20000);
+    updateMainButton();
+    panelProgressBar.style.width = '0%'; fsProgressBar.style.width = '0%';
+    panelCurrentTime.textContent = '0:00'; panelTotalTime.textContent = '0:00';
+    fsCurrentTime.textContent = '0:00'; fsTotalTime.textContent = '0:00';
+    currentSpeedIndex = 0; applySpeed();
+    if (player && typeof player.loadVideoById === 'function') { try { player.loadVideoById(videoId); return; } catch(e) {} }
+    recreatePlayer();
+}
+
+// ===== Speed control =====
+function applySpeed() {
+    const speed = SPEEDS[currentSpeedIndex];
+    if (player && isPlayerReady && typeof player.setPlaybackRate === 'function') { try { player.setPlaybackRate(speed); } catch(e) {} }
+    const label = getSpeedLabel();
+    panelSpeed.textContent = label; fsSpeed.textContent = label;
+}
+function cycleSpeed() { currentSpeedIndex = getNextSpeedIndex(); applySpeed(); if (isPortraitMode) resetFsHideTimer(); }
+
+// ===== YouTube Player =====
+function getVideoIdFromURL() {
+    if (window._currentVideoUrl) {
+        const match = window._currentVideoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/);
+        if (match) return match[1];
+    }
+    const params = new URLSearchParams(window.location.search);
+    return params.get('v') || 'k7JdIaTNQQI';
+}
+
+function initYouTubePlayer() {
+    videoId = getVideoIdFromURL();
+    currentVideoId = videoId;
+    refreshNoteDisplay();
+    if (typeof YT === 'undefined') {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+        window.onYouTubeIframeAPIReady = createPlayer;
+    } else { createPlayer(); }
+}
+
+function createPlayer() {
+    player = new YT.Player('player', {
+        height: '100%', width: '100%', videoId: videoId,
+        playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, fs: 0, playsinline: 1 },
+        events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
+    });
+}
+
+function onPlayerReady(event) {
+    videoLoaded = true; isPlayerReady = true; isReloading = false;
+    clearTimeout(videoLoadingTimeout); videoLoadingTimeout = null;
+    loadingDiv.classList.remove('error-state'); loadingDiv.classList.add('hidden');
+    applySpeed(); updateMainButton();
+
+    // ---- Panel Controls ----
+    panelTogglePlay.onclick = function() {
+        if (!videoLoaded || !player || !isPlayerReady) return;
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) { player.pauseVideo(); updateMainButton(); updateFsPlayIcon(false); }
+        else { player.playVideo(); updateMainButton(); updateFsPlayIcon(true); }
+    };
+    panelSpeed.onclick = cycleSpeed;
+    panelRewind.onclick = () => { if (player && isPlayerReady) { const t = Math.max(0, player.getCurrentTime() - 10); player.seekTo(t, true); } };
+    panelForward.onclick = () => { if (player && isPlayerReady) { const dur = player.getDuration() || 99999; const t = Math.min(dur, player.getCurrentTime() + 10); player.seekTo(t, true); } };
+    panelMute.onclick = () => {
+        if (player && isPlayerReady) {
+            if (player.isMuted()) { player.unMute(); panelMute.innerHTML = '<i class="fas fa-volume-up"></i>'; updateFsMuteIcon(false); }
+            else { player.mute(); panelMute.innerHTML = '<i class="fas fa-volume-mute"></i>'; updateFsMuteIcon(true); }
         }
-      });
-    }
+    };
+    panelFullscreen.onclick = enterPortrait;
 
-    function onPlayerReady(event) {
-      // Clear video loading timeout - FIX FOR ISSUE 2
-      if (videoLoadingTimeout) {
-        clearTimeout(videoLoadingTimeout);
-        videoLoadingTimeout = null;
-      }
-      
-      // Set up video player controls
-      const togglePlayBtn = document.getElementById('togglePlayBtn');
-      togglePlayBtn.addEventListener('click', () => {
-        if (videoPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-          videoPlayer.pauseVideo();
-          togglePlayBtn.textContent = 'Play';
-        } else {
-          videoPlayer.playVideo();
-          togglePlayBtn.textContent = 'Pause';
+    // ---- Fullscreen Controls ----
+    fsTogglePlay.onclick = (e) => { e.stopPropagation(); if (!videoLoaded || !player || !isPlayerReady) return; if (player.getPlayerState() === YT.PlayerState.PLAYING) { player.pauseVideo(); updateMainButton(); updateFsPlayIcon(false); } else { player.playVideo(); updateMainButton(); updateFsPlayIcon(true); } resetFsHideTimer(); };
+    fsSpeed.onclick = (e) => { e.stopPropagation(); cycleSpeed(); resetFsHideTimer(); };
+    fsRewind.onclick = (e) => { e.stopPropagation(); if (player && isPlayerReady) { const t = Math.max(0, player.getCurrentTime() - 10); player.seekTo(t, true); } resetFsHideTimer(); };
+    fsForward.onclick = (e) => { e.stopPropagation(); if (player && isPlayerReady) { const dur = player.getDuration() || 99999; const t = Math.min(dur, player.getCurrentTime() + 10); player.seekTo(t, true); } resetFsHideTimer(); };
+    fsMute.onclick = (e) => { e.stopPropagation(); if (player && isPlayerReady) { if (player.isMuted()) { player.unMute(); panelMute.innerHTML = '<i class="fas fa-volume-up"></i>'; updateFsMuteIcon(false); } else { player.mute(); panelMute.innerHTML = '<i class="fas fa-volume-mute"></i>'; updateFsMuteIcon(true); } } resetFsHideTimer(); };
+    fsExit.onclick = (e) => { e.stopPropagation(); exitPortrait(); };
+    fsRotate.onclick = (e) => { e.stopPropagation(); rotateVideo(); resetFsHideTimer(); };
+
+    // ---- Panel Progress Bar ----
+    panelProgressContainer.onclick = (e) => { if (isDraggingProgress || !player || !isPlayerReady) return; const rect = panelProgressContainer.getBoundingClientRect(); const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)); player.seekTo(pos * player.getDuration(), true); };
+    panelProgressThumb.addEventListener('mousedown', startPanelDrag); panelProgressThumb.addEventListener('touchstart', startPanelDrag);
+    function startPanelDrag(e) { e.preventDefault(); if (!player || !isPlayerReady) return; isDraggingProgress = true; const moveHandler = (ev) => { if (!isDraggingProgress) return; const clientX = ev.type.includes('touch') ? ev.touches[0].clientX : ev.clientX; const rect = panelProgressContainer.getBoundingClientRect(); let pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)); panelProgressBar.style.width = (pos * 100) + '%'; }; const endHandler = () => { isDraggingProgress = false; const pos = parseFloat(panelProgressBar.style.width) / 100; if (player && isPlayerReady) player.seekTo(pos * player.getDuration(), true); document.removeEventListener('mousemove', moveHandler); document.removeEventListener('touchmove', moveHandler); document.removeEventListener('mouseup', endHandler); document.removeEventListener('touchend', endHandler); }; document.addEventListener('mousemove', moveHandler); document.addEventListener('touchmove', moveHandler, { passive: false }); document.addEventListener('mouseup', endHandler); document.addEventListener('touchend', endHandler); }
+
+    // ---- FS Progress Bar ----
+    fsProgressContainer.onclick = (e) => { if (isDraggingFsProgress || !player || !isPlayerReady) return; const rect = fsProgressContainer.getBoundingClientRect(); const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)); player.seekTo(pos * player.getDuration(), true); resetFsHideTimer(); };
+    fsProgressThumb.addEventListener('mousedown', startFsDrag); fsProgressThumb.addEventListener('touchstart', startFsDrag);
+    function startFsDrag(e) { e.preventDefault(); if (!player || !isPlayerReady) return; isDraggingFsProgress = true; const moveHandler = (ev) => { if (!isDraggingFsProgress) return; const clientX = ev.type.includes('touch') ? ev.touches[0].clientX : ev.clientX; const rect = fsProgressContainer.getBoundingClientRect(); let pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)); fsProgressBar.style.width = (pos * 100) + '%'; }; const endHandler = () => { isDraggingFsProgress = false; const pos = parseFloat(fsProgressBar.style.width) / 100; if (player && isPlayerReady) player.seekTo(pos * player.getDuration(), true); resetFsHideTimer(); document.removeEventListener('mousemove', moveHandler); document.removeEventListener('touchmove', moveHandler); document.removeEventListener('mouseup', endHandler); document.removeEventListener('touchend', endHandler); }; document.addEventListener('mousemove', moveHandler); document.addEventListener('touchmove', moveHandler, { passive: false }); document.addEventListener('mouseup', endHandler); document.addEventListener('touchend', endHandler); }
+
+    // ---- Blocker ----
+    blocker.onclick = (e) => { e.stopPropagation(); if (isPortraitMode) toggleFsControls(); };
+
+    // ---- Progress update ----
+    if (progressUpdateInterval) clearInterval(progressUpdateInterval);
+    progressUpdateInterval = setInterval(() => {
+        if (player && isPlayerReady && !isDraggingProgress && !isDraggingFsProgress) {
+            const ct = player.getCurrentTime(); const dur = player.getDuration();
+            if (dur > 0) { const pct = (ct / dur * 100); panelProgressBar.style.width = pct + '%'; fsProgressBar.style.width = pct + '%'; panelCurrentTime.textContent = formatTime(ct); panelTotalTime.textContent = formatTime(dur); fsCurrentTime.textContent = formatTime(ct); fsTotalTime.textContent = formatTime(dur); }
         }
-      });
+    }, 200);
+    if (isReloading) { try { if (player) player.playVideo(); } catch(e) {} isReloading = false; }
+}
 
-      document.getElementById('stopBtn').addEventListener('click', () => {
-        videoPlayer.stopVideo();
-        togglePlayBtn.textContent = 'Play';
-      });
-      
-      document.getElementById('rewindBtn').addEventListener('click', () => {
-        const t = Math.max(0, videoPlayer.getCurrentTime() - 10); 
-        videoPlayer.seekTo(t, true);
-      });
-      
-      document.getElementById('forwardBtn').addEventListener('click', () => {
-        const t = Math.min(videoPlayer.getDuration() || 99999, videoPlayer.getCurrentTime() + 10); 
-        videoPlayer.seekTo(t, true);
-      });
-      
-      document.getElementById('muteBtn').addEventListener('click', () => {
-        if(videoPlayer.isMuted()) {
-          videoPlayer.unMute();
-          document.getElementById('muteBtn').textContent = 'Mute';
-        } else {
-          videoPlayer.mute();
-          document.getElementById('muteBtn').textContent = 'Unmute';
-        }
-      });
-
-      document.getElementById('portraitBtn').addEventListener('click', enterPortrait);
-
-      // Set up top buttons
-      document.getElementById('youtubeBtn').addEventListener('click', () => {
-        // Open in YouTube directly without tracking
-        window.open(videoUrl, '_blank');
-      });
-    
-
-      // Set up blocker for portrait mode exit
-      const blocker = document.getElementById('blocker');
-      blocker.addEventListener('click', exitPortraitOnTap);
-
-      // Set up progress bar - UPDATED
-      const progressContainer = document.getElementById('progress-container');
-      const progressBar = document.getElementById('progress-bar');
-      const progressThumb = document.getElementById('progress-thumb');
-      
-      progressContainer.addEventListener('click', (e) => {
-        if (isDraggingProgress) return;
-        const rect = progressContainer.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / progressContainer.offsetWidth;
-        const newTime = pos * videoPlayer.getDuration();
-        videoPlayer.seekTo(newTime, true);
-        updateProgressBar(pos * 100);
-      });
-      
-      // Add drag functionality to progress thumb
-      progressThumb.addEventListener('mousedown', startDrag);
-      progressThumb.addEventListener('touchstart', startDrag);
-      
-      function startDrag(e) {
-        e.preventDefault();
-        isDraggingProgress = true;
-        
-        const moveHandler = (e) => {
-          if (!isDraggingProgress) return;
-          
-          const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-          const rect = progressContainer.getBoundingClientRect();
-          let pos = (clientX - rect.left) / progressContainer.offsetWidth;
-          pos = Math.max(0, Math.min(1, pos));
-          
-          updateProgressBar(pos * 100);
-        };
-        
-        const endHandler = () => {
-          isDraggingProgress = false;
-          const pos = parseFloat(progressBar.style.width) / 100;
-          const newTime = pos * videoPlayer.getDuration();
-          videoPlayer.seekTo(newTime, true);
-          
-          document.removeEventListener('mousemove', moveHandler);
-          document.removeEventListener('touchmove', moveHandler);
-          document.removeEventListener('mouseup', endHandler);
-          document.removeEventListener('touchend', endHandler);
-        };
-        
-        document.addEventListener('mousemove', moveHandler);
-        document.addEventListener('touchmove', moveHandler, { passive: false });
-        document.addEventListener('mouseup', endHandler);
-        document.addEventListener('touchend', endHandler);
-      }
-
-      // Get video duration for tracking
-      videoDuration = videoPlayer.getDuration();
-      
-      // Start tracking watch time
-      videoWatchTime = 0;
-      videoCheckInterval = setInterval(updateVideoProgress, 1000);
-      
-      // Start updating progress bar
-      progressUpdateInterval = setInterval(updateProgressFromPlayer, 200);
-      
-      // Hide loading indicator
-      const loading = document.getElementById('loading');
-      loading.classList.add('hidden');
+function onPlayerStateChange(event) {
+    if (videoLoaded && isPlayerReady) {
+        const isPlaying = event.data === YT.PlayerState.PLAYING;
+        if (isPlaying || event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) { updateMainButton(); updateFsPlayIcon(isPlaying); }
+        if (isPortraitMode) resetFsHideTimer();
     }
+}
+function onPlayerError(e) {
+    console.error('YouTube error', e.data);
+    if (!videoLoaded) { loadingDiv.classList.add('error-state'); loadingDiv.classList.remove('hidden'); loadingText.innerHTML = `<span class="error-icon">⚠️</span><br>ভিডিও লোড করা সম্ভব হচ্ছে না!<br>নেটওয়ার্ক সংযোগ পরীক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিন।`; updateMainButton(); }
+    else { showNotification('ভিডিও প্লেব্যাকে সমস্যা হয়েছে', true); }
+}
 
-    function updateProgressFromPlayer() {
-      if (videoPlayer && !isDraggingProgress) {
-        const currentTime = videoPlayer.getCurrentTime();
-        const duration = videoPlayer.getDuration();
-        
-        if (duration > 0) {
-          const progressPercent = (currentTime / duration) * 100;
-          updateProgressBar(progressPercent);
-        }
-      }
-    }
+// ===== FS Controls Helpers =====
+function updateFsPlayIcon(playing) { const icon = fsTogglePlay.querySelector('i'); if (icon) icon.className = playing ? 'fas fa-pause' : 'fas fa-play'; }
+function updateFsMuteIcon(muted) { const icon = fsMute.querySelector('i'); if (icon) icon.className = muted ? 'fas fa-volume-mute' : 'fas fa-volume-up'; if (muted) panelMute.innerHTML = '<i class="fas fa-volume-mute"></i>'; else panelMute.innerHTML = '<i class="fas fa-volume-up"></i>'; }
+function toggleFsControls() { if (fsVisible) hideFsControls(); else showFsControls(); }
+function showFsControls() { fsControls.classList.add('visible'); fsVisible = true; resetFsHideTimer(); }
+function hideFsControls() { fsControls.classList.remove('visible'); fsVisible = false; clearTimeout(fsHideTimeout); fsHideTimeout = null; }
+function resetFsHideTimer() { clearTimeout(fsHideTimeout); if (fsVisible && !isFsControlsInteracting) { fsHideTimeout = setTimeout(() => { hideFsControls(); }, 3500); } else if (fsVisible && isFsControlsInteracting) { clearTimeout(fsHideTimeout); } }
 
-    function updateProgressBar(percent) {
-      const progressBar = document.getElementById('progress-bar');
-      progressBar.style.width = percent + '%';
+// ===== Fullscreen / Rotate =====
+function enterPortrait() {
+    if (!aspect) return;
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) { exitPortrait(); return; }
+    const requestFullscreen = aspect.requestFullscreen || aspect.webkitRequestFullscreen || aspect.mozRequestFullScreen || aspect.msRequestFullscreen;
+    if (requestFullscreen) {
+        requestFullscreen.call(aspect).then(() => {
+            aspect.classList.add('fullscreen-landscape'); document.body.classList.add('fullscreen-active'); isPortraitMode = true; showFsControls();
+            const onFullscreenChange = function() {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+                    aspect.classList.remove('fullscreen-landscape'); document.body.classList.remove('fullscreen-active'); isPortraitMode = false;
+                    const media = aspect.querySelector('iframe, video'); if (media) { media.style.transform = ''; media.style.width = ''; media.style.height = ''; delete media.dataset.rotation; }
+                    hideFsControls(); document.removeEventListener('fullscreenchange', onFullscreenChange);
+                }
+            };
+            document.addEventListener('fullscreenchange', onFullscreenChange);
+        }).catch(err => { console.warn('fullscreen error:', err); showNotification('ফুলস্ক্রিন এ যেতে সমস্যা হয়েছে', true); });
     }
+}
+function exitPortrait() {
+    const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+    if (exitFullscreen) exitFullscreen.call(document).catch(() => {});
+    hideFsControls(); isPortraitMode = false;
+}
+function rotateVideo() {
+    const media = aspect.querySelector('iframe, video'); if (!media) return;
+    let angle = media.dataset.rotation ? parseInt(media.dataset.rotation) : 0; angle = (angle + 90) % 360; media.dataset.rotation = angle;
+    if (angle === 90 || angle === 270) { media.style.transform = `rotate(${angle}deg) scale(1.8)`; media.style.width = '180%'; media.style.height = '180%'; }
+    else { media.style.transform = `rotate(${angle}deg) scale(1)`; media.style.width = '100%'; media.style.height = '100%'; }
+    if (isPortraitMode) resetFsHideTimer();
+}
 
-    function updateVideoProgress() {
-      if (videoPlayer && videoPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-        videoWatchTime += 1; // Increment by 1 second
-        
-        const currentTime = videoPlayer.getCurrentTime();
-        const duration = videoPlayer.getDuration();
-        
-        if (duration > 0) {
-          // Check if 40% of video has been watched
-          if ((currentTime / duration) >= 0.4) {
-            trackItem(videoTrackId, videoType);
-            clearInterval(videoCheckInterval);
-          }
-        }
-      }
+// ===== Top Buttons =====
+function setupTopButtons() {
+    // YouTube Button
+    if (!ENABLE_YOUTUBE_BUTTON) {
+        youtubeBtn.classList.add('disabled-btn');
+        youtubeBtn.innerHTML = `<small>⛔</small><span>VIDEO PLAYER<br>RUNNING NOW</span>`;
+        youtubeBtn.style.cursor = 'not-allowed';
+        youtubeBtn.onclick = function(e) { e.preventDefault(); e.stopPropagation(); showNotification('এই বাটনটি বন্ধ করা আছে', true); return false; };
+    } else {
+        youtubeBtn.classList.remove('disabled-btn');
+        youtubeBtn.innerHTML = `<small>Download &</small><span>YouTube Play</span>`;
+        youtubeBtn.onclick = () => { const id = getVideoIdFromURL(); window.open('https://www.youtube.com/watch?v=' + id, '_blank'); };
     }
+    // Folder Button
+    folderBtn.onclick = closeVideoPlayer;
+}
 
-    function onPlayerStateChange(event) {
-      const togglePlayBtn = document.getElementById('togglePlayBtn');
-      const loading = document.getElementById('loading');
-      
-      if (event.data === YT.PlayerState.PLAYING) {
-        togglePlayBtn.textContent = 'PAUSE';
-        loading.classList.add('hidden');
-      } else if (event.data === YT.PlayerState.PAUSED) {
-        togglePlayBtn.textContent = 'PLAY';
-      } else if (event.data === YT.PlayerState.ENDED) {
-        togglePlayBtn.textContent = 'PLAY';
-      }
-      
-      // Update loading progress based on buffering
-      if (event.data === YT.PlayerState.BUFFERING) {
-        updateLoadingProgressBar();
-      }
-    }
+// ===== openVideoPlayer (override) =====
+function openVideoPlayer(url, trackId, type) {
+    console.log('🎬 Opening video player:', url, trackId, type);
+    window._currentVideoUrl = url;
+    window._currentTrackId = trackId;
+    window._currentType = type;
+    window._subjectScrollPosition = window.scrollY || 0;
+    document.getElementById('subject-page').style.display = 'none';
+    document.getElementById('video-player-page').style.display = 'block';
+    history.pushState({ page: 'video', url: url, trackId: trackId, type: type }, '');
+    window._currentPageState = 'video';
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+        const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/);
+        if (match) { videoId = match[1]; currentVideoId = videoId; refreshNoteDisplay(); if (player && typeof player.loadVideoById === 'function') player.loadVideoById(videoId); else recreatePlayer(); }
+        else showNotification('ভিডিও আইডি খুঁজে পাওয়া যায়নি', true);
+    }, 100);
+}
 
-    function updateLoadingProgressBar() {
-      if (videoPlayer && videoPlayer.getVideoLoadedFraction) {
-        const loadedFraction = videoPlayer.getVideoLoadedFraction();
-        const loadingProgressBar = document.getElementById('loading-progress-bar');
-        if (loadingProgressBar) {
-          loadingProgressBar.style.width = (loadedFraction * 100) + '%';
-        }
-      }
-    }
+// ===== closeVideoPlayer =====
+function closeVideoPlayer() {
+    if (progressUpdateInterval) clearInterval(progressUpdateInterval);
+    if (videoLoadingTimeout) clearTimeout(videoLoadingTimeout);
+    if (fsHideTimeout) clearTimeout(fsHideTimeout);
+    if (isPortraitMode) exitPortrait();
+    if (player) { try { player.stopVideo(); player.destroy(); } catch(e) {} player = null; }
+    document.getElementById('video-player-page').style.display = 'none';
+    document.getElementById('subject-page').style.display = 'block';
+    window.scrollTo(0, window._subjectScrollPosition || 0);
+    window._currentPageState = 'subject';
+    videoLoaded = false; isPlayerReady = false;
+}
 
-    function onPlaybackQualityChange(event) {
-      console.log('Playback quality changed to:', event.data);
-      updateLoadingProgressBar();
-    }
+// ===== Init =====
+document.addEventListener('DOMContentLoaded', function() {
+    setupTopButtons();
+    updateMainButton();
+    panelTogglePlay.onclick = function() {
+        if (!videoLoaded) refreshVideo();
+        else if (player && isPlayerReady) { if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo(); else player.playVideo(); updateMainButton(); updateFsPlayIcon(player.getPlayerState() === YT.PlayerState.PLAYING); }
+    };
 
-    function onPlaybackRateChange(event) {
-      console.log('Playback rate changed to:', event.data);
-    }
+    // Note events
+    noteEditToggle.onclick = function(e) { e.stopPropagation(); if (isNoteEditing) exitEditMode(false); else enterEditMode(); };
+    noteSaveBtn.onclick = function(e) { e.stopPropagation(); exitEditMode(true); };
+    noteCancelBtn.onclick = function(e) { e.stopPropagation(); exitEditMode(false); };
+    noteDeleteBtn.onclick = function(e) { e.stopPropagation(); deleteNote(); };
+    noteTextarea.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 220) + 'px'; });
+    noteTextarea.addEventListener('keydown', function(e) { if (e.key === 'Escape' && isNoteEditing) { exitEditMode(false); e.preventDefault(); } if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && isNoteEditing) { exitEditMode(true); e.preventDefault(); } });
 
-    function onPlayerError(event) {
-      console.error('YouTube Player Error:', event.data);
-      showNotification("ভিডিও লোড করতে সমস্যা হয়েছে", true);
-    }
+    initYouTubePlayer();
+    videoLoadingTimeout = setTimeout(() => {
+        if (!videoLoaded) { loadingDiv.classList.add('error-state'); loadingDiv.classList.remove('hidden'); loadingText.innerHTML = `<span class="error-icon">⏱️</span><br>ভিডিও লোড হতে অনেক সময় লাগছে!<br>নেটওয়ার্ক সংযোগ পরীক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিন।`; updateMainButton(); }
+    }, 25000);
 
-    function enterPortrait() {
-      const aspect = document.getElementById('aspect');
-      aspect.classList.add('portrait', 'fullscreen-portrait');
-      document.body.classList.add('fullscreen-locked');
-      isPortraitMode = true;
-      
-      // Auto scroll to center when entering portrait mode
-      setTimeout(() => {
-        window.scrollTo({
-          top: window.innerHeight / 2,
-          behavior: 'smooth'
-        });
-      }, 100);
+    const fsContent = fsControls.querySelector('.fs-content');
+    if (fsContent) {
+        fsContent.addEventListener('mouseenter', () => { isFsControlsInteracting = true; clearTimeout(fsHideTimeout); });
+        fsContent.addEventListener('mouseleave', () => { isFsControlsInteracting = false; if (isPortraitMode && fsVisible) resetFsHideTimer(); });
+        fsContent.addEventListener('touchstart', () => { isFsControlsInteracting = true; clearTimeout(fsHideTimeout); });
+        fsContent.addEventListener('touchend', () => { isFsControlsInteracting = false; if (isPortraitMode && fsVisible) resetFsHideTimer(); });
+        fsContent.addEventListener('click', () => { if (isPortraitMode && fsVisible) resetFsHideTimer(); });
     }
+});
 
-    function exitPortraitOnTap() {
-      if (isPortraitMode) {
-        exitPortrait();
-      }
-    }
-
-    function exitPortrait() {
-      const aspect = document.getElementById('aspect');
-      aspect.classList.remove('portrait', 'fullscreen-portrait');
-      document.body.classList.remove('fullscreen-locked');
-      isPortraitMode = false;
-      
-      // Auto scroll back to top when exiting portrait mode
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }, 100);
-    }
-
-    function closeVideoPlayer() {
-      // Clear tracking interval
-      if (videoCheckInterval) {
-        clearInterval(videoCheckInterval);
-      }
-      
-      // Clear progress update interval
-      if (progressUpdateInterval) {
-        clearInterval(progressUpdateInterval);
-      }
-      
-      // Clear video loading timeout
-      if (videoLoadingTimeout) {
-        clearTimeout(videoLoadingTimeout);
-        videoLoadingTimeout = null;
-      }
-      
-      // Exit portrait mode if active
-      if (isPortraitMode) {
-        exitPortrait();
-      }
-      
-      // Stop video player
-      if (videoPlayer) {
-        videoPlayer.stopVideo();
-        videoPlayer.destroy();
-        videoPlayer = null;
-      }
-      
-      // Clear player element
-      const playerElement = document.getElementById('player');
-      if (playerElement) {
-        playerElement.innerHTML = '';
-      }
-      
-      // Return to subject page
-      videoPlayerPage.style.display = 'none';
-      subjectPage.style.display = 'block';
-      
-      // Restore scroll position
-      window.scrollTo(0, subjectScrollPosition);
-      currentPageState = 'subject';
-    }
+window.addEventListener('beforeunload', function() {
+    if (progressUpdateInterval) clearInterval(progressUpdateInterval);
+    if (videoLoadingTimeout) clearTimeout(videoLoadingTimeout);
+    if (fsHideTimeout) clearTimeout(fsHideTimeout);
+});
+console.log('✅ New Video Player with fullscreen controls, note system, and speed control loaded.');
 
     // Drive Player Functions
     function extractDriveId(url) {
@@ -7788,150 +7731,6 @@ body.fullscreen-active {
   touch-action: none !important;
     }
   </style>
-<script>
-(function() {
-  'use strict';
-
-  const aspect = document.getElementById('aspect');
-  if (!aspect) {
-    console.warn('aspect এলিমেন্ট পাওয়া যায়নি');
-    return;
-  }
-
-  let rotationAngle = 0; // বর্তমান ঘূর্ণন কোণ (ডিগ্রি)
-  let rotateButton = null; // বাটন এলিমেন্টের রেফারেন্স
-
-  // -------------------- আপডেটকৃত অংশ (ডেমো থেকে নেওয়া) --------------------
-  function applyVideoRotation(angle) {
-    const media = aspect.querySelector('video, iframe');
-    if (media) {
-      if (angle === 90 || angle === 270) {
-        // 90° বা 270° হলে ভিডিও ৩০% বড় দেখাবে
-        media.style.transform = `rotate(${angle}deg) scale(1.8)`;
-        media.style.width = '180%';
-        media.style.height = '180%';
-      } else {
-        // 0° বা 180° হলে স্বাভাবিক সাইজ
-        media.style.transform = `rotate(${angle}deg) scale(1)`;
-        media.style.width = '100%';
-        media.style.height = '100%';
-      }
-    }
-  }
-  // ----------------------------------------------------------------------
-
-  // রোটেট বাটন তৈরি
-  function createRotateButton() {
-    const btn = document.createElement('div');
-    btn.className = 'rotate-btn';
-    btn.setAttribute('aria-label', 'ঘোরান');
-    btn.innerHTML = '↻'; // ঘড়ির কাঁটার দিকে ঘূর্ণন সিম্বল
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      rotationAngle = (rotationAngle + 90) % 360;
-      applyVideoRotation(rotationAngle);
-    });
-    return btn;
-  }
-
-  // ফুলস্ক্রিন এন্টার
-  window.enterPortrait = function() {
-    if (!aspect) return;
-
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
-      window.exitPortrait();
-      return;
-    }
-
-    const requestFullscreen = aspect.requestFullscreen || aspect.webkitRequestFullscreen || aspect.mozRequestFullScreen || aspect.msRequestFullscreen;
-    if (requestFullscreen) {
-      requestFullscreen.call(aspect).then(() => {
-        aspect.classList.add('fullscreen-landscape');
-        document.body.classList.add('fullscreen-active');
-        window.isPortraitMode = true;
-
-        rotationAngle = 0;
-        applyVideoRotation(0);
-
-        rotateButton = createRotateButton();
-        aspect.appendChild(rotateButton);
-
-        const onFullscreenChange = function() {
-          if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
-            aspect.classList.remove('fullscreen-landscape');
-            document.body.classList.remove('fullscreen-active');
-            window.isPortraitMode = false;
-            applyVideoRotation(0);
-
-            if (rotateButton && rotateButton.parentNode) {
-              rotateButton.parentNode.removeChild(rotateButton);
-              rotateButton = null;
-            }
-
-            document.removeEventListener('fullscreenchange', onFullscreenChange);
-            document.removeEventListener('webkitfullscreenchange', onFullscreenChange);
-            document.removeEventListener('mozfullscreenchange', onFullscreenChange);
-            document.removeEventListener('MSFullscreenChange', onFullscreenChange);
-          }
-        };
-        document.addEventListener('fullscreenchange', onFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-        document.addEventListener('mozfullscreenchange', onFullscreenChange);
-        document.addEventListener('MSFullscreenChange', onFullscreenChange);
-
-        aspect.addEventListener('click', function onClick(e) {
-          if (!e.target.closest('.rotate-btn')) {
-            window.exitPortrait();
-          }
-        });
-
-      }).catch(err => {
-        console.warn('ফুলস্ক্রিন এন্টার করতে সমস্যা:', err);
-      });
-    } else {
-      console.warn('ব্রাউজার ফুলস্ক্রিন সাপোর্ট করে না');
-    }
-  };
-
-  window.exitPortrait = function() {
-    if (!aspect) return;
-
-    const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
-    if (exitFullscreen) {
-      exitFullscreen.call(document).catch(err => {
-        console.warn('ফুলস্ক্রিন থেকে বের হতে সমস্যা:', err);
-      });
-    } else {
-      aspect.classList.remove('fullscreen-landscape');
-      document.body.classList.remove('fullscreen-active');
-      window.isPortraitMode = false;
-      applyVideoRotation(0);
-      if (rotateButton && rotateButton.parentNode) {
-        rotateButton.parentNode.removeChild(rotateButton);
-        rotateButton = null;
-      }
-    }
-  };
-
-  window.exitPortraitOnTap = function() {
-    if (window.isPortraitMode) {
-      window.exitPortrait();
-    }
-  };
-
-  const originalCloseVideoPlayer = window.closeVideoPlayer;
-  window.closeVideoPlayer = function() {
-    if (window.isPortraitMode) {
-      window.exitPortrait();
-    }
-    if (originalCloseVideoPlayer) {
-      originalCloseVideoPlayer();
-    }
-  };
-
-  console.log('আপডেটেড ম্যানুয়াল রোটেশন বাটন সহ ফুলস্ক্রিন সিস্টেম চালু হয়েছে');
-})();
-  </script>
 
   <script>
 // ========== নতুন সময়-ভিত্তিক মোটিভেশন সিস্টেম ==========
