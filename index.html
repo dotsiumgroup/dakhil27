@@ -6,6 +6,8 @@
   <title>DAKHIL-27 (TARGET GPA-5) SUCCESS JOURNEY COURSE (BOM)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     /* Preloader Styles */
     #preloader {
@@ -3745,29 +3747,127 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <button class="banner-refresh-btn bangla-font" id="bannerRefreshBtn">পুনরায় রিফ্রেশ</button>
   </div>
 
-  <div id="login-page">
-    <div class="login-container">
+  <style>
+  .mode-switcher{display:flex;gap:6px;background:#f2f0eb;padding:6px;border-radius:50px;margin-bottom:22px;}
+  .mode-tab{flex:1;text-align:center;padding:11px 6px;border:none;background:transparent;border-radius:40px;font-weight:600;font-size:0.86rem;color:var(--text-muted);cursor:pointer;}
+  .mode-tab.active{color:#fff;background:linear-gradient(135deg,#6c63ff,#a29bfe);}
+  .auth-panel{display:none;}
+  .auth-panel.active{display:block;}
+  .gender-select{display:flex;gap:10px;}
+  .gender-option{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:12px;border:2px solid #e8e6ed;background:#faf8f5;color:var(--text-muted);font-weight:600;cursor:pointer;}
+  .gender-option.selected{border-color:#6c63ff;background:rgba(108,99,255,0.12);color:#6c63ff;}
+  .id-success{display:none;text-align:center;}
+  .id-success.active{display:block;}
+  .id-card{background:linear-gradient(135deg,#1e272e,#2d3436);border-radius:16px;padding:22px;margin-bottom:20px;}
+  .id-card .id-label{font-size:0.72rem;color:#fbbf24;font-weight:700;margin-bottom:8px;}
+  .id-card .id-value{font-size:1.4rem;font-weight:700;color:#fff;word-break:break-all;}
+  .copy-btn{margin-top:14px;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);cursor:pointer;}
+  #login-password-wrapper{display:none;margin-top:6px;}
+  .error-message.show{display:flex !important;align-items:center;gap:8px;justify-content:center;}
+  .pw-msg{font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:8px;padding:10px 14px;background:#f0ebf8;border-radius:10px;border-left:4px solid #8b5cf6;}
+</style>
+
+<div id="login-page">
+  <div class="login-container">
+
+    <!-- রেজিস্ট্রেশন সফল হলে এটা দেখাবে -->
+    <div class="id-success bangla-font" id="id-success-screen">
+      <h2 class="bangla-font">রেজিস্ট্রেশন সম্পন্ন হয়েছে!</h2>
+      <p class="bangla-font">আপনার BOM Student ID তৈরি হয়েছে। পরবর্তীতে লগইন করতে এই আইডিটি প্রয়োজন হবে — অবশ্যই সংরক্ষণ করুন।</p>
+      <div class="id-card">
+        <div class="id-label">BOM STUDENT ID</div>
+        <div class="id-value" id="generated-id-text">--------</div>
+        <button class="copy-btn" id="copy-id-btn" type="button">কপি করুন</button>
+      </div>
+      <button class="login-btn bangla-font" id="continue-to-main-btn">মেইন পেইজে যান</button>
+    </div>
+
+    <!-- লগইন / রেজিস্ট্রেশন ফর্ম -->
+    <div id="auth-forms-wrap">
       <div class="welcome-message">
         <h1 class="bangla-font">DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE"</h1>
-        <p class="bangla-font">শিক্ষার যাত্রায় এক নতুন দিগন্ত। বাংলাদেশ অনলাইন মাদ্রাসা (BOM) এর প্রাইভেট ব্যাচের দাখিল-২৭ শিক্ষার্থীদের জন্য প্রিমিয়াম লার্নিং এক্সপেরিয়েন্স</p>
+        <p class="bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) এর প্রাইভেট ব্যাচের দাখিল-২৭ শিক্ষার্থীদের জন্য প্রিমিয়াম লার্নিং এক্সপেরিয়েন্স</p>
       </div>
-      <div class="login-form">
+
+      <div class="mode-switcher">
+        <button type="button" class="mode-tab active bangla-font" data-mode="register">রেজিস্ট্রেশন</button>
+        <button type="button" class="mode-tab bangla-font" data-mode="login">শিক্ষার্থী লগইন</button>
+        <button type="button" class="mode-tab bangla-font" data-mode="admin">এডমিন লগইন</button>
+      </div>
+
+      <!-- শিক্ষার্থী লগইন প্যানেল -->
+      <div class="auth-panel" data-panel="login" id="panel-login">
         <div class="form-group">
-          <label for="password" class="bangla-font">সিকিউরিটি কোড লিখুন</label>
-          <input type="password" id="password" placeholder="এখানে কোডটি লিখুন" class="bangla-font">
+          <label class="bangla-font">BOM Student ID</label>
+          <input type="text" id="login-student-id" placeholder="আপনার Student ID লিখুন" class="bangla-font">
         </div>
-        <button class="login-btn bangla-font" onclick="checkPassword()">লগইন করুন</button>
-        <div id="error-message" class="error-message bangla-font">সিকিউরিটি কোডটি ভুল হয়েছে। আবার চেষ্টা করুন।</div>
+        <div class="form-group">
+          <label class="bangla-font">WhatsApp নাম্বার</label>
+          <input type="tel" id="login-student-whatsapp" placeholder="01XXXXXXXXX" class="bangla-font">
+        </div>
+        <div id="login-password-wrapper">
+          <div class="pw-msg bangla-font">প্রিয় <span id="login-pw-student-name">শিক্ষার্থী</span>, আপনার আইডি পাসওয়ার্ড দ্বারা সুরক্ষিত। পাসওয়ার্ড দিন।</div>
+          <div class="form-group">
+            <label class="bangla-font">আইডির পাসওয়ার্ড</label>
+            <input type="password" id="login-student-password" placeholder="পাসওয়ার্ড লিখুন" class="bangla-font">
+          </div>
+        </div>
+        <button class="login-btn bangla-font" id="student-login-btn" type="button">লগইন করুন</button>
+        <div id="login-error" class="error-message bangla-font"><span>ভুল তথ্য দেওয়া হয়েছে।</span></div>
       </div>
+
+      <!-- রেজিস্ট্রেশন প্যানেল -->
+      <div class="auth-panel active" data-panel="register" id="panel-register">
+        <div class="form-group">
+          <label class="bangla-font">সম্পূর্ণ নাম (ইংরেজিতে)</label>
+          <input type="text" id="reg-name" placeholder="যেমন: RIFAT HASAN" class="bangla-font">
+        </div>
+        <div class="form-group">
+          <label class="bangla-font">প্রতিষ্ঠানের নাম (ইংরেজিতে)</label>
+          <input type="text" id="reg-institution" placeholder="যেমন: DHAKA ALIA MADRASAH" class="bangla-font">
+        </div>
+        <div class="form-group">
+          <label class="bangla-font">WhatsApp নাম্বার</label>
+          <input type="tel" id="reg-whatsapp" placeholder="01XXXXXXXXX" class="bangla-font">
+        </div>
+        <div class="form-group">
+          <label class="bangla-font">লিঙ্গ নির্বাচন করুন</label>
+          <div class="gender-select" id="gender-select">
+            <div class="gender-option bangla-font" data-gender="MALE">পুরুষ</div>
+            <div class="gender-option bangla-font" data-gender="FEMALE">নারী</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="bangla-font">অ্যাপের সিক্রেট পাসওয়ার্ড</label>
+          <input type="password" id="reg-secret" placeholder="সিক্রেট পাসওয়ার্ড লিখুন" class="bangla-font">
+        </div>
+        <button class="login-btn bangla-font" id="register-btn" type="button">রেজিস্ট্রেশন করুন</button>
+        <div id="register-error" class="error-message bangla-font"><span>সব তথ্য সঠিকভাবে পূরণ করুন।</span></div>
+      </div>
+
+      <!-- এডমিন লগইন প্যানেল -->
+      <div class="auth-panel" data-panel="admin" id="panel-admin">
+        <div class="form-group">
+          <label class="bangla-font">সম্পূর্ণ নাম</label>
+          <input type="text" id="admin-name" placeholder="আপনার নাম লিখুন" class="bangla-font">
+        </div>
+        <div class="form-group">
+          <label class="bangla-font">এডমিন পাসওয়ার্ড</label>
+          <input type="password" id="admin-password" placeholder="পাসওয়ার্ড লিখুন" class="bangla-font">
+        </div>
+        <button class="login-btn bangla-font" id="admin-login-btn" type="button">এডমিন লগইন করুন</button>
+        <div id="admin-error" class="error-message bangla-font"><span>পাসওয়ার্ড সঠিক নয়।</span></div>
+      </div>
+
       <div class="support-info">
-        <p class="bangla-font">এক্সেস পাসওয়ার্ড পেতে BOM এর এডমিনের সাথে যোগাযোগ করুন</p>
+        <p class="bangla-font">সহায়তা প্রয়োজন হলে BOM এর এডমিনের সাথে যোগাযোগ করুন</p>
         <a href="https://wa.me/8801806234120" class="whatsapp-link" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-          <span>WhatsApp</span>
+          <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
         </a>
       </div>
     </div>
   </div>
+</div>
   
   <div id="main-page" style="display: none;">
     <header>
@@ -3785,6 +3885,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         <div class="controls">
           <button class="btn" id="refresh-data-btn"><i class="fas fa-sync-alt"></i> <span class="bangla-font">ডেটা রিফ্রেশ</span></button>
           <button class="btn" id="dashboard-btn" style="display: none;"><i class="fas fa-tachometer-alt"></i> <span class="bangla-font">ড্যাশবোর্ড</span></button>
+          
           <a class="btn" id="add-class-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScxUYNsEFpE3YA9DBA7GtDadTJ3TXJd9-xgKesRlOrVrjvj1w/viewform?usp=header" target="_blank" rel="noopener" style="display: none;"><i class="fas fa-plus-circle"></i> <span class="bangla-font">ক্লাস যুক্ত করুন</span></a>
         </div>
       </nav>
@@ -3906,6 +4007,56 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <span class="go bangla-font">খুলুন</span>
   </a>
 </div>
+
+<style>
+  .bomfolder-add-btn { display:flex; align-items:center; justify-content:center; gap:8px; padding:16px; margin-top:20px; border-radius:16px; border:2px dashed #6c63ff; background:rgba(108,99,255,0.05); color:#6c63ff; font-weight:700; cursor:pointer; }
+  .bomfolder-dots { position:absolute; top:14px; right:14px; background:rgba(0,0,0,0.05); width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; color:#636e72; }
+  .bomfolder-pill { position:relative; }
+  .bomfolder-hidden-badge { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); border-radius:16px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; }
+  .bomfolder-modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:999998; padding:16px; }
+  .bomfolder-modal-overlay.active { display:flex; }
+  .bomfolder-modal-box { background:#fff; border-radius:18px; max-width:420px; width:100%; padding:24px; }
+  .bomfolder-modal-box h3 { margin-bottom:16px; color:#2d3436; }
+  .bomfolder-modal-box input { width:100%; padding:12px 14px; border-radius:10px; border:2px solid #e8e6ed; margin-bottom:14px; }
+  .bomfolder-modal-box .btn-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .bomfolder-modal-box button { border:none; border-radius:10px; padding:11px 16px; font-weight:700; cursor:pointer; color:#fff; flex:1; min-width:100px; }
+  .bomfolder-save { background:#6c63ff; }
+  .bomfolder-hide { background:#ffa502; }
+  .bomfolder-delete { background:#ff4757; }
+  .bomfolder-cancel { background:#636e72; }
+</style>
+
+<div id="bom-folder-list-container"></div>
+<div class="bomfolder-add-btn bangla-font" id="bomfolder-add-btn" style="display:none;">
+  <i class="fas fa-plus-circle"></i> নতুন ফোল্ডার যুক্ত করুন
+</div>
+
+<div class="bomfolder-modal-overlay" id="bomfolder-create-overlay">
+  <div class="bomfolder-modal-box">
+    <h3 class="bangla-font">নতুন ফোল্ডার যুক্ত করুন</h3>
+    <input type="text" id="bomfolder-new-name" placeholder="ফোল্ডারের নাম লিখুন" class="bangla-font">
+    <div class="btn-row">
+      <button class="bomfolder-save bangla-font" id="bomfolder-create-save">যুক্ত করুন</button>
+      <button class="bomfolder-cancel bangla-font" id="bomfolder-create-cancel">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<div class="bomfolder-modal-overlay" id="bomfolder-manage-overlay">
+  <div class="bomfolder-modal-box">
+    <h3 class="bangla-font">ফোল্ডার পরিচালনা</h3>
+    <input type="text" id="bomfolder-edit-name" class="bangla-font">
+    <div class="btn-row">
+      <button class="bomfolder-save bangla-font" id="bomfolder-edit-save">নাম পরিবর্তন</button>
+      <button class="bomfolder-hide bangla-font" id="bomfolder-hide-btn">হাইড করুন</button>
+    </div>
+    <div class="btn-row" style="margin-top:8px;">
+      <button class="bomfolder-delete bangla-font" id="bomfolder-delete-btn">ডিলিট করুন</button>
+      <button class="bomfolder-cancel bangla-font" id="bomfolder-manage-cancel">বন্ধ করুন</button>
+    </div>
+  </div>
+</div>
+
     </main>
     <div class="container">
       <div class="action-buttons">
@@ -3952,6 +4103,171 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     </footer>
   </div>
   
+  <style>
+  #bom-dashboard-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
+  .bomdash-header { background:#fff; border-bottom:1px solid #dfe6e9; box-shadow:0 2px 10px rgba(0,0,0,.05); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#2d3436; }
+  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid #dfe6e9; background:#fff; color:#2d3436; font-weight:500; cursor:pointer; }
+  .bomdash-content { max-width:820px; margin:24px auto; padding:0 20px; }
+  .bomdash-card { border-radius:22px; padding:30px 26px; background:linear-gradient(160deg,#08142b,#0d2145,#08142b); color:#eef3fb; box-shadow:0 24px 60px rgba(6,14,32,.3); margin-bottom:20px; }
+  .bomdash-name { font-size:1.4rem; font-weight:800; color:#fff; text-align:center; margin-bottom:4px; }
+  .bomdash-roll { color:#f6d365; font-weight:700; text-align:center; margin-bottom:20px; }
+  .bomdash-chips { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:20px; }
+  .bomdash-chip { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:12px 14px; }
+  .bomdash-chip .k { font-size:.65rem; text-transform:uppercase; color:#d8b34a; font-weight:700; }
+  .bomdash-chip .v { font-size:.9rem; font-weight:600; color:#f2f5fa; }
+  .bomdash-login-box { background:rgba(51,209,125,.08); border:1px solid rgba(51,209,125,.25); border-radius:16px; padding:20px; }
+  .bomdash-login-stats { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:16px; }
+  .bomdash-login-num { font-size:1.35rem; font-weight:800; color:#fff; }
+  .bomdash-login-label { font-size:.7rem; text-transform:uppercase; color:#9fb0cc; font-weight:600; }
+  .bomdash-pw-btn { border:none; border-radius:10px; padding:9px 20px; font-weight:700; font-size:.82rem; cursor:pointer; background:linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; margin-top:10px; }
+  .bomdash-pw-modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.65); display:none; align-items:center; justify-content:center; z-index:999999; padding:20px; }
+  .bomdash-pw-modal-overlay.active { display:flex; }
+  .bomdash-pw-modal { background:#fff; border-radius:22px; max-width:420px; width:100%; padding:26px; }
+  .bomdash-pw-modal h3 { margin-bottom:16px; color:#2d3436; }
+  .bomdash-pw-modal input { width:100%; padding:12px 14px; border-radius:10px; border:2px solid #e8e6ed; margin-bottom:12px; }
+  .bomdash-pw-modal button.save { width:100%; padding:13px; border:none; border-radius:10px; background:linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; font-weight:700; cursor:pointer; }
+  .bomdash-pw-modal button.close-x { float:right; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#636e72; }
+  .bomdash-pw-error { color:#ff4757; font-size:.85rem; margin-top:8px; display:none; }
+</style>
+
+<style>
+  #bom-dashboard-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
+  .bomdash-header { background:#fff; border-bottom:1px solid #dfe6e9; box-shadow:0 2px 10px rgba(0,0,0,.05); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#2d3436; }
+  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid #dfe6e9; background:#fff; color:#2d3436; font-weight:500; cursor:pointer; }
+  .bomdash-content { max-width:820px; margin:24px auto; padding:0 20px; }
+
+  .pf-wrap { position:relative; overflow:hidden; border-radius:22px; padding:30px 26px 34px; background:linear-gradient(160deg,#08142b,#0d2145,#08142b); color:#eef3fb; box-shadow:0 24px 60px rgba(6,14,32,.3); margin-bottom:20px; }
+  .pf-hero { display:flex; flex-direction:column; align-items:center; text-align:center; padding-bottom:20px; margin-bottom:22px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .pf-avatar { width:86px; height:86px; border-radius:50%; border:2px solid #d8b34a; background:radial-gradient(circle at 35% 30%,#1c3a68,#0b1c36); display:flex; align-items:center; justify-content:center; font-size:2.1rem; color:#f6d365; box-shadow:0 0 0 6px rgba(216,179,74,.08); margin-bottom:12px; }
+  .pf-identity { width:100%; text-align:left; }
+  .pf-line { font-size:1rem; font-weight:500; color:#cfd8e6; margin-bottom:4px; }
+  .pf-line .pf-value { font-weight:700; color:#fff; }
+  .pf-line .pf-value.name { font-size:1.4rem; font-weight:800; }
+  .pf-line .pf-value.roll { color:#f6d365; }
+  .pf-badge-pill { display:inline-flex; align-items:center; gap:6px; padding:7px 16px; border-radius:30px; font-size:.82rem; font-weight:700; margin-top:12px; align-self:flex-end; }
+  .badge-starter { background:rgba(255,255,255,.08); color:#cfd8e6; }
+  .badge-bronze { background:rgba(205,127,50,.16); color:#e3a26a; }
+  .badge-silver { background:rgba(192,192,192,.14); color:#e6e6e6; }
+  .badge-gold { background:rgba(255,215,0,.14); color:#ffd700; }
+  .badge-platinum { background:rgba(229,228,226,.16); color:#f4f4f4; }
+
+  .pf-chips { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:24px; }
+  .pf-chip { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px 14px; }
+  .pf-chip .k { font-size:.64rem; text-transform:uppercase; color:#d8b34a; font-weight:700; }
+  .pf-chip .v { font-size:.9rem; font-weight:600; color:#f2f5fa; word-break:break-word; }
+
+  .pf-metrics-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:22px; }
+  .pf-dial-card { flex:1; min-width:220px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:18px 20px; display:flex; align-items:center; gap:18px; }
+  .pf-dial { width:90px; height:90px; border-radius:50%; flex-shrink:0; background:conic-gradient(#d8b34a calc(var(--p)*1%),rgba(255,255,255,.10) 0); display:flex; align-items:center; justify-content:center; position:relative; }
+  .pf-dial::before { content:''; position:absolute; inset:9px; border-radius:50%; background:#0d2145; }
+  .pf-dial-value { position:relative; z-index:2; font-size:1.1rem; font-weight:800; color:#fff; }
+  .pf-dial-copy .t { font-size:.9rem; font-weight:700; color:#fff; margin-bottom:4px; }
+  .pf-dial-copy .d { font-size:.76rem; color:#9fb0cc; }
+  .pf-days-card { flex:1; min-width:160px; background:rgba(216,179,74,.08); border:1px solid rgba(216,179,74,.25); border-radius:16px; padding:18px 20px; display:flex; flex-direction:column; justify-content:center; }
+  .pf-days-number { font-size:2rem; font-weight:800; color:#f6d365; line-height:1; margin-bottom:4px; }
+  .pf-days-label { font-size:.76rem; color:#cdb87a; font-weight:600; }
+
+  .pf-section-title { font-size:.78rem; letter-spacing:1.4px; text-transform:uppercase; font-weight:700; color:#d8b34a; margin:20px 0 12px; }
+  .pf-stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .pf-stat-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:14px 16px; }
+  .pf-stat-card .head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .pf-stat-card .label { font-size:.85rem; font-weight:700; color:#f2f5fa; }
+  .pf-stat-card .nums { font-size:.72rem; color:#9fb0cc; }
+  .pf-stat-card .nums b { color:#33d17d; }
+  .pf-stat-card .bar { height:8px; border-radius:4px; background:rgba(255,255,255,.08); overflow:hidden; }
+  .pf-stat-card .bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#d8b34a,#f6d365); }
+
+  .pf-journey { display:flex; align-items:flex-start; justify-content:space-between; gap:4px; padding:18px 6px 4px; overflow-x:auto; }
+  .pf-journey-step { display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; min-width:62px; position:relative; }
+  .pf-journey-dot { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; background:rgba(255,255,255,.06); border:2px solid rgba(255,255,255,.14); opacity:.45; filter:grayscale(1); }
+  .pf-journey-step.achieved .pf-journey-dot { opacity:1; filter:none; border-color:#d8b34a; background:rgba(216,179,74,.14); }
+  .pf-journey-label { font-size:.64rem; text-align:center; color:#8fa0bd; font-weight:600; }
+  .pf-journey-step.achieved .pf-journey-label { color:#f6d365; }
+
+  .pf-login-box { margin-top:22px; padding:20px 22px; border-radius:16px; background:rgba(51,209,125,.08); border:1px solid rgba(51,209,125,.25); }
+  .lb-title { font-size:1rem; font-weight:800; color:#fff; margin-bottom:14px; }
+  .lb-stats { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:14px; }
+  .lb-num { font-size:1.35rem; font-weight:800; color:#fff; }
+  .lb-num.warning { color:#ffa502; }
+  .lb-num.danger { color:#ff4757; }
+  .lb-label { font-size:.7rem; text-transform:uppercase; color:#9fb0cc; font-weight:600; }
+  .lb-pw-status { font-size:.85rem; font-weight:600; color:#9fb0cc; margin-bottom:10px; }
+  .lb-pw-btn { border:none; border-radius:10px; padding:9px 20px; font-weight:700; font-size:.82rem; cursor:pointer; background:linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; }
+
+  .pf-id-box { margin-top:26px; padding:18px 20px; border-radius:16px; background:rgba(216,179,74,.10); border:1px solid rgba(216,179,74,.28); display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .pf-id-box .info { display:flex; align-items:center; gap:12px; }
+  .pf-id-box .icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#d8b34a,#f6d365); color:#0d2145; font-size:1.2rem; }
+  .pf-id-box h4 { font-size:.98rem; color:#fff; margin-bottom:3px; }
+  .pf-id-box p { color:#9fb0cc; font-size:.78rem; }
+  .pf-dl-group { display:flex; gap:10px; flex-wrap:wrap; }
+  .pf-dl-btn { border:none; border-radius:10px; padding:11px 18px; font-weight:700; font-size:.85rem; cursor:pointer; color:#0d2145; background:linear-gradient(135deg,#d8b34a,#f6d365); }
+  .pf-dl-btn.pf-dl-img { background:linear-gradient(135deg,#33d17d,#27ae60); color:#fff; }
+
+  #idCardRenderArea { position:fixed; left:-10000px; top:0; width:540px; height:336px; overflow:hidden; pointer-events:none; }
+  .id-card-download { width:540px; height:336px; position:relative; overflow:hidden; border-radius:18px; background:linear-gradient(135deg,#07152e,#0d2345,#07152e); color:white; font-family:Poppins,sans-serif; }
+  .id-card-header { position:absolute; top:22px; left:28px; right:28px; display:flex; align-items:center; justify-content:space-between; }
+  .id-card-logo { width:55px; height:55px; border-radius:50%; border:2px solid #d8b34a; display:flex; align-items:center; justify-content:center; color:#f6d365; font-size:25px; }
+  .id-card-title { flex:1; margin-left:14px; }
+  .id-card-title .institution { font-size:18px; font-weight:800; }
+  .id-card-title .subtitle { font-size:9px; color:#d8b34a; margin-top:4px; font-weight:600; }
+  .id-card-badge { border:1px solid #d8b34a; color:#f6d365; padding:5px 9px; border-radius:20px; font-size:8px; font-weight:700; }
+  .id-card-content { position:absolute; top:100px; left:28px; right:28px; bottom:26px; display:flex; gap:20px; }
+  .id-card-photo { width:112px; height:140px; border-radius:9px; border:2px solid #d8b34a; background:linear-gradient(135deg,#172d50,#0b1c36); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:4px; }
+  .id-card-photo i { font-size:48px; color:rgba(255,255,255,.25); }
+  .id-field { margin-bottom:4px; }
+  .id-field-label { color:#d8b34a; font-size:7px; letter-spacing:1px; font-weight:700; margin-bottom:2px; }
+  .id-field-value { font-size:13px; font-weight:600; color:#fff; word-break:break-word; }
+  #idCardStudentId { font-weight:900; font-size:16px; letter-spacing:2px; }
+  .id-card-footer { position:absolute; left:28px; right:28px; bottom:12px; display:flex; justify-content:space-between; font-size:7px; color:rgba(255,255,255,.65); }
+  .id-card-footer .signature { color:#d8b34a; font-weight:700; }
+</style>
+
+<div id="bom-dashboard-page">
+  <div class="bomdash-header">
+    <div class="bomdash-title bangla-font"><i class="fas fa-user-graduate"></i> শিক্ষার্থীর প্রোফাইল</div>
+    <button class="bomdash-back bangla-font" id="bomdash-back-btn"><i class="fas fa-arrow-left"></i> মেইন পেইজে ফিরুন</button>
+  </div>
+  <div class="bomdash-content" id="bomdash-content">
+    <!-- জাভাস্ক্রিপ্ট দিয়ে ভরা হবে -->
+  </div>
+</div>
+
+<div id="idCardRenderArea">
+  <div class="id-card-download" id="idCardDownload">
+    <div class="id-card-header">
+      <div class="id-card-logo"><i class="fas fa-graduation-cap"></i></div>
+      <div class="id-card-title">
+        <div class="institution">BANGLADESH ONLINE MADRASA</div>
+        <div class="subtitle">DIGITAL STUDENT IDENTIFICATION CARD</div>
+      </div>
+      <div class="id-card-badge">DAKHIL-27</div>
+    </div>
+    <div class="id-card-content">
+      <div class="id-card-photo"><i class="fas fa-user"></i></div>
+      <div class="id-card-info">
+        <div class="id-field"><div class="id-field-label">NAME</div><div class="id-field-value" id="idCardName">-</div></div>
+        <div class="id-field"><div class="id-field-label">INSTITUTION</div><div class="id-field-value" id="idCardInstitution">-</div></div>
+        <div class="id-field"><div class="id-field-label">GENDER</div><div class="id-field-value" id="idCardGender">-</div></div>
+        <div class="id-field"><div class="id-field-label">COURSE</div><div class="id-field-value" id="idCardCourse">-</div></div>
+        <div class="id-field"><div class="id-field-label">BOM ROLL NO</div><div class="id-field-value" id="idCardRollNo">-</div></div>
+        <div class="id-field"><div class="id-field-label">BOM STUDENT ID</div><div class="id-field-value" id="idCardStudentId">-</div></div>
+      </div>
+    </div>
+    <div class="id-card-footer"><span>STUDENT IDENTITY CARD</span><span class="signature">~ BOM ~</span></div>
+  </div>
+</div>
+
+<div class="bomdash-pw-modal-overlay" id="bomdash-pw-overlay">
+  <div class="bomdash-pw-modal">
+    <button class="close-x" id="bomdash-pw-close">&times;</button>
+    <h3 class="bangla-font" id="bomdash-pw-title">পাসওয়ার্ড সেট করুন</h3>
+    <div id="bomdash-pw-body"></div>
+  </div>
+</div>
+
+
   <div id="subject-page" style="display: none;">
     <header>
       <nav class="nav container">
@@ -4230,6 +4546,73 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   
   <div id="notification" class="notification"></div>
   
+  <style>
+  .bomadmin-panel-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:999998;padding:16px;}
+  .bomadmin-panel-overlay.active{display:flex;}
+  .bomadmin-panel-box{background:#fff;border-radius:18px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:22px;}
+  .bomadmin-panel-box h3{margin-bottom:16px;color:#2d3436;}
+  .bomadmin-close-x{float:right;background:none;border:none;font-size:1.4rem;cursor:pointer;}
+  .bomadmin-student-row{background:#f8f9fa;border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:0.9rem;}
+  .bomadmin-student-row .name{font-weight:700;color:#2d3436;}
+  .bomadmin-student-row .meta{color:#636e72;font-size:0.8rem;margin:4px 0 8px;}
+  .bomadmin-btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .bomadmin-btn{border:none;border-radius:8px;padding:7px 14px;font-size:0.8rem;font-weight:600;cursor:pointer;color:#fff;}
+  .bomadmin-btn.approve{background:#4CAF50;}
+  .bomadmin-btn.block{background:#ff4757;}
+  .bomadmin-btn.limit{background:#6c63ff;}
+</style>
+
+<div class="bomadmin-panel-overlay" id="bomadmin-approval-overlay">
+  <div class="bomadmin-panel-box">
+    <button class="bomadmin-close-x" id="bomadmin-approval-close">&times;</button>
+    <h3 class="bangla-font">অনুমোদনের অপেক্ষায় থাকা শিক্ষার্থীরা</h3>
+    <div id="bomadmin-pending-list" class="bangla-font">লোড হচ্ছে...</div>
+  </div>
+</div>
+
+<div class="bomadmin-panel-overlay" id="bomadmin-settings-overlay">
+  <div class="bomadmin-panel-box" style="max-width:420px;">
+    <button class="bomadmin-close-x" id="bomadmin-settings-close">&times;</button>
+    <h3 class="bangla-font">সিস্টেম সেটিংস</h3>
+    <div style="background:#f8f9fa;border-radius:12px;padding:16px;margin-bottom:14px;">
+      <div class="bangla-font" style="font-weight:700;margin-bottom:6px;">অটো এক্সেস সিস্টেম</div>
+      <div class="bangla-font" style="font-size:0.82rem;color:#636e72;margin-bottom:12px;">
+        চালু থাকলে, রেজিস্ট্রেশনের ২০ মিনিট পর স্টুডেন্ট নিজে থেকেই অ্যাক্সেস পাবে (এডমিনের অনুমোদন ছাড়াই)।
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="bangla-font" id="bomadmin-autoaccess-status" style="font-weight:700;">লোড হচ্ছে...</span>
+        <button class="bomadmin-btn approve bangla-font" id="bomadmin-autoaccess-toggle">পরিবর্তন করুন</button>
+      </div>
+    </div>
+    <div style="background:#f8f9fa;border-radius:12px;padding:16px;">
+      <div class="bangla-font" style="font-weight:700;margin-bottom:6px;">সর্বোচ্চ লগইন সীমা</div>
+      <div class="bangla-font" style="font-size:0.82rem;color:#636e72;margin-bottom:12px;">
+        নতুন প্রতিটি স্টুডেন্ট রেজিস্ট্রেশনের সময় এই সংখ্যক বার লগইনের অনুমতি পাবে।
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <input type="number" id="bomadmin-maxlogin-input" min="1" style="width:80px;padding:8px 10px;border-radius:8px;border:1px solid #dfe6e9;">
+        <button class="bomadmin-btn limit bangla-font" id="bomadmin-maxlogin-save">সংরক্ষণ করুন</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bomadmin-panel-overlay" id="bomadmin-allstudents-overlay">
+  <div class="bomadmin-panel-box">
+    <button class="bomadmin-close-x" id="bomadmin-allstudents-close">&times;</button>
+    <h3 class="bangla-font">সকল শিক্ষার্থী</h3>
+    <input type="text" id="bomadmin-search-input" placeholder="🔍 নাম বা আইডি দিয়ে খুঁজুন" class="bangla-font" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid #dfe6e9;margin-bottom:14px;">
+    <div id="bomadmin-allstudents-list" class="bangla-font">লোড হচ্ছে...</div>
+  </div>
+</div>
+<div class="bomadmin-panel-overlay" id="bomlock-processing-overlay">
+  <div class="bomadmin-panel-box" style="text-align:center;">
+    <h3 class="bangla-font" id="bomlock-processing-title">অ্যাক্সেস প্রক্রিয়াধীন</h3>
+    <p class="bangla-font" id="bomlock-processing-msg" style="color:#636e72;line-height:1.7;"></p>
+    <button class="bomadmin-btn approve bangla-font" id="bomlock-processing-close" style="margin-top:14px;">ঠিক আছে</button>
+  </div>
+</div>
+
   <!-- Dashboard Modal -->
   <div id="dashboard-modal" class="dashboard-modal">
     <div class="modal-content">
@@ -4734,10 +5117,913 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         document.body.style.overflow = ""; // Restore scrolling
       }
     });
-
+    
     // Main Website Functionality
     const API_URL = "https://script.google.com/macros/s/AKfycbxbkM3I0Zp_Bqr4XJcjNB6A82h-RYGXUYq7oiNkmhAuJzslOYJtPjhNmuIIwJXTaCzgnA/exec";
 
+// ============ নতুন গুগল শিট ভিত্তিক সিস্টেম ============
+    const MASTER_API_URL = "https://script.google.com/macros/s/AKfycbyFtqGxGzEav-kC6kEtMsMBCmgWgAgrcXjz38Or-hpqit9ORuPvl8Dq4Apknyo3Gu1EWg/exec";
+
+    function bomApiPost(payload) {
+      return fetch(MASTER_API_URL, { method: 'POST', body: JSON.stringify(payload) })
+        .then(res => res.json());
+    }
+    function bomApiGet(params) {
+      const qs = new URLSearchParams(params).toString();
+      return fetch(MASTER_API_URL + '?' + qs).then(res => res.json());
+    }
+
+    function isLoggedIn() { return localStorage.getItem('bom_logged_in') === 'true'; }
+    function getUserRole() { return localStorage.getItem('bom_user_role') || null; }
+    function getCurrentStudentId() { return localStorage.getItem('bom_student_id') || ''; }
+    function getCurrentName() { return localStorage.getItem('bom_user_name') || ''; }
+
+    function setLoginData(role, name, studentId) {
+      localStorage.setItem('bom_logged_in', 'true');
+      localStorage.setItem('bom_user_role', role);
+      if (name) localStorage.setItem('bom_user_name', name);
+      if (studentId) localStorage.setItem('bom_student_id', studentId);
+    }
+
+    function logout() {
+      localStorage.removeItem('bom_logged_in');
+      localStorage.removeItem('bom_user_role');
+      localStorage.removeItem('bom_user_name');
+      localStorage.removeItem('bom_student_id');
+      location.reload();
+    }
+
+    // ===== ট্যাব সুইচিং (রেজিস্ট্রেশন / লগইন / এডমিন) =====
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.mode-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const mode = this.getAttribute('data-mode');
+          document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+          document.querySelector('.auth-panel[data-panel="' + mode + '"]').classList.add('active');
+        });
+      });
+
+      // লিঙ্গ নির্বাচন
+      window.selectedGenderBom = null;
+      document.querySelectorAll('.gender-option').forEach(opt => {
+        opt.addEventListener('click', function() {
+          document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+          window.selectedGenderBom = this.getAttribute('data-gender');
+        });
+      });
+
+      // বাটনগুলোর সাথে ফাংশন সংযুক্ত করা
+      document.getElementById('register-btn').addEventListener('click', handleRegisterBom);
+      document.getElementById('student-login-btn').addEventListener('click', handleStudentLoginBom);
+      document.getElementById('admin-login-btn').addEventListener('click', handleAdminLoginBom);
+      document.getElementById('continue-to-main-btn').addEventListener('click', function() {
+        showLoadingOverlay();
+        setTimeout(() => { hideLoadingOverlay(); showMainPage('user'); }, 1500);
+      });
+      document.getElementById('copy-id-btn').addEventListener('click', function() {
+        const id = document.getElementById('generated-id-text').textContent;
+        navigator.clipboard.writeText(id).then(() => {
+          this.innerHTML = 'কপি হয়েছে ✓';
+          setTimeout(() => { this.innerHTML = 'কপি করুন'; }, 1800);
+        });
+      });
+    });
+
+    // ===== রেজিস্ট্রেশন =====
+    async function handleRegisterBom() {
+      const name = document.getElementById('reg-name').value.trim().toUpperCase();
+      const institution = document.getElementById('reg-institution').value.trim().toUpperCase();
+      const whatsapp = document.getElementById('reg-whatsapp').value.trim();
+      const secret = document.getElementById('reg-secret').value.trim();
+      const errEl = document.getElementById('register-error');
+      errEl.classList.remove('show');
+
+      if (!name || !institution || !whatsapp || !window.selectedGenderBom || !secret) {
+        errEl.querySelector('span').textContent = 'সব তথ্য পূরণ করুন এবং লিঙ্গ নির্বাচন করুন।';
+        errEl.classList.add('show');
+        return;
+      }
+      if (secret !== 'USERDAKHIL27') {
+        errEl.querySelector('span').textContent = 'সিক্রেট পাসওয়ার্ড ভুল হয়েছে।';
+        errEl.classList.add('show');
+        return;
+      }
+
+      const btn = document.getElementById('register-btn');
+      btn.disabled = true;
+      btn.innerHTML = 'প্রসেস হচ্ছে...';
+
+      try {
+        const result = await bomApiPost({
+          action: 'register', name, institution, whatsapp,
+          gender: window.selectedGenderBom, batch: 'DAKHIL-27', course: 'SUCCESS JOURNEY COURSE'
+        });
+        btn.disabled = false;
+        btn.innerHTML = 'রেজিস্ট্রেশন করুন';
+
+        if (result.ok) {
+          document.getElementById('generated-id-text').textContent = result.studentId;
+          document.getElementById('auth-forms-wrap').style.display = 'none';
+          document.getElementById('id-success-screen').classList.add('active');
+          setLoginData('user', result.name, result.studentId);
+       }
+      } catch (e) {
+        btn.disabled = false;
+        btn.innerHTML = 'রেজিস্ট্রেশন করুন';
+        errEl.querySelector('span').textContent = 'নেটওয়ার্ক সমস্যা, আবার চেষ্টা করুন।';
+        errEl.classList.add('show');
+      }
+    }
+
+    // ===== শিক্ষার্থী লগইন =====
+    let bomLoginState = 'idle';
+    async function handleStudentLoginBom() {
+      const studentId = document.getElementById('login-student-id').value.trim();
+      const whatsapp = document.getElementById('login-student-whatsapp').value.trim();
+      const errEl = document.getElementById('login-error');
+      errEl.classList.remove('show');
+
+      if (!studentId || !whatsapp) {
+        errEl.querySelector('span').textContent = 'আইডি এবং WhatsApp নাম্বার লিখুন।';
+        errEl.classList.add('show');
+        return;
+      }
+
+      const btn = document.getElementById('student-login-btn');
+      btn.disabled = true;
+
+      const password = bomLoginState === 'password_required'
+        ? document.getElementById('login-student-password').value.trim()
+        : null;
+
+      try {
+        const result = await bomApiPost({ action: 'login', studentId, whatsapp, password });
+        btn.disabled = false;
+
+        if (result.error === 'password_required') {
+          document.getElementById('login-pw-student-name').textContent = result.name;
+          document.getElementById('login-password-wrapper').style.display = 'block';
+          btn.innerHTML = 'পাসওয়ার্ড যাচাই করুন';
+          bomLoginState = 'password_required';
+          return;
+        }
+        if (result.error === 'processing') {
+          const msg = result.autoAccess
+            ? 'আপনার রেজিস্ট্রেশন তথ্য গ্রহণ করা হয়েছে। ৩০ মিনিটের ভিতরে যেকোনো এডমিন আপনার আইডিতে অনুমোদন দিবেন।'
+            : 'আপনার রেজিস্ট্রেশন তথ্য গ্রহণ করা হয়েছে। ২৪ ঘন্টার ভিতরে যেকোনো এডমিন আপনার আইডিতে অনুমোদন দিবেন।';
+          errEl.querySelector('span').textContent = msg;
+          errEl.classList.add('show');
+          return;
+        }
+        if (!result.ok) {
+          const errMsgs = {
+            not_found: 'এই আইডি খুঁজে পাওয়া যায়নি।',
+            wrong_whatsapp: 'WhatsApp নাম্বার সঠিক নয়।',
+            wrong_password: 'পাসওয়ার্ড ভুল হয়েছে।',
+            blocked: 'আপনার আইডি ব্লক করা হয়েছে, এডমিনের সাথে যোগাযোগ করুন।',
+            limit_exceeded: 'লগইন সীমা শেষ, এডমিনের সাথে যোগাযোগ করুন।'
+          };
+          errEl.querySelector('span').textContent = errMsgs[result.error] || 'লগইন ব্যর্থ হয়েছে।';
+          errEl.classList.add('show');
+          return;
+        }
+
+        setLoginData('user', result.name, studentId);
+        localStorage.setItem('bom_institution', result.institution);
+        localStorage.setItem('bom_whatsapp', result.whatsapp);
+        localStorage.setItem('bom_gender', result.gender);
+        localStorage.setItem('bom_roll', result.roll);
+        bomLoginState = 'idle';
+        showLoadingOverlay();
+        setTimeout(() => { hideLoadingOverlay(); showMainPage('user'); }, 1500);
+
+      } catch (e) {
+        btn.disabled = false;
+        errEl.querySelector('span').textContent = 'নেটওয়ার্ক সমস্যা, আবার চেষ্টা করুন।';
+        errEl.classList.add('show');
+      }
+    }
+
+    // ===== এডমিন লগইন =====
+    function handleAdminLoginBom() {
+      const name = document.getElementById('admin-name').value.trim();
+      const password = document.getElementById('admin-password').value.trim();
+      const errEl = document.getElementById('admin-error');
+      errEl.classList.remove('show');
+      if (!name || !password) {
+        errEl.querySelector('span').textContent = 'নাম ও পাসওয়ার্ড লিখুন।';
+        errEl.classList.add('show');
+        return;
+      }
+      let role = null;
+      if (password === 'OWNERDAKHIL27') role = 'owner';
+      else if (password === 'EDITOR@BOM-27') role = 'editor';
+      if (!role) {
+        errEl.querySelector('span').textContent = 'পাসওয়ার্ড ভুল।';
+        errEl.classList.add('show');
+        return;
+      }
+      setLoginData(role, name, null);
+      showLoadingOverlay();
+      setTimeout(() => { hideLoadingOverlay(); showMainPage(role); }, 1500);
+    }
+
+    // ===== showMainPage: role অনুযায়ী মেইন পেজ দেখানো =====
+    function showMainPage(role) {
+      document.getElementById('default-page').style.display = 'none';
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('main-page').style.display = 'block';
+      loadInitialData();
+      showAddClassButton();
+      showDashboardButton();
+      setButtonVisibility();
+      window.scrollTo(0, 0);
+      showAdminButtonsIfNeeded();
+      bomLoadFolders();
+      showSettingsButtonIfAdmin();
+    }
+    
+    // ===== ড্যাশবোর্ড পেজ (নতুন, সম্পূর্ণ) =====
+    const BOM_BADGES = [
+      { name: 'Starter', threshold: 0, class: 'badge-starter', icon: '🏁' },
+      { name: 'Bronze Cup', threshold: 30, class: 'badge-bronze', icon: '🥉' },
+      { name: 'Silver Cup', threshold: 50, class: 'badge-silver', icon: '🥈' },
+      { name: 'Gold Cup', threshold: 65, class: 'badge-gold', icon: '🥇' },
+      { name: 'Platinum Trophy', threshold: 80, class: 'badge-platinum', icon: '🏆' }
+    ];
+
+    function bomGetBadge(progress) {
+      for (let i = BOM_BADGES.length - 1; i >= 0; i--) {
+        if (progress >= BOM_BADGES[i].threshold) return BOM_BADGES[i];
+      }
+      return BOM_BADGES[0];
+    }
+
+    function bomDaysSince(dateStr) {
+      try {
+        const start = new Date(dateStr);
+        if (isNaN(start.getTime())) return 0;
+        const diff = Math.floor((new Date().setHours(0,0,0,0) - start.setHours(0,0,0,0)) / (1000*60*60*24));
+        return Math.max(diff, 0);
+      } catch(e) { return 0; }
+    }
+
+    function bomEscapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text || '';
+      return div.innerHTML;
+    }
+
+    // ওয়েবসাইটে থাকা সব ক্লাস/মিশন/ডকুমেন্ট/পরীক্ষার মোট সংখ্যা বের করা
+    function bomGetTotalCounts() {
+      const counts = { class: 0, mission: 0, document: 0, exam: 0 };
+      if (typeof allClasses !== 'undefined' && Array.isArray(allClasses)) {
+        allClasses.forEach(item => {
+          if (!item || !item.subject) return;
+          if (item.subject.includes('(ক্লাস)')) counts.class++;
+          else if (item.subject.includes('(মিশন)')) counts.mission++;
+          else if (item.subject.includes('(ডকুমেন্ট)')) counts.document++;
+          else if (item.subject === 'ইক্সাম') counts.exam++;
+        });
+      }
+      return counts;
+    }
+
+    async function showDashboardBom() {
+      if (getUserRole() !== 'user') {
+        showNotification('শুধুমাত্র শিক্ষার্থীরা ড্যাশবোর্ড দেখতে পারেন।', true);
+        return;
+      }
+      const studentId = getCurrentStudentId();
+      if (!studentId) {
+        showNotification('আপনার তথ্য পাওয়া যায়নি। পুনরায় লগইন করুন।', true);
+        return;
+      }
+
+      document.getElementById('main-page').style.display = 'none';
+      document.getElementById('bom-dashboard-page').style.display = 'block';
+      window.scrollTo(0, 0);
+
+      const contentEl = document.getElementById('bomdash-content');
+      contentEl.innerHTML = '<p class="bangla-font" style="text-align:center;padding:40px;color:#636e72;">লোড হচ্ছে...</p>';
+
+      try {
+        const result = await bomApiGet({ action: 'loadDashboard', studentId: studentId });
+        if (!result.ok) {
+          contentEl.innerHTML = '<p style="text-align:center;color:red;">তথ্য লোড করা যায়নি।</p>';
+          return;
+        }
+        window._bomDashData = result;
+        renderBomDashboard(result);
+      } catch (e) {
+        contentEl.innerHTML = '<p style="text-align:center;color:red;">নেটওয়ার্ক সমস্যা হয়েছে।</p>';
+      }
+    }
+
+    function renderBomDashboard(d) {
+      const totals = bomGetTotalCounts();
+      const doneClass = d.completedClasses.length;
+      const doneMission = d.completedMissions.length;
+      const doneDoc = d.completedDocs.length;
+      const doneExam = d.completedExams.length;
+
+      const totalAll = totals.class + totals.mission + totals.document + totals.exam;
+      const totalDone = doneClass + doneMission + doneDoc + doneExam;
+      const progress = totalAll > 0 ? Math.round((totalDone / totalAll) * 100) : 0;
+
+      const badge = bomGetBadge(progress);
+      const days = bomDaysSince(new Date().toISOString()); // যোগদানের সঠিক তারিখ শীট থেকে না থাকলে ০ দেখাবে
+
+      const loginCount = d.loginCount || 0;
+      const loginLimit = d.loginLimit || 5;
+      const remaining = Math.max(0, loginLimit - loginCount);
+      const hasPassword = !!d.password;
+
+      function statCard(icon, label, done, total) {
+        const pct = total > 0 ? Math.round((done/total)*100) : 0;
+        return `<div class="pf-stat-card">
+          <div class="head">
+            <span class="label bangla-font"><i class="fas ${icon}"></i> ${label}</span>
+            <span class="nums bangla-font"><b>${done}</b>/${total} সম্পন্ন</span>
+          </div>
+          <div class="bar"><div class="bar-fill" style="width:${pct}%;"></div></div>
+        </div>`;
+      }
+
+      const journeyHtml = BOM_BADGES.map(b => {
+        const achieved = progress >= b.threshold;
+        return `<div class="pf-journey-step ${achieved ? 'achieved' : ''}">
+          <div class="pf-journey-dot">${b.icon}</div>
+          <div class="pf-journey-label bangla-font">${b.name}</div>
+        </div>`;
+      }).join('');
+
+      const chips = [
+        { k: 'Institution', v: d.institution },
+        { k: 'WhatsApp Number', v: d.whatsapp },
+        { k: 'Gender', v: d.gender },
+        { k: 'BOM STUDENT ID', v: d.studentId },
+        { k: 'Course Name', v: d.course }
+      ];
+      const chipsHtml = chips.map(c => `<div class="pf-chip"><span class="k">${c.k}</span><span class="v">${bomEscapeHtml(c.v)}</span></div>`).join('');
+
+      const html = `
+        <div class="pf-wrap">
+          <div class="pf-hero">
+            <div class="pf-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div class="pf-identity">
+              <div class="pf-line bangla-font">NAME: <span class="pf-value name">${bomEscapeHtml(d.name)}</span></div>
+              <div class="pf-line bangla-font">BATCH: <span class="pf-value">${bomEscapeHtml(d.batch)}</span></div>
+              <div class="pf-line bangla-font">BOM ROLL: <span class="pf-value roll">${bomEscapeHtml(d.roll)}</span></div>
+            </div>
+            <div class="pf-badge-pill ${badge.class}">${badge.icon} ${badge.name}</div>
+          </div>
+
+          <div class="pf-chips">${chipsHtml}</div>
+
+          <div class="pf-metrics-row">
+            <div class="pf-dial-card">
+              <div class="pf-dial" style="--p:${progress};">
+                <span class="pf-dial-value">${progress}%</span>
+              </div>
+              <div class="pf-dial-copy">
+                <div class="t bangla-font">সামগ্রিক অগ্রগতি</div>
+                <div class="d bangla-font">${totalDone} / ${totalAll} আইটেম সম্পন্ন হয়েছে</div>
+              </div>
+            </div>
+            <div class="pf-days-card">
+              <div class="pf-days-number">${loginCount}</div>
+              <div class="pf-days-label bangla-font">বার লগইন করেছেন</div>
+            </div>
+          </div>
+
+          <div class="pf-section-title bangla-font">অগ্রগতির সারসংক্ষেপ</div>
+          <div class="pf-stats-grid">
+            ${statCard('fa-chalkboard', 'ক্লাস', doneClass, totals.class)}
+            ${statCard('fa-bullseye', 'মিশন', doneMission, totals.mission)}
+            ${statCard('fa-file-lines', 'ডকুমেন্ট', doneDoc, totals.document)}
+            ${statCard('fa-pen-to-square', 'পরীক্ষা', doneExam, totals.exam)}
+          </div>
+
+          <div class="pf-section-title bangla-font">অর্জনের পথ</div>
+          <div class="pf-journey">${journeyHtml}</div>
+
+          <div class="pf-login-box">
+            <div class="lb-title bangla-font"><i class="fas fa-sign-in-alt"></i> লগইন ডেটা</div>
+            <div class="lb-stats">
+              <div><span class="lb-num">${loginCount}</span><br><span class="lb-label bangla-font">মোট লগইন</span></div>
+              <div><span class="lb-num ${remaining<=1?'danger':remaining<=2?'warning':''}">${remaining}</span><br><span class="lb-label bangla-font">অবশিষ্ট</span></div>
+              <div><span class="lb-num">${loginLimit}</span><br><span class="lb-label bangla-font">সর্বোচ্চ সীমা</span></div>
+            </div>
+            <div class="lb-pw-status bangla-font">আইডি পাসওয়ার্ড: ${hasPassword ? '✅ সেট করা আছে' : '⚠️ সেট করা নেই'}</div>
+            <button class="lb-pw-btn bangla-font" id="bomdash-pw-open-btn">${hasPassword ? 'পাসওয়ার্ড পরিবর্তন করুন' : 'পাসওয়ার্ড সেট করুন'}</button>
+          </div>
+
+          <div class="pf-id-box">
+            <div class="info">
+              <div class="icon"><i class="fas fa-id-card"></i></div>
+              <div><h4 class="bangla-font">Student ID Card</h4><p class="bangla-font">PDF বা HD Image ডাউনলোড করুন</p></div>
+            </div>
+            <div class="pf-dl-group">
+              <button class="pf-dl-btn bangla-font" id="bomdash-dl-pdf">PDF Download</button>
+              <button class="pf-dl-btn pf-dl-img bangla-font" id="bomdash-dl-png">Image Download</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('bomdash-content').innerHTML = html;
+
+      // পাসওয়ার্ড বাটন ইভেন্ট
+      document.getElementById('bomdash-pw-open-btn').addEventListener('click', bomOpenPwModal);
+      document.getElementById('bomdash-dl-pdf').addEventListener('click', bomDownloadIdPdf);
+      document.getElementById('bomdash-dl-png').addEventListener('click', bomDownloadIdPng);
+
+      bomUpdateHiddenIdCard(d);
+    }
+
+    document.getElementById('bomdash-back-btn').addEventListener('click', function() {
+      document.getElementById('bom-dashboard-page').style.display = 'none';
+      document.getElementById('main-page').style.display = 'block';
+    });
+
+    // ===== পাসওয়ার্ড সেট/পরিবর্তন মডাল =====
+    function bomOpenPwModal() {
+      const hasPw = window._bomDashData && window._bomDashData.password;
+      document.getElementById('bomdash-pw-title').textContent = hasPw ? 'পাসওয়ার্ড পরিবর্তন করুন' : 'পাসওয়ার্ড সেট করুন';
+      let html = '';
+      if (hasPw) html += '<input type="password" id="bomdash-pw-current" placeholder="বর্তমান পাসওয়ার্ড" class="bangla-font">';
+      html += '<input type="password" id="bomdash-pw-new" placeholder="নতুন পাসওয়ার্ড" class="bangla-font">';
+      html += '<input type="password" id="bomdash-pw-confirm" placeholder="পুনরায় নতুন পাসওয়ার্ড" class="bangla-font">';
+      html += '<div class="bomdash-pw-error" id="bomdash-pw-error"></div>';
+      html += '<button class="save bangla-font" id="bomdash-pw-save-btn">সংরক্ষণ করুন</button>';
+      document.getElementById('bomdash-pw-body').innerHTML = html;
+
+      document.getElementById('bomdash-pw-save-btn').addEventListener('click', async function() {
+        const errEl = document.getElementById('bomdash-pw-error');
+        errEl.style.display = 'none';
+        const newPw = document.getElementById('bomdash-pw-new').value.trim();
+        const confirmPw = document.getElementById('bomdash-pw-confirm').value.trim();
+        const currentPw = hasPw ? document.getElementById('bomdash-pw-current').value.trim() : null;
+
+        if (!newPw || !confirmPw || (hasPw && !currentPw)) {
+          errEl.textContent = 'সব ঘর পূরণ করুন।'; errEl.style.display = 'block'; return;
+        }
+        if (newPw !== confirmPw) {
+          errEl.textContent = 'নতুন পাসওয়ার্ড দুইটি মিলছে না।'; errEl.style.display = 'block'; return;
+        }
+        if (newPw.length < 4) {
+          errEl.textContent = 'পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে।'; errEl.style.display = 'block'; return;
+        }
+
+        const result = await bomApiPost({ action: 'setPassword', studentId: getCurrentStudentId(), currentPassword: currentPw, newPassword: newPw });
+        if (result.ok) {
+          document.getElementById('bomdash-pw-overlay').classList.remove('active');
+          showNotification('পাসওয়ার্ড সফলভাবে সংরক্ষণ করা হয়েছে!', false);
+          showDashboardBom();
+        } else {
+          errEl.textContent = 'বর্তমান পাসওয়ার্ড ভুল হয়েছে।'; errEl.style.display = 'block';
+        }
+      });
+
+      document.getElementById('bomdash-pw-overlay').classList.add('active');
+    }
+
+    document.getElementById('bomdash-pw-close').addEventListener('click', function() {
+      document.getElementById('bomdash-pw-overlay').classList.remove('active');
+    });
+
+    // ===== আইডি কার্ড ডাউনলোড =====
+    function bomUpdateHiddenIdCard(d) {
+      document.getElementById('idCardName').textContent = d.name || '-';
+      document.getElementById('idCardInstitution').textContent = d.institution || '-';
+      document.getElementById('idCardGender').textContent = d.gender || '-';
+      document.getElementById('idCardCourse').textContent = d.course || '-';
+      document.getElementById('idCardRollNo').textContent = d.roll || '-';
+      document.getElementById('idCardStudentId').textContent = d.studentId || '-';
+    }
+
+    async function bomDownloadIdPdf() {
+      const btn = document.getElementById('bomdash-dl-pdf');
+      btn.disabled = true; btn.textContent = 'তৈরি হচ্ছে...';
+      try {
+        const card = document.getElementById('idCardDownload');
+        const canvas = await html2canvas(card, { scale: 4, useCORS: true, backgroundColor: null });
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [135, 85] });
+        pdf.addImage(imgData, 'PNG', 0, 0, 135, 85);
+        const name = (window._bomDashData.name || 'Student').replace(/[\\/:*?"<>|]/g, '');
+        pdf.save(`BOM_ID_CARD_${name}.pdf`);
+      } catch (e) {
+        showNotification('PDF তৈরি করতে সমস্যা হয়েছে।', true);
+      }
+      btn.disabled = false; btn.textContent = 'PDF Download';
+    }
+
+    async function bomDownloadIdPng() {
+      const btn = document.getElementById('bomdash-dl-png');
+      btn.disabled = true; btn.textContent = 'তৈরি হচ্ছে...';
+      try {
+        const card = document.getElementById('idCardDownload');
+        const canvas = await html2canvas(card, { scale: 5, useCORS: true, backgroundColor: null });
+        const link = document.createElement('a');
+        const name = (window._bomDashData.name || 'Student').replace(/[\\/:*?"<>|]/g, '');
+        link.download = `BOM_ID_CARD_${name}.png`;
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+      } catch (e) {
+        showNotification('Image তৈরি করতে সমস্যা হয়েছে।', true);
+      }
+      btn.disabled = false; btn.textContent = 'Image Download';
+    }
+
+
+    // ===== এডমিন অনুমোদন প্যানেল =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const role = getUserRole();
+      if (role === 'owner' || role === 'editor') {
+        const b1 = document.getElementById('bomadmin-approval-btn');
+        const b2 = document.getElementById('bomadmin-allstudents-btn');
+        if (b1) b1.style.display = 'inline-flex';
+        if (b2) b2.style.display = 'inline-flex';
+      }
+    });
+
+    // Login এর পর বাটন দেখানোর জন্য (showMainPage থেকেও কল হবে)
+    function showAdminButtonsIfNeeded() {
+      const role = getUserRole();
+      const b1 = document.getElementById('bomadmin-approval-btn');
+      const b2 = document.getElementById('bomadmin-allstudents-btn');
+      if (role === 'owner' || role === 'editor') {
+        if (b1) b1.style.display = 'inline-flex';
+        if (b2) b2.style.display = 'inline-flex';
+      } else {
+        if (b1) b1.style.display = 'none';
+        if (b2) b2.style.display = 'none';
+      }
+    }
+
+    async function bomOpenApprovalPanel() {
+      document.getElementById('bomadmin-approval-overlay').classList.add('active');
+      const listEl = document.getElementById('bomadmin-pending-list');
+      listEl.innerHTML = 'লোড হচ্ছে...';
+      const result = await bomApiGet({ action: 'getPendingStudents' });
+      if (!result.ok || result.students.length === 0) {
+        listEl.innerHTML = '<p style="text-align:center;color:#636e72;">কোনো অনুমোদনের অপেক্ষায় নেই।</p>';
+        return;
+      }
+      listEl.innerHTML = result.students.map(s => `
+        <div class="bomadmin-student-row">
+          <div class="name">${s.name}</div>
+          <div class="meta">রোল: ${s.roll} | WhatsApp: ${s.whatsapp} | আইডি: ${s.studentId}</div>
+          <div class="bomadmin-btn-row">
+            <button class="bomadmin-btn approve" data-id="${s.studentId}">✓ অনুমোদন দিন</button>
+            <button class="bomadmin-btn block" data-id="${s.studentId}" data-action="block">✕ ব্লক করুন</button>
+          </div>
+        </div>
+      `).join('');
+
+      listEl.querySelectorAll('.approve').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          this.disabled = true; this.textContent = 'প্রসেসিং...';
+          await bomApiPost({ action: 'approveStudent', studentId: this.getAttribute('data-id') });
+          showNotification('অনুমোদন দেওয়া হয়েছে!', false);
+          bomOpenApprovalPanel();
+        });
+      });
+      listEl.querySelectorAll('.block').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          this.disabled = true; this.textContent = 'প্রসেসিং...';
+          await bomApiPost({ action: 'blockStudent', studentId: this.getAttribute('data-id') });
+          showNotification('ব্লক করা হয়েছে!', false);
+          bomOpenApprovalPanel();
+        });
+      });
+    }
+
+    document.getElementById('bomadmin-approval-close').addEventListener('click', function() {
+      document.getElementById('bomadmin-approval-overlay').classList.remove('active');
+    });
+
+    // ===== সকল শিক্ষার্থী =====
+    let bomAllStudentsCache = [];
+    async function bomOpenAllStudentsPanel() {
+      document.getElementById('bomadmin-allstudents-overlay').classList.add('active');
+      const listEl = document.getElementById('bomadmin-allstudents-list');
+      listEl.innerHTML = 'লোড হচ্ছে...';
+      const result = await bomApiGet({ action: 'getAllStudentsForAdmin' });
+      bomAllStudentsCache = result.ok ? result.students : [];
+      renderAllStudentsList(bomAllStudentsCache);
+    }
+
+    function renderAllStudentsList(list) {
+      const listEl = document.getElementById('bomadmin-allstudents-list');
+      if (list.length === 0) {
+        listEl.innerHTML = '<p style="text-align:center;color:#636e72;">কোনো শিক্ষার্থী নেই।</p>';
+        return;
+      }
+      listEl.innerHTML = list.map(s => `
+        <div class="bomadmin-student-row">
+          <div class="name">${s.name} <span style="color:#6c63ff;">(${s.roll})</span></div>
+          <div class="meta">স্ট্যাটাস: ${s.status} | লগইন: ${s.loginCount}/${s.loginLimit} | আইডি: ${s.studentId}</div>
+          <div class="bomadmin-btn-row">
+            ${s.status !== 'APPROVED' ? `<button class="bomadmin-btn approve" data-id="${s.studentId}" data-act="approve">✓ অনুমোদন</button>` : ''}
+            ${s.status !== 'BLOCKED' ? `<button class="bomadmin-btn block" data-id="${s.studentId}" data-act="block">✕ ব্লক</button>` : `<button class="bomadmin-btn approve" data-id="${s.studentId}" data-act="restore">↺ পুনরায় সক্রিয়</button>`}
+            <button class="bomadmin-btn limit" data-id="${s.studentId}" data-act="limit">+১ লগইন সীমা</button>
+          </div>
+        </div>
+      `).join('');
+
+      listEl.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const act = this.getAttribute('data-act');
+          const id = this.getAttribute('data-id');
+          this.disabled = true;
+          const actionMap = { approve: 'approveStudent', block: 'blockStudent', restore: 'restoreStudent', limit: 'increaseLoginLimit' };
+          await bomApiPost({ action: actionMap[act], studentId: id });
+          showNotification('আপডেট সম্পন্ন হয়েছে!', false);
+          bomOpenAllStudentsPanel();
+        });
+      });
+    }
+
+    document.getElementById('bomadmin-search-input').addEventListener('input', function() {
+      const term = this.value.trim().toLowerCase();
+      const filtered = bomAllStudentsCache.filter(s =>
+        s.name.toLowerCase().includes(term) || s.studentId.toLowerCase().includes(term) || s.roll.toLowerCase().includes(term)
+      );
+      renderAllStudentsList(filtered);
+    });
+
+    document.getElementById('bomadmin-allstudents-close').addEventListener('click', function() {
+      document.getElementById('bomadmin-allstudents-overlay').classList.remove('active');
+    });
+
+    // ===== সিস্টেম সেটিংস প্যানেল =====
+    async function bomOpenSettingsPanel() {
+      document.getElementById('bomadmin-settings-overlay').classList.add('active');
+      const result = await bomApiGet({ action: 'getSettings' });
+      if (result.ok) {
+        window._bomSettingsCache = result;
+        document.getElementById('bomadmin-autoaccess-status').textContent = result.autoAccess ? '✅ চালু আছে' : '❌ বন্ধ আছে';
+        document.getElementById('bomadmin-maxlogin-input').value = result.maxLoginLimit;
+      }
+    }
+
+    document.getElementById('bomadmin-settings-close').addEventListener('click', function() {
+      document.getElementById('bomadmin-settings-overlay').classList.remove('active');
+    });
+
+    document.getElementById('bomadmin-autoaccess-toggle').addEventListener('click', async function() {
+      if (!window._bomSettingsCache) return;
+      const newValue = !window._bomSettingsCache.autoAccess;
+      this.disabled = true; this.textContent = 'প্রসেসিং...';
+      await bomApiPost({ action: 'updateSettings', key: 'AutoAccess', value: newValue ? 'TRUE' : 'FALSE' });
+      window._bomSettingsCache.autoAccess = newValue;
+      document.getElementById('bomadmin-autoaccess-status').textContent = newValue ? '✅ চালু আছে' : '❌ বন্ধ আছে';
+      this.disabled = false; this.textContent = 'পরিবর্তন করুন';
+      showNotification('সেটিংস আপডেট হয়েছে!', false);
+    });
+
+    document.getElementById('bomadmin-maxlogin-save').addEventListener('click', async function() {
+      const val = parseInt(document.getElementById('bomadmin-maxlogin-input').value);
+      if (!val || val < 1) { showNotification('সঠিক সংখ্যা দিন।', true); return; }
+      this.disabled = true; this.textContent = 'প্রসেসিং...';
+      await bomApiPost({ action: 'updateSettings', key: 'MaxLoginLimit', value: val });
+      this.disabled = false; this.textContent = 'সংরক্ষণ করুন';
+      showNotification('সর্বোচ্চ লগইন সীমা আপডেট হয়েছে!', false);
+    });
+
+    // ===== ক্লাস/মিশন/ডকুমেন্ট অ্যাক্সেস চেক =====
+    function showProcessingModal(autoAccess) {
+      const msg = autoAccess
+        ? 'আপনার রেজিস্ট্রেশন তথ্য গ্রহণ করা হয়েছে। ৩০ মিনিটের ভিতরে যেকোনো এডমিন আপনার আইডিতে অনুমোদন দিবেন। এই ৩০ মিনিটের ভিতরে অনুমোদন পাওয়ার জন্য WhatsApp এ কোন এডমিনকে রিকোয়েস্ট করা থেকে বিরত থাকুন। যদি ৩০ মিনিট পার হয়ে যায় এবং আপনি অনুমোদন না পেয়ে থাকেন, তারপর এডমিনের সাথে যোগাযোগ করুন।'
+        : 'আপনার রেজিস্ট্রেশন তথ্য গ্রহণ করা হয়েছে। ২৪ ঘন্টার ভিতরে যেকোনো এডমিন আপনার আইডিতে অনুমোদন দিবেন। যদি ২৪ ঘন্টা পার হয়ে যায় এবং আপনি অনুমোদন না পেয়ে থাকেন, তারপর এডমিনের সাথে যোগাযোগ করুন।';
+      document.getElementById('bomlock-processing-msg').textContent = msg;
+      document.getElementById('bomlock-processing-overlay').classList.add('active');
+    }
+    document.getElementById('bomlock-processing-close').addEventListener('click', function() {
+      document.getElementById('bomlock-processing-overlay').classList.remove('active');
+    });
+
+    // মূল অ্যাক্সেস চেক ফাংশন — যেকোনো ক্লাস/মিশন/ডকুমেন্ট খোলার আগে এটা কল হবে
+    async function checkClassAccessBom() {
+      const role = getUserRole();
+      if (role !== 'user') return true; // এডমিন/এডিটরের জন্য সবসময় খোলা
+
+      const studentId = getCurrentStudentId();
+      if (!studentId) return false;
+
+      try {
+        const result = await bomApiGet({ action: 'getAccessStatus', studentId: studentId });
+        if (!result.ok) return false;
+
+        if (result.status === 'APPROVED') return true;
+
+        if (result.status === 'PROCESSING' && result.autoAccess) {
+          const regTime = new Date(result.registeredAt);
+          const now = new Date();
+          if ((now - regTime) >= 20 * 60 * 1000) return true; // ২০ মিনিট পার হয়ে গেলে
+        }
+
+        if (result.status === 'BLOCKED') {
+          showNotification('আপনার আইডি ব্লক করা হয়েছে। এডমিনের সাথে যোগাযোগ করুন।', true);
+          return false;
+        }
+
+        showProcessingModal(result.autoAccess);
+        return false;
+      } catch (e) {
+        showNotification('নেটওয়ার্ক সমস্যা হয়েছে।', true);
+        return false;
+      }
+    }
+
+    // ===== ক্লাসে ক্লিক করার আগে অ্যাক্সেস চেক করার গেট ফাংশন =====
+    async function bomGate(kind, url, trackId, itemType) {
+      const allowed = await checkClassAccessBom();
+      if (!allowed) return;
+      if (kind === 'video') window.openVideoPlayer(url, trackId, itemType);
+      else if (kind === 'drive') window.openDrivePlayer(url, trackId, itemType);
+      else window.trackAndOpenLink(url, trackId, itemType);
+    }
+
+    // ===== পুরনো কোডের সাথে সামঞ্জস্যের জন্য (compatibility) =====
+    function checkLoginExpiry() {
+      return isLoggedIn();
+    }
+    function setLoginExpiry(role) {
+      setLoginData(role, getCurrentName(), getCurrentStudentId());
+    }
+   
+   // ===== ফোল্ডার সিস্টেম =====
+    let bomFoldersCache = [];
+    let bomCurrentEditFolder = null;
+
+    async function bomLoadFolders() {
+      const result = await bomApiGet({ action: 'getFolders' });
+      if (!result.ok) return;
+      bomFoldersCache = result.folders;
+      renderBomFolders();
+    }
+
+    function renderBomFolders() {
+      const container = document.getElementById('bom-folder-list-container');
+      const role = getUserRole();
+      const isAdmin = (role === 'owner' || role === 'editor');
+      let html = '';
+
+      bomFoldersCache.forEach(f => {
+        if (f.status === 'HIDE' && !isAdmin) return; // স্টুডেন্টের কাছে হাইড ফোল্ডার গায়েব
+        const isHidden = f.status === 'HIDE';
+        html += `
+          <a class="pill subject-link bomfolder-pill" href="#" data-name="${bomEscapeHtml(f.name)}">
+            <span><i class="fas fa-folder-open"></i> <span class="bangla-font">${bomEscapeHtml(f.name)}</span></span>
+            <span class="go bangla-font">খুলুন</span>
+            ${isAdmin ? `<span class="bomfolder-dots" data-row="${f.row}" data-name="${bomEscapeHtml(f.name)}" onclick="bomOpenFolderManage(event, ${f.row}, '${bomEscapeHtml(f.name).replace(/'/g,"\\'")}')">⋮</span>` : ''}
+            ${isHidden ? '<div class="bomfolder-hidden-badge bangla-font">হাইড করা</div>' : ''}
+          </a>
+        `;
+      });
+
+      // নতুন তৈরি করা ফোল্ডারগুলো পুরনো "subj-list" এর উপরে বসাতে হবে
+      const subjList = document.querySelector('.subj-list');
+      let dynamicContainer = document.getElementById('bom-dynamic-folders');
+      if (!dynamicContainer) {
+        dynamicContainer = document.createElement('div');
+        dynamicContainer.id = 'bom-dynamic-folders';
+        dynamicContainer.className = 'subj-list';
+        subjList.parentNode.insertBefore(dynamicContainer, subjList);
+      }
+      dynamicContainer.innerHTML = html;
+
+      // নতুন ফোল্ডারগুলোতে ক্লিক ইভেন্ট (subject page খোলার জন্য)
+      dynamicContainer.querySelectorAll('.subject-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (e.target.classList.contains('bomfolder-dots')) return;
+          e.preventDefault();
+          const subject = this.getAttribute('data-name');
+          showSubjectPage(subject, 'main');
+        });
+      });
+
+      document.getElementById('bomfolder-add-btn').style.display = isAdmin ? 'flex' : 'none';
+    }
+
+    document.getElementById('bomfolder-add-btn').addEventListener('click', function() {
+      document.getElementById('bomfolder-new-name').value = '';
+      document.getElementById('bomfolder-create-overlay').classList.add('active');
+    });
+    document.getElementById('bomfolder-create-cancel').addEventListener('click', function() {
+      document.getElementById('bomfolder-create-overlay').classList.remove('active');
+    });
+    document.getElementById('bomfolder-create-save').addEventListener('click', async function() {
+      const name = document.getElementById('bomfolder-new-name').value.trim();
+      if (!name) { showNotification('ফোল্ডারের নাম লিখুন।', true); return; }
+      this.disabled = true; this.textContent = 'প্রসেসিং...';
+      const result = await bomApiPost({ action: 'addFolder', name: name });
+      this.disabled = false; this.textContent = 'যুক্ত করুন';
+      if (result.ok) {
+        showNotification('ফোল্ডার তৈরি হয়েছে!', false);
+        document.getElementById('bomfolder-create-overlay').classList.remove('active');
+        bomLoadFolders();
+      } else if (result.error === 'duplicate') {
+        showNotification('এই নামে ফোল্ডার আগে থেকেই আছে।', true);
+      } else {
+        showNotification('ফোল্ডার তৈরি করতে সমস্যা হয়েছে।', true);
+      }
+    });
+
+    function bomOpenFolderManage(event, row, name) {
+      event.preventDefault();
+      event.stopPropagation();
+      bomCurrentEditFolder = { row: row, name: name };
+      document.getElementById('bomfolder-edit-name').value = name;
+      document.getElementById('bomfolder-manage-overlay').classList.add('active');
+    }
+
+    document.getElementById('bomfolder-manage-cancel').addEventListener('click', function() {
+      document.getElementById('bomfolder-manage-overlay').classList.remove('active');
+    });
+
+    document.getElementById('bomfolder-edit-save').addEventListener('click', async function() {
+      const newName = document.getElementById('bomfolder-edit-name').value.trim();
+      if (!newName || !bomCurrentEditFolder) return;
+      this.disabled = true;
+      await bomApiPost({ action: 'editFolder', row: bomCurrentEditFolder.row, newName: newName });
+      this.disabled = false;
+      showNotification('নাম পরিবর্তন করা হয়েছে!', false);
+      document.getElementById('bomfolder-manage-overlay').classList.remove('active');
+      bomLoadFolders();
+    });
+
+    document.getElementById('bomfolder-hide-btn').addEventListener('click', async function() {
+      if (!bomCurrentEditFolder) return;
+      this.disabled = true;
+      await bomApiPost({ action: 'hideFolder', row: bomCurrentEditFolder.row });
+      this.disabled = false;
+      showNotification('স্ট্যাটাস পরিবর্তন করা হয়েছে!', false);
+      document.getElementById('bomfolder-manage-overlay').classList.remove('active');
+      bomLoadFolders();
+    });
+
+    document.getElementById('bomfolder-delete-btn').addEventListener('click', async function() {
+      if (!bomCurrentEditFolder) return;
+      if (!confirm('আপনি কি নিশ্চিত এই ফোল্ডারটি ডিলিট করতে চান?')) return;
+      this.disabled = true;
+      await bomApiPost({ action: 'deleteFolder', row: bomCurrentEditFolder.row });
+      this.disabled = false;
+      showNotification('ফোল্ডার ডিলিট করা হয়েছে!', false);
+      document.getElementById('bomfolder-manage-overlay').classList.remove('active');
+      bomLoadFolders();
+    });
+
+    // ===== সিস্টেম সেটিংস প্যানেল =====
+    function showSettingsButtonIfAdmin() {
+      const role = getUserRole();
+      const btn = document.getElementById('bomadmin-settings-btn');
+      if (btn) btn.style.display = (role === 'owner' || role === 'editor') ? 'inline-flex' : 'none';
+    }
+
+    async function bomOpenSettingsPanel() {
+      document.getElementById('bomadmin-settings-overlay').classList.add('active');
+      const result = await bomApiGet({ action: 'getSettings' });
+      if (result.ok) {
+        window._bomSettingsCache = result;
+        document.getElementById('bomadmin-autoaccess-status').textContent = result.autoAccess ? '✅ চালু আছে' : '❌ বন্ধ আছে';
+        document.getElementById('bomadmin-maxlogin-input').value = result.maxLoginLimit;
+      }
+    }
+
+    document.getElementById('bomadmin-settings-close').addEventListener('click', function() {
+      document.getElementById('bomadmin-settings-overlay').classList.remove('active');
+    });
+
+    document.getElementById('bomadmin-autoaccess-toggle').addEventListener('click', async function() {
+      if (!window._bomSettingsCache) return;
+      const newValue = !window._bomSettingsCache.autoAccess;
+      this.disabled = true; this.textContent = 'প্রসেসিং...';
+      await bomApiPost({ action: 'updateSettings', key: 'AutoAccess', value: newValue ? 'TRUE' : 'FALSE' });
+      window._bomSettingsCache.autoAccess = newValue;
+      document.getElementById('bomadmin-autoaccess-status').textContent = newValue ? '✅ চালু আছে' : '❌ বন্ধ আছে';
+      this.disabled = false; this.textContent = 'পরিবর্তন করুন';
+      showNotification('সেটিংস আপডেট হয়েছে!', false);
+    });
+
+    document.getElementById('bomadmin-maxlogin-save').addEventListener('click', async function() {
+      const val = parseInt(document.getElementById('bomadmin-maxlogin-input').value);
+      if (!val || val < 1) { showNotification('সঠিক সংখ্যা দিন।', true); return; }
+      this.disabled = true; this.textContent = 'প্রসেসিং...';
+      await bomApiPost({ action: 'updateSettings', key: 'MaxLoginLimit', value: val });
+      this.disabled = false; this.textContent = 'সংরক্ষণ করুন';
+      showNotification('সর্বোচ্চ লগইন সীমা আপডেট হয়েছে!', false);
+    });
+    // ============ নতুন সিস্টেম শেষ ============
+    
     function $(sel, root = document) { return root.querySelector(sel); }
     function $all(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
 
@@ -4890,20 +6176,7 @@ const documentsPage = $('#documents-page');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function setLoginExpiry(role) {
-      // No expiry time set for lifetime access
-      localStorage.setItem(IS_LOGGED_IN_KEY, 'true');
-      localStorage.setItem(USER_ROLE_KEY, role);
-    }
-
-    function checkLoginExpiry() {
-      const isLoggedIn = localStorage.getItem(IS_LOGGED_IN_KEY);
-      return isLoggedIn === 'true';
-    }
-
-    function getUserRole() {
-      return localStorage.getItem(USER_ROLE_KEY) || 'user';
-    }
+    
 
     function logout() {
       localStorage.removeItem(IS_LOGGED_IN_KEY);
@@ -5064,11 +6337,6 @@ const documentsPage = $('#documents-page');
       }
     }
 
-    $('#password').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        checkPassword();
-      }
-    });
 
     function getDateFromTimestamp(timestamp) {
       if (!timestamp) return getTodayDate();
@@ -5222,7 +6490,12 @@ const documentsPage = $('#documents-page');
             const date = getDateFromTimestamp(timestamp);
             const time = getTimeFromTimestamp(timestamp);
             const displaySerial = index + 1;
-            const type = specialFolders.includes(subject) ? 'special' : subject === 'মিশন' ? 'mission' : subject === 'ইক্সাম' ? 'exam' : 'class';
+            let type;
+            if (specialFolders.includes(subject)) type = 'special';
+            else if (subject === 'ইক্সাম') type = 'exam';
+            else if (subject.includes('(ডকুমেন্ট)')) type = 'document';
+            else if (subject.includes('(মিশন)') || subject === 'মিশন') type = 'mission';
+            else type = 'class';
 
             normalizedRows.push({
               subject: subject,
@@ -5393,12 +6666,11 @@ if (specialFolders.includes(r.subject)) {
         // Set onclick attribute based on link type
         let onclickAttr = '';
         if (isYouTube) {
-          onclickAttr = `onclick="openVideoPlayer('${r.link}', '${trackId}', '${r.type}')"`;
+          onclickAttr = `onclick="bomGate('video', '${r.link}', '${trackId}', '${r.type}')"`;
         } else if (isDrive) {
-          onclickAttr = `onclick="openDrivePlayer('${r.link}', '${trackId}', '${r.type}')"`;
+          onclickAttr = `onclick="bomGate('drive', '${r.link}', '${trackId}', '${r.type}')"`;
         } else {
-          // For other links, track and open in new tab
-          onclickAttr = `onclick="trackAndOpenLink('${r.link}', '${trackId}', '${r.type}')"`;
+          onclickAttr = `onclick="bomGate('link', '${r.link}', '${trackId}', '${r.type}')"`;
         }
         
         card.innerHTML = `
@@ -6242,6 +7514,7 @@ const noteDeleteBtn = document.getElementById('noteDeleteBtn');
 // ===== State =====
 let player = null;
 let videoId = null;
+let videoCompletionTimer = null;
 let isDraggingProgress = false;
 let isDraggingFsProgress = false;
 let progressUpdateInterval = null;
@@ -6279,8 +7552,22 @@ function getSpeedLabel() { return SPEEDS[currentSpeedIndex] + 'x'; }
 
 // ===== Note System =====
 function getNoteKey(vid) { return NOTE_STORAGE_PREFIX + (vid || currentVideoId || 'default'); }
-function loadNoteFromStorage(vid) { const key = getNoteKey(vid); const stored = localStorage.getItem(key); return stored !== null ? stored : ''; }
-function saveNoteToStorage(vid, content) { const key = getNoteKey(vid); if (content && content.trim().length > 0) { localStorage.setItem(key, content); } else { localStorage.removeItem(key); } }
+function loadNoteFromStorage(vid) {
+  if (window._bomAllNotes && window._bomAllNotes[vid] !== undefined) {
+    return window._bomAllNotes[vid];
+  }
+  return '';
+}
+function saveNoteToStorage(vid, content) {
+  if (!window._bomAllNotes) window._bomAllNotes = {};
+  if (content && content.trim().length > 0) window._bomAllNotes[vid] = content;
+  else delete window._bomAllNotes[vid];
+
+  const studentId = getCurrentStudentId();
+  if (studentId) {
+    bomApiPost({ action: 'saveNote', studentId: studentId, videoId: vid, content: content });
+  }
+}
 function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 
 function renderNoteDisplay(content) {
@@ -6425,10 +7712,42 @@ function getVideoIdFromURL() {
     return params.get('v') || 'k7JdIaTNQQI';
 }
 
+async function bomLoadAllNotes() {
+  const studentId = getCurrentStudentId();
+  if (!studentId || getUserRole() !== 'user') return;
+  try {
+    const result = await bomApiGet({ action: 'loadDashboard', studentId: studentId });
+    if (result.ok && result.notes) {
+      try { window._bomAllNotes = JSON.parse(result.notes); }
+      catch(e) { window._bomAllNotes = {}; }
+    } else {
+      window._bomAllNotes = {};
+    }
+  } catch (e) {
+    window._bomAllNotes = {};
+  }
+}
+
+async function bomLoadAllNotes() {
+  const studentId = getCurrentStudentId();
+  if (!studentId || getUserRole() !== 'user') return;
+  try {
+    const result = await bomApiGet({ action: 'loadDashboard', studentId: studentId });
+    if (result.ok && result.notes) {
+      try { window._bomAllNotes = JSON.parse(result.notes); }
+      catch(e) { window._bomAllNotes = {}; }
+    } else {
+      window._bomAllNotes = {};
+    }
+  } catch (e) {
+    window._bomAllNotes = {};
+  }
+}
+
 function initYouTubePlayer() {
     videoId = getVideoIdFromURL();
     currentVideoId = videoId;
-    refreshNoteDisplay();
+    bomLoadAllNotes().then(() => refreshNoteDisplay());
     if (typeof YT === 'undefined') {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -6506,6 +7825,18 @@ function onPlayerStateChange(event) {
         const isPlaying = event.data === YT.PlayerState.PLAYING;
         if (isPlaying || event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) { updateMainButton(); updateFsPlayIcon(isPlaying); }
         if (isPortraitMode) resetFsHideTimer();
+
+        // ভিডিও চালু হওয়ার ২ সেকেন্ড পর "সম্পন্ন" হিসেবে চিহ্নিত করা
+        if (isPlaying) {
+            clearTimeout(videoCompletionTimer);
+            videoCompletionTimer = setTimeout(() => {
+                if (window._currentTrackId && window._currentType) {
+                    trackItem(window._currentTrackId, window._currentType);
+                }
+            }, 2000);
+        } else {
+            clearTimeout(videoCompletionTimer);
+        }
     }
 }
 function onPlayerError(e) {
@@ -6583,10 +7914,32 @@ function openVideoPlayer(url, trackId, type) {
     history.pushState({ page: 'video', url: url, trackId: trackId, type: type }, '');
     window._currentPageState = 'video';
     window.scrollTo(0, 0);
+
+    videoLoaded = false;
+    isPlayerReady = false;
+    loadingDiv.classList.remove('hidden', 'error-state');
+    loadingText.innerHTML = 'ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন';
+    clearTimeout(videoLoadingTimeout);
+    videoLoadingTimeout = setTimeout(() => {
+        if (!videoLoaded) {
+            loadingDiv.classList.add('error-state');
+            loadingDiv.classList.remove('hidden');
+            loadingText.innerHTML = `<span class="error-icon">⏱️</span><br>ভিডিও লোড হতে অনেক সময় লাগছে!<br>নেটওয়ার্ক সংযোগ পরীক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিন।`;
+            updateMainButton();
+        }
+    }, 25000);
+
     setTimeout(() => {
         const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/);
-        if (match) { videoId = match[1]; currentVideoId = videoId; refreshNoteDisplay(); if (player && typeof player.loadVideoById === 'function') player.loadVideoById(videoId); else recreatePlayer(); }
-        else showNotification('ভিডিও আইডি খুঁজে পাওয়া যায়নি', true);
+        if (match) {
+            videoId = match[1];
+            currentVideoId = videoId;
+            bomLoadAllNotes().then(() => refreshNoteDisplay());
+            if (player && typeof player.loadVideoById === 'function') player.loadVideoById(videoId);
+            else recreatePlayer();
+        } else {
+            showNotification('ভিডিও আইডি খুঁজে পাওয়া যায়নি', true);
+        }
     }, 100);
 }
 
@@ -6621,10 +7974,7 @@ document.addEventListener('DOMContentLoaded', function() {
     noteTextarea.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 220) + 'px'; });
     noteTextarea.addEventListener('keydown', function(e) { if (e.key === 'Escape' && isNoteEditing) { exitEditMode(false); e.preventDefault(); } if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && isNoteEditing) { exitEditMode(true); e.preventDefault(); } });
 
-    initYouTubePlayer();
-    videoLoadingTimeout = setTimeout(() => {
-        if (!videoLoaded) { loadingDiv.classList.add('error-state'); loadingDiv.classList.remove('hidden'); loadingText.innerHTML = `<span class="error-icon">⏱️</span><br>ভিডিও লোড হতে অনেক সময় লাগছে!<br>নেটওয়ার্ক সংযোগ পরীক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিন।`; updateMainButton(); }
-    }, 25000);
+    
 
     const fsContent = fsControls.querySelector('.fs-content');
     if (fsContent) {
@@ -6982,7 +8332,7 @@ $('#search-documents').addEventListener('input', () => {
       };
     }
 
-    // UPDATED: Tracking function - Now excludes special folders from dashboard counting
+    // UPDATED: Tracking function - এখন Google Sheet এও সেভ হবে
     window.trackItem = function(id, type) {
       const studentData = getStudentData();
       let completed = studentData.completedItems;
@@ -6990,10 +8340,20 @@ $('#search-documents').addEventListener('input', () => {
         return; // Already completed
       }
 
-      // For all types (including YouTube videos with 40% watch time), complete immediately
       completed.push(id);
       saveStudentData(studentData.name, studentData.joinDate, new Date().toISOString(), new Date().toISOString(), completed);
-      showNotification(`${type} সম্পন্ন হয়েছে!`, false);
+      showNotification(`${type} সম্পন্ন হয়েছে!`, false);
+
+      // ===== Google Sheet এ সেভ করা =====
+      const role = getUserRole();
+      const studentId = getCurrentStudentId();
+      if (role === 'user' && studentId) {
+        const typeMap = { 'class':'class', 'mission':'mission', 'document':'document', 'exam':'exam' };
+        const mappedType = typeMap[type];
+        if (mappedType) {
+          bomApiPost({ action: 'trackComplete', studentId: studentId, itemId: id, type: mappedType });
+        }
+      }
     };
 
     // UPDATED: Function to get items from all classes - EXCLUDES special folders
@@ -7330,7 +8690,7 @@ $('#search-documents').addEventListener('input', () => {
 
     const dashboardBtn = $('#dashboard-btn');
     dashboardBtn.addEventListener('click', () => {
-      showDashboard();
+      showDashboardBom();
     });
 
     // UPDATED Slideshow functionality with pause/resume on click
@@ -7558,24 +8918,18 @@ $('#search-documents').addEventListener('input', () => {
     }
 
     // Default page to main website transition
-    function goToMainWebsite() {
+    
+function goToMainWebsite() {
       defaultPage.style.display = 'none';
-      
-      // Always start main page from top regardless of default page scroll
       window.scrollTo({ top: 0, behavior: 'instant' });
-      
-      if (checkLoginExpiry()) {
-        mainPage.style.display = 'block';
-        loadInitialData();
-        showAddClassButton();
-        showDashboardButton();
-        setButtonVisibility(); // Set button visibility
-        currentPageState = 'main';
+
+      if (isLoggedIn()) {
+        showMainPage(getUserRole());
       } else {
-        loginPage.style.display = 'flex';
+        document.getElementById('login-page').style.display = 'flex';
       }
     }
-
+    
     // Check if user has visited main website before
     document.addEventListener('DOMContentLoaded', () => {
       // শুধুমাত্র ইভেন্ট লিসেনার ইনিশিয়ালাইজ করা
@@ -10311,8 +11665,9 @@ body.fullscreen-active {
         let videoLoadingTimeout = null;
         let liveButtonState = 'loading';
 
-        let trackingId = localStorage.getItem('trackingId') || '';
-        let userName = localStorage.getItem('liveCommentName') || '';
+        let trackingId = getCurrentStudentId();
+        let userName = getCurrentName();
+        
         let heartbeatInterval = null;
         let activeCountInterval = null;
         let currentActiveCount = 0;
@@ -10476,16 +11831,12 @@ body.fullscreen-active {
             }
         }
 
-        async function sendHeartbeat() {
-            if (!trackingId || !userName) return;
+        async function sendInactive() {
+            if (!trackingId) return;
             try {
-                const payload = {
-                    action: 'heartbeat',
-                    trackingId: trackingId
-                };
-                await apiPost(TRACKING_SCRIPT_URL, payload);
+                await bomApiPost({ action: 'setInactive', studentId: trackingId });
             } catch (e) {
-                console.warn('Heartbeat failed', e);
+                console.warn('Inactive send failed', e);
             }
         }
 
@@ -10510,7 +11861,7 @@ body.fullscreen-active {
 
         async function fetchActiveCount() {
             try {
-                const data = await apiGet(TRACKING_SCRIPT_URL + '?action=getActiveCount');
+                const data = await bomApiGet({ action: 'getActiveCount' });
                 if (data && typeof data.count === 'number') {
                     currentActiveCount = data.count;
                     if (liveButtonState === 'live') {
@@ -10699,16 +12050,16 @@ body.fullscreen-active {
         }
 
         function updateVideoProgress() {
-            if (videoPlayer && videoPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-                videoWatchTime += 1;
-                const currentTime = videoPlayer.getCurrentTime();
-                const duration = videoPlayer.getDuration();
-                if (duration > 0 && (currentTime / duration) >= 0.4) {
-                    trackItem(videoTrackId, videoType);
-                    clearInterval(videoCheckInterval);
-                }
-            }
+    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+        videoWatchTime += 1;
+        const currentTime = player.getCurrentTime();
+        const duration = player.getDuration();
+        if (duration > 0 && (currentTime / duration) >= 0.05) {
+            trackItem(window._currentTrackId, window._currentType);
+            clearInterval(videoCheckInterval);
         }
+    }
+}
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
@@ -10805,6 +12156,10 @@ body.fullscreen-active {
                 showErrorModal();
                 if (loadingText) loadingText.innerHTML = "লাইভ স্ট্রিম শুরু হচ্ছে না!<br>দয়া করে আরো কিছুক্ষণ অপেক্ষা করুন অথবা রিফ্রেশ করুন..";
             }, 20000);
+
+            // ভিডিও লোড না হলেও কমেন্ট ও হার্টবিট সিস্টেম আলাদাভাবে চালু হবে (নিরাপদে, চেষ্টা করে দেখা হচ্ছে)
+            try { startCommentSystem(); } catch (e) { console.warn('comment system error', e); }
+            try { startHeartbeat(); } catch (e) { console.warn('heartbeat error', e); }
         }
 
         function startVideoAfterRegistration() {
@@ -10836,7 +12191,7 @@ body.fullscreen-active {
         async function fetchComments() {
             if (!isLiveClass) return;
             try {
-                const data = await apiGet(COMMENT_SCRIPT_URL + '?action=getComments');
+                const data = await bomApiGet({ action: 'getComments' });
                 if (data && Array.isArray(data.comments)) {
                     const serverComments = data.comments;
                     const existingKeys = new Set(allComments.map(c => c.timestamp + c.name + c.message));
@@ -10882,12 +12237,11 @@ body.fullscreen-active {
             sendCommentBtn.disabled = true;
 
             try {
-                const payload = {
+                const result = await bomApiPost({
                     action: 'addComment',
-                    name: userName,
+                    studentId: trackingId,
                     message: message.trim()
-                };
-                const result = await apiPost(COMMENT_SCRIPT_URL, payload);
+                });
                 if (result && !result.error) {
                     commentInput.value = '';
                     showNotification('মন্তব্য পাঠানো হয়েছে');
@@ -10943,14 +12297,21 @@ body.fullscreen-active {
         currentPlayerCleanup = cleanupPlayer;
 
         // প্লেয়ার শুরু করার মূল ফাংশন
-        if (trackingId && userName) {
-            hideNameModal();
-            hideCodeModal();
-            startActiveCountInterval();
-            openLivePlayer();
-        } else {
-            startRegistrationFlow();
-        }
+        // ভিডিও লোড হোক বা না হোক, "মেইন পেজে ফিরুন" বাটন সবসময় কাজ করবে
+        folderBtn.onclick = function() {
+            if (currentPlayerCleanup) currentPlayerCleanup();
+            livePlayer.style.display = 'none';
+            document.body.style.overflow = '';
+        };
+        // ভিডিও লোড না হলেও কমেন্ট সিস্টেম আলাদাভাবে চালু হবে
+        startCommentSystem();
+        
+        
+        // নাম/কোড রেজিস্ট্রেশন সিস্টেম বাদ — সরাসরি Student ID ব্যবহার করে লাইভ প্লেয়ার চালু
+        hideNameModal();
+        hideCodeModal();
+        startActiveCountInterval();
+        openLivePlayer();
 
         youtubeBtn.onclick = function() {
             if (liveButtonState === 'error') {
@@ -11266,6 +12627,9 @@ const SPECIAL_SUBJECTS = [
       <div class="grid-2">
         <button class="btn admin-main-btn" data-action="addInfo">➕ নতুন ক্লাস বা তথ্য যুক্ত করুন</button>
         <button class="btn admin-main-btn" data-action="editClass">✏️ ক্লাস বা অন্যান্য তথ্য এডিট করুন</button>
+        <button class="btn" id="bomadmin-approval-btn"><i class="fas fa-user-check"></i> <span class="bangla-font">অনুমোদন</span></button>
+        <button class="btn" id="bomadmin-allstudents-btn"><i class="fas fa-users"></i> <span class="bangla-font">সকল শিক্ষার্থী</span></button>
+        <button class="btn" id="bomadmin-settings-btn"><i class="fas fa-sliders-h"></i> <span class="bangla-font">সেটিংস</span></button>
         <button class="btn admin-main-btn" data-action="addStudent">👥 নতুন শিক্ষার্থী যুক্ত করুন</button>
         <button class="btn admin-main-btn" data-action="editAccess">🔐 শিক্ষার্থীর এক্সেস এডিট করুন</button>
       </div>
@@ -11289,6 +12653,14 @@ const SPECIAL_SUBJECTS = [
         }
       });
     });
+
+    // নতুন BOM সিস্টেমের বাটনগুলো এখানে সংযুক্ত করা হচ্ছে (মডেল খোলার সাথে সাথে)
+    const bomApprovalBtn = document.getElementById('bomadmin-approval-btn');
+    const bomAllStudentsBtn = document.getElementById('bomadmin-allstudents-btn');
+    const bomSettingsBtn = document.getElementById('bomadmin-settings-btn');
+    if (bomApprovalBtn) bomApprovalBtn.addEventListener('click', bomOpenApprovalPanel);
+    if (bomAllStudentsBtn) bomAllStudentsBtn.addEventListener('click', bomOpenAllStudentsPanel);
+    if (bomSettingsBtn) bomSettingsBtn.addEventListener('click', bomOpenSettingsPanel);
   }
 
   // ========== নতুন তথ্য যুক্ত করার মডেল ==========
@@ -12895,11 +14267,11 @@ const SPECIAL_SUBJECTS = [
       
       let onclick = '';
       if (isYouTube) {
-        onclick = `openVideoPlayer('${item.link}', '${item.globalId}', 'mission')`;
+        onclick = `bomGate('video', '${item.link}', '${item.globalId}', 'mission')`;
       } else if (isDrive) {
-        onclick = `openDrivePlayer('${item.link}', '${item.globalId}', 'mission')`;
+        onclick = `bomGate('drive', '${item.link}', '${item.globalId}', 'mission')`;
       } else {
-        onclick = `trackAndOpenLink('${item.link}', '${item.globalId}', 'mission')`;
+        onclick = `bomGate('link', '${item.link}', '${item.globalId}', 'mission')`;
       }
       
       const card = document.createElement('div');
@@ -14354,6 +15726,7 @@ const SPECIAL_SUBJECTS = [
 
 })();
 			</script>
+			
 	
 </body>
 </html>
