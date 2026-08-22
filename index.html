@@ -3,24 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DAKHIL-27 (TARGET GPA-5) SUCCESS JOURNEY COURSE (BOM)</title>
+  <title>DAKHIL-27 FINAL STAGE PREPARATION COURSE (BOM)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof fetchData === 'function' && !window._bomPrefetchStarted) {
+      window._bomPrefetchStarted = true;
+      window._bomPrefetchPromise = fetchData().catch(function() { return []; });
+    }
+  });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     /* Preloader Styles */
     #preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #f8f9fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 999999;
-      transition: opacity 1.5s ease, transform 1.5s ease;
-    }
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 40%, #1c1440 0%, #0a0620 55%, #030105 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999999;
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  overflow: hidden;
+}
+
+#preloader::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -60%;
+  width: 220%; height: 220%;
+  background: conic-gradient(from 0deg, transparent 0%, rgba(108,99,255,0.22) 12%, transparent 28%, rgba(240,180,41,0.2) 44%, transparent 60%, rgba(255,101,132,0.2) 76%, transparent 92%, transparent 100%);
+  animation: preloaderGlow 10s linear infinite;
+  z-index: 0;
+}
+
+#preloader::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, #030105 90%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes preloaderGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
     
     .brand {
       font-size: 8.4vw;
@@ -31,12 +66,15 @@
       opacity: 0;
       transform: scale(0.8);
       animation: zoomIn 1.2s ease-out forwards 0.4s;
+      position: relative;
+  z-index: 2;
     }
     
     .tagline {
       font-size: 2.2vw;
       font-weight: 700;
-      color: #636e72;
+      color: #ffd76e;
+  text-shadow: 0 0 12px rgba(240, 180, 41, 0.4);
       letter-spacing: 0.4em;
       margin-top: 20px;
       opacity: 0;
@@ -825,7 +863,8 @@
     }
 
     html, body {
-      background: var(--darker);
+      background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+      background-attachment: fixed;
       color: var(--text);
       font-family: var(--font-primary);
       line-height: 1.6;
@@ -859,9 +898,25 @@
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(20px) saturate(180%);
-      background: #ffffff;
-      border-bottom: 1px solid var(--card-border);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      background: linear-gradient(120deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+      box-shadow: 0 6px 26px rgba(0,0,0,0.4);
+      position: sticky;
+      overflow: hidden;
+    }
+
+    #main-page header::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6c63ff, #f0b429, #ff6584, #6c63ff);
+      background-size: 300% 100%;
+      animation: headerShimmer 6s linear infinite;
+    }
+
+    @keyframes headerShimmer {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 300% 0%; }
     }
 
     .nav {
@@ -870,36 +925,52 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 24px;
+      position: relative;
+      z-index: 1;
     }
 
-    .brand {
+    .nav .brand {
       display: flex;
       align-items: center;
       gap: 12px;
       font-weight: 800;
       letter-spacing: 0.5px;
       font-size: 1.6rem;
-      color: var(--text);
+      color: #f5f7ff;
       position: relative;
       transition: var(--transition);
     }
 
-    .brand:hover {
-      color: var(--primary);
+    .nav .brand i {
+      background: linear-gradient(135deg, #f0b429, #ffd76e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: iconGlow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes iconGlow {
+      0%, 100% { filter: drop-shadow(0 0 5px rgba(240, 180, 41, 0.4)); }
+      50% { filter: drop-shadow(0 0 14px rgba(240, 180, 41, 0.8)); }
+    }
+
+    .nav .brand:hover {
+      color: #ffd76e;
     }
 
     .tag {
       font-size: 0.85rem;
       font-weight: 600;
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #f0b429, #ffd76e);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
-      border: 1px solid var(--glass-border);
+      border: 1px solid rgba(240, 180, 41, 0.4);
+      background-color: rgba(255,255,255,0.06);
       backdrop-filter: blur(10px);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 0 14px rgba(240, 180, 41, 0.15);
     }
 
     .searchbar {
@@ -915,40 +986,45 @@
       width: 100%;
       padding: 14px 20px 14px 45px;
       border-radius: var(--radius);
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      color: var(--text);
+      border: 1px solid rgba(240, 180, 41, 0.3);
+      background: rgba(255,255,255,0.08);
+      color: #f5f7ff;
       outline: none;
       transition: var(--transition);
       font-size: 0.95rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+    }
+
+    .searchbar input::placeholder {
+      color: rgba(245, 247, 255, 0.55);
     }
 
     .searchbar input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+      border-color: #f0b429;
+      box-shadow: 0 0 0 4px rgba(240, 180, 41, 0.25);
+      background: rgba(255,255,255,0.13);
     }
 
     .searchbar i {
       position: absolute;
       left: 18px;
-      color: var(--text-muted);
+      color: #ffd76e;
       font-size: 1rem;
       transition: var(--transition);
     }
 
     .searchbar input:focus + i {
-      color: var(--primary);
+      color: #f0b429;
     }
 
     .hero {
       text-align: center;
-      padding: 80px 40px;
+      padding: 70px 40px;
       margin: 40px 0;
       border-radius: var(--radius);
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-xl);
+      background: linear-gradient(150deg, #101a3f 0%, #1c2a5e 55%, #2a1f5e 100%);
+      border: 1px solid rgba(240, 180, 41, 0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 60px rgba(108, 99, 255, 0.2);
       position: relative;
       overflow: hidden;
       animation: fadeIn 1s ease-out;
@@ -961,9 +1037,17 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 10%, transparent 40%);
+      background: radial-gradient(circle, rgba(240, 180, 41, 0.15) 10%, transparent 40%);
       animation: rotateGradient 20s linear infinite;
-      z-index: -1;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6c63ff, #f0b429, #ff6584);
     }
 
     @keyframes rotateGradient {
@@ -974,20 +1058,24 @@
     .hero h1 {
       font-size: 3.2rem;
       margin-bottom: 16px;
-      background: var(--gradient-primary);
+      background: linear-gradient(120deg, #ffffff 0%, #ffd76e 55%, #f0b429 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       font-weight: 800;
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 4px 20px rgba(240, 180, 41, 0.25);
+      position: relative;
+      z-index: 1;
     }
 
     .hero p {
-      color: var(--text-muted);
+      color: rgba(230, 233, 250, 0.85);
       font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.8;
+      position: relative;
+      z-index: 1;
     }
 
     /* SLIDESHOW STYLES - UPDATED */
@@ -1062,16 +1150,16 @@
       border-collapse: separate;
       border-spacing: 0;
       margin: 24px 0;
-      background: #ffffff;
+      background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.92));
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.32);
       font-size: 0.9rem;
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(240, 180, 41, 0.22);
     }
 
     .today-classes-table th {
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #6c63ff, #4d3fd6);
       color: white;
       padding: 12px 16px;
       text-align: left;
@@ -1081,9 +1169,9 @@
 
     .today-classes-table td {
       padding: 12px 16px;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid rgba(240, 180, 41, 0.12);
       transition: var(--transition);
-      color: var(--text);
+      color: #e6e9fa;
     }
 
     .today-classes-table tr:last-child td {
@@ -1091,28 +1179,28 @@
     }
 
     .today-classes-table tr:hover {
-      background: rgba(108, 99, 255, 0.05);
+      background: rgba(240, 180, 41, 0.08);
     }
 
     .subject-badge {
       display: inline-block;
       padding: 4px 10px;
       border-radius: 20px;
-      background: var(--primary);
-      color: white;
+      background: linear-gradient(135deg, #f0b429, #ffd76e);
+      color: #101a3f;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 700;
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
     }
 
     .subject-badge:hover {
-      background: var(--primary-dark);
+      transform: scale(1.05);
     }
 
     .class-info {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: #b9c0e6;
     }
 
     .grid {
@@ -1123,20 +1211,20 @@
     }
 
     .card {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
+      background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.92));
+      border: 1px solid rgba(240, 180, 41, 0.2);
       border-radius: var(--radius);
       padding: 24px;
       transition: var(--transition);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.32);
       position: relative;
       overflow: hidden;
       font-size: 0.95rem;
     }
 
     .card.highlight {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.3), var(--shadow-xl);
+      border-color: #f0b429;
+      box-shadow: 0 0 0 4px rgba(240, 180, 41, 0.3), var(--shadow-xl);
     }
 
     .card::before {
@@ -1146,20 +1234,20 @@
       left: 0;
       right: 0;
       height: 6px;
-      background: var(--gradient-primary);
+      background: linear-gradient(90deg, #6c63ff, #f0b429);
       opacity: 0.95;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-lg);
+      border-color: #f0b429;
+      box-shadow: 0 14px 30px rgba(240, 180, 41, 0.2);
     }
 
     .subject {
       font-weight: 700;
       margin-bottom: 12px;
-      color: var(--primary);
+      color: #ffd76e;
       font-size: 1.1rem;
       display: flex;
       align-items: center;
@@ -1167,7 +1255,7 @@
     }
 
     .time {
-      color: var(--text-muted);
+      color: #b9c0e6;
       font-size: 0.9rem;
       margin-bottom: 16px;
       display: flex;
@@ -1218,8 +1306,8 @@
     }
 
     .pill {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
+      background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9));
+      border: 1px solid rgba(240, 180, 41, 0.2);
       border-radius: var(--radius);
       padding: 16px 24px;
       display: flex;
@@ -1227,10 +1315,11 @@
       align-items: center;
       gap: 16px;
       transition: var(--transition);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.3);
       position: relative;
       overflow: hidden;
       font-size: 0.95rem;
+      color: #e6e9fa;
     }
 
     .pill::before {
@@ -1240,7 +1329,7 @@
       left: 0;
       width: 6px;
       height: 100%;
-      background: var(--gradient-primary);
+      background: linear-gradient(180deg, #f0b429, #ffd76e);
       opacity: 0;
       transition: var(--transition);
     }
@@ -1251,16 +1340,16 @@
 
     .pill:hover {
       transform: translateY(-3px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-lg);
+      border-color: #f0b429;
+      box-shadow: 0 12px 30px rgba(240, 180, 41, 0.25);
     }
 
     .pill .go {
       padding: 8px 16px;
       border-radius: 10px;
-      background: var(--gradient-primary);
-      color: white;
-      font-weight: 600;
+      background: linear-gradient(135deg, #f0b429, #ffd76e);
+      color: #101a3f;
+      font-weight: 700;
       transition: var(--transition);
       font-size: 0.85rem;
     }
@@ -1273,16 +1362,16 @@
     .owner-wrap {
       max-width: 980px;
       margin: 32px auto 16px;
-      padding: 24px;
+      padding: 26px;
       border-radius: var(--radius);
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: linear-gradient(150deg, rgba(28,42,94,0.55), rgba(17,23,52,0.92));
+      border: 1px solid rgba(240, 180, 41, 0.22);
       display: flex;
       flex-direction: column;
       gap: 16px;
       align-items: center;
       text-align: center;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.32);
     }
 
     .owner-messages {
@@ -1291,7 +1380,7 @@
 
     .owner-intro {
       font-size: 1rem;
-      color: var(--text-muted);
+      color: #cfd6ff;
       max-width: 600px;
       line-height: 1.8;
       margin-bottom: 12px;
@@ -1299,7 +1388,7 @@
 
     .owner-sub2 {
       font-size: 0.85rem;
-      color: rgba(0,0,0,0.8);
+      color: #9fa8d9;
       margin-top: 0;
       margin-bottom: 8px;
       text-transform: lowercase;
@@ -1310,7 +1399,7 @@
       font-weight: 800;
       margin-top: 8px;
       margin-bottom: 4px;
-      background: var(--gradient-primary);
+      background: linear-gradient(90deg, #ffffff, #ffd76e);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -1320,7 +1409,7 @@
 
     .owner-sub {
       font-size: 0.85rem;
-      color: rgba(0,0,0,0.8);
+      color: #9fa8d9;
       margin-top: 0;
       margin-bottom: 8px;
       text-transform: lowercase;
@@ -1331,7 +1420,7 @@
       gap: 8px;
       align-items: center;
       font-size: 0.8rem;
-      color: var(--text);
+      color: #cfd6ff;
       text-transform: none;
       font-weight: 600;
     }
@@ -1340,7 +1429,7 @@
       font-weight: 900;
       letter-spacing: 1px;
       text-transform: uppercase;
-      background: var(--gradient-primary);
+      background: linear-gradient(90deg, #f0b429, #ffd76e);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -1356,12 +1445,12 @@
       margin: 16px auto 64px;
       padding: 20px 24px;
       border-radius: 12px;
-      background: #f8f9fa;
-      border: 1px solid rgba(0,0,0,0.05);
-      color: rgba(0,0,0,0.8);
+      background: linear-gradient(150deg, rgba(28,42,94,0.5), rgba(17,23,52,0.85));
+      border: 1px solid rgba(240, 180, 41, 0.18);
+      color: #b9c0e6;
       text-align: center;
       font-size: 0.85rem;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.28);
     }
 
     @media (max-width: 768px) {
@@ -1393,12 +1482,13 @@
       gap: 8px;
       margin-bottom: 24px;
       padding: 12px 20px;
-      background: #ffffff;
+      background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(17,23,52,0.9));
       border-radius: 12px;
       transition: var(--transition);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      color: #e6e9fa;
       font-size: 0.95rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
     }
 
     .back-button:hover {
@@ -1506,7 +1596,7 @@
 
     .card .video-title {
       font-size: 1rem;
-      color: var(--text-muted);
+      color: #e6e9fa;
       margin-bottom: 16px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1639,32 +1729,42 @@
     .filter-bar select {
       padding: 10px 16px;
       border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      color: var(--text);
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      background: rgba(255,255,255,0.08);
+      color: #f5f7ff;
       outline: none;
       transition: var(--transition);
       min-width: 150px;
       font-size: 0.85rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .filter-bar select option {
+      background: #141b3d;
+      color: #f5f7ff;
     }
 
     .filter-bar input {
       padding: 14px 20px;
       border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      color: var(--text);
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      background: rgba(255,255,255,0.08);
+      color: #f5f7ff;
       outline: none;
       transition: var(--transition);
       min-width: 200px;
       font-size: 0.95rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .filter-bar input::placeholder {
+      color: rgba(245, 247, 255, 0.55);
     }
 
     .filter-bar input:focus, .filter-bar select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+      border-color: #f0b429;
+      box-shadow: 0 0 0 4px rgba(240, 180, 41, 0.2);
+      background: rgba(255,255,255,0.13);
     }
 
     .class-serial {
@@ -1687,8 +1787,8 @@
     }
 
     #login-page {
-      background: #f8f9fa;
-      color: var(--text);
+      background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+      color: #f5f7ff;
       font-family: var(--font-primary);
       line-height: 1.6;
       min-height: 100vh;
@@ -1702,13 +1802,14 @@
     .login-container {
       width: 100%;
       max-width: 480px;
-      background: #ffffff;
-      border: 1px solid var(--card-border);
+      background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(11,19,48,0.92));
+      border: 1px solid rgba(240, 180, 41, 0.25);
       border-radius: var(--radius);
       padding: 40px;
-      box-shadow: var(--shadow-xl);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px);
     }
 
     .login-container::before {
@@ -1739,7 +1840,7 @@
     }
 
     .welcome-message p {
-      color: var(--text-muted);
+      color: #b9c0e6;
       font-size: 1.1rem;
     }
 
@@ -1755,20 +1856,20 @@
       display: block;
       margin-bottom: 8px;
       font-weight: 500;
-      color: var(--text);
+      color: #ffd76e;
     }
 
     .form-group input {
       width: 100%;
       padding: 16px 20px;
       border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      color: var(--text);
+      border: 1px solid rgba(240,180,41,0.2);
+      background: rgba(11,19,48,0.5);
+      color: #f5f7ff;
       outline: none;
       transition: var(--transition);
       font-size: 1rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: none;
     }
 
     .form-group input:focus {
@@ -1799,11 +1900,11 @@
       text-align: center;
       margin-top: 32px;
       padding-top: 24px;
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(240,180,41,0.15);
     }
 
     .support-info p {
-      color: var(--text-muted);
+      color: #b9c0e6;
       margin-bottom: 16px;
       font-size: 0.95rem;
     }
@@ -1819,7 +1920,7 @@
       text-decoration: none;
       font-weight: 600;
       transition: var(--transition);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
     }
 
     .whatsapp-link:hover {
@@ -2250,10 +2351,10 @@
       text-align: center;
       margin: 20px auto;
       padding: 25px 20px;
-      background: #ffffff;
-      border: 1px solid var(--card-border);
+      background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(17,23,52,0.9));
+      border: 1px solid rgba(240, 180, 41, 0.25);
       border-radius: 16px;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.3);
       max-width: 300px;
       width: 100%;
     }
@@ -2261,7 +2362,7 @@
     .clock-time {
       font-size: 1.8rem;
       font-weight: 700;
-      background: var(--gradient-primary);
+      background: linear-gradient(90deg, #ffffff, #ffd76e);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -2275,14 +2376,14 @@
 
     .clock-date {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: #cfd6ff;
       font-weight: 500;
     }
 
     #exam-countdown {
       font-size: 0.9rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      color: #ffd76e;
+      font-weight: 600;
     }
 
     .clock-container::before {
@@ -2302,28 +2403,29 @@
       gap: 5px;
       max-height: 300px;
       overflow-y: auto;
-      background: #ffffff;
+      background: linear-gradient(160deg, rgba(28,42,94,0.85), rgba(17,23,52,0.95));
+      border: 1px solid rgba(240, 180, 41, 0.22);
       border-radius: 12px;
       padding: 10px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
       display: none;
     }
 
     .search-result-item {
       padding: 8px 12px;
-      background: #f8f9fa;
+      background: rgba(255,255,255,0.06);
       border-radius: 8px;
       cursor: pointer;
       transition: var(--transition);
       font-size: 0.9rem;
-      color: var(--text);
+      color: #e6e9fa;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .search-result-item:hover {
-      background: rgba(108, 99, 255, 0.1);
+      background: rgba(240, 180, 41, 0.15);
       transform: translateY(-2px);
     }
 
@@ -2425,7 +2527,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #f8f9fa;
+      background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2442,16 +2544,17 @@
     }
 
     .loading-box {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(11,19,48,0.92));
+      border: 1px solid rgba(240, 180, 41, 0.25);
+      border-radius: 20px;
       padding: 40px;
       text-align: center;
       max-width: 500px;
       width: 90%;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px);
     }
 
     .loading-box::before {
@@ -2475,7 +2578,7 @@
     }
 
     .loading-message {
-      color: var(--text-muted);
+      color: #b9c0e6;
       margin-bottom: 25px;
       font-size: 1rem;
       line-height: 1.6;
@@ -2483,25 +2586,56 @@
 
     /* Updated modern loading spinner */
     .loading-spinner {
-      width: 60px;
-      height: 60px;
-      border: 5px solid transparent;
-      border-radius: 50%;
-      border-top: 5px solid var(--primary);
-      border-right: 5px solid var(--secondary);
-      border-bottom: 5px solid var(--accent);
-      border-left: 5px solid var(--warning);
-      margin: 0 auto 20px;
-      animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  --color-1: #ffd76e;
+  --size: 0.5px;
+  color: var(--color-1);
+  font-size: calc(10 * var(--size));
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: bomLoaderSpin 1.3s infinite linear;
+  transform: translateZ(0);
+  margin: 0 auto 24px;
+  filter: drop-shadow(0 0 5px rgba(240,180,41,0.5));
+}
+
+    @keyframes bomLoaderSpin {
+      0%, 100% {
+        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+      }
+      12.5% {
+        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+      }
+      25% {
+        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+      }
+      37.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+      }
+      50% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+      }
+      62.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+      }
+      75% {
+        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+      }
+      87.5% {
+        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+      }
     }
 
     .loading-progress {
       width: 100%;
       height: 8px;
-      background: #e9ecef;
+      background: rgba(255,255,255,0.08);
       border-radius: 4px;
       overflow: hidden;
       margin-top: 20px;
+      border: 1px solid rgba(240,180,41,0.15);
     }
 
     .loading-progress-bar {
@@ -2706,19 +2840,29 @@
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
-      background: #ffffff;
-      border: 1px solid var(--card-border);
+      background: linear-gradient(160deg, rgba(28,42,94,0.7), rgba(17,23,52,0.95));
+      border: 1px solid rgba(240, 180, 41, 0.3);
       border-radius: 10px;
       padding: 8px 30px 8px 12px;
       font-size: 0.85rem;
-      color: var(--text);
+      color: #f5f7ff;
       position: relative;
       min-width: 150px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffd76e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"), linear-gradient(160deg, rgba(28,42,94,0.7), rgba(17,23,52,0.95));
       background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 14px;
+      background-position: right 10px center, 0 0;
+      background-size: 14px, cover;
       transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    #sort-classes:focus {
+      border-color: #f0b429;
+      box-shadow: 0 0 0 4px rgba(240, 180, 41, 0.2);
+    }
+    #sort-classes option {
+      background: #141b3d;
+      color: #f5f7ff;
     }
 
     #sort-classes:focus {
@@ -2761,9 +2905,26 @@
     }
 
     /* ===== Video Player Page ===== */
-#video-player-page .wrap { max-width: 980px; margin: 0 auto; padding: 16px; box-sizing: border-box; }
-#video-player-page .player-card { background: #ffffff; padding: 16px; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
-#video-player-page .player-card:hover { transform: translateY(-4px); }
+#video-player-page {
+  min-height: 100vh;
+  background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+  background-attachment: fixed;
+  padding-top: 1px; /* layout ঠিক রাখতে */
+}
+#video-player-page .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px; box-sizing: border-box; }
+#video-player-page .player-card {
+  background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(11,19,48,0.9));
+  border: 1px solid rgba(240, 180, 41, 0.2);
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#video-player-page .player-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 50px rgba(108,99,255,0.3);
+}
 #video-player-page .top-buttons { display: flex; justify-content: space-between; margin-bottom: 16px; gap: 10px; position: relative; z-index: 10; }
 #video-player-page .custom-btn { background: linear-gradient(135deg, #6c63ff, #a29bfe); padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(108,99,255,0.3); color: #fff; font-family: Arial, sans-serif; width: 48%; transition: all 0.25s ease; border: none; user-select: none; }
 #video-player-page .custom-btn:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(108,99,255,0.45); }
@@ -2783,8 +2944,26 @@
 #video-player-page #loading.error-state p { color: #ff6b6b; font-weight: 500; }
 #video-player-page #loading.error-state p .error-icon { display: inline-block; font-size: 24px; margin-bottom: 8px; color: #ff4757; }
 #video-player-page .spinner { border: 4px solid rgba(255,255,255,0.15); border-top: 4px solid #ff4d4d; border-radius: 50%; width: 44px; height: 44px; animation: spin 1s linear infinite; margin: 0 auto 12px; }
+#video-player-page .video-loading-ring {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  padding: 3px;
+  background: conic-gradient(#f0b429 0%, rgba(255,255,255,0.12) 0%);
+  box-shadow: 0 0 12px rgba(240,180,41,0.4);
+  transition: background 0.25s linear;
+}
+#video-player-page .vlr-logo {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #0b1330;
+  border: 2px solid #0b1330;
+}
+#video-player-page #loading.error-state .video-loading-ring { display: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
-#video-player-page #loading p { font-size: 14px; margin: 5px 0; opacity: 0.85; font-weight: 300; line-height: 1.6; }
+#video-player-page #loading p { font-size: 14px; margin: 2px 0; opacity: 0.85; font-weight: 300; line-height: 1.5; }
 #video-player-page .controls-panel { background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); padding: 12px 16px 16px 16px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
 #video-player-page .panel-progress-container { width: 100%; height: 8px; background: rgba(255,255,255,0.12); border-radius: 4px; cursor: pointer; position: relative; transition: height 0.15s ease; }
 #video-player-page .panel-progress-container:hover { height: 10px; }
@@ -2835,9 +3014,9 @@
 #video-player-page .fs-btn i { pointer-events: none; }
 
 /* Note Box */
-#video-player-page .note-box { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06); transition: box-shadow 0.3s ease, transform 0.3s ease; background: linear-gradient(145deg, #fdf6e3, #fef9ef); border: 1px solid #f0e4d0; }
-#video-player-page .note-box:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.10); }
-#video-player-page .note-box-header { background: linear-gradient(135deg, #f7971e, #ffd200); color: #2d3436; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+#video-player-page .note-box { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); transition: box-shadow 0.3s ease, transform 0.3s ease; background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(11,19,48,0.9)); border: 1px solid rgba(240, 180, 41, 0.2); }
+#video-player-page .note-box:hover { box-shadow: 0 12px 32px rgba(108,99,255,0.25); }
+#video-player-page .note-box-header { background: linear-gradient(135deg, #d8973c, #f0b429); color: #1e1408; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(240,180,41,0.25); }
 #video-player-page .note-box-header .title-wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; letter-spacing: 0.3px; }
 #video-player-page .note-box-header .title-wrap i { font-size: 20px; color: #2d3436; }
 #video-player-page .note-box-header .title-wrap .badge { background: rgba(0,0,0,0.08); padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; color: #2d3436; white-space: nowrap; }
@@ -2845,44 +3024,44 @@
 #video-player-page .note-edit-toggle:hover { background: rgba(255,255,255,0.65); transform: scale(1.04); }
 #video-player-page .note-edit-toggle:active { transform: scale(0.94); }
 #video-player-page .note-edit-toggle i { font-size: 14px; }
-#video-player-page .note-body { padding: 16px 20px 20px 20px; min-height: 70px; position: relative; background: rgba(255,252,245,0.5); }
-#video-player-page .note-display { max-height: 180px; overflow-y: auto; padding-right: 6px; font-size: 15px; line-height: 1.8; color: #2d3436; white-space: pre-wrap; word-break: break-word; }
+#video-player-page .note-body { padding: 16px 20px 20px 20px; min-height: 70px; position: relative; background: rgba(11,19,48,0.35); }
+#video-player-page .note-display { max-height: 180px; overflow-y: auto; padding-right: 6px; font-size: 15px; line-height: 1.8; color: #f5f7ff; white-space: pre-wrap; word-break: break-word; }
 #video-player-page .note-display::-webkit-scrollbar { width: 5px; }
-#video-player-page .note-display::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-#video-player-page .note-display::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
-#video-player-page .note-display::-webkit-scrollbar-thumb:hover { background: #b0b5bd; }
-#video-player-page .note-display.empty { color: #b0b5bd; font-style: italic; font-weight: 300; text-align: center; padding: 18px 0; font-size: 15px; }
+#video-player-page .note-display::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+#video-player-page .note-display::-webkit-scrollbar-thumb { background: rgba(240,180,41,0.4); border-radius: 10px; }
+#video-player-page .note-display::-webkit-scrollbar-thumb:hover { background: rgba(240,180,41,0.6); }
+#video-player-page .note-display.empty { color: #8fa0bd; font-style: italic; font-weight: 300; text-align: center; padding: 18px 0; font-size: 15px; }
 #video-player-page .note-display .note-text { display: block; }
-#video-player-page .note-display .empty-icon { display: block; font-size: 28px; margin-bottom: 6px; color: #d1d5db; }
+#video-player-page .note-display .empty-icon { display: block; font-size: 28px; margin-bottom: 6px; color: #6c63ff; }
 #video-player-page .note-textarea-wrap { display: none; flex-direction: column; gap: 12px; }
 #video-player-page .note-textarea-wrap.active { display: flex; }
-#video-player-page .note-textarea { width: 100%; min-height: 110px; max-height: 220px; padding: 14px 16px; border: 2px solid #e8ecf0; border-radius: 12px; font-size: 15px; font-family: 'Poppins', sans-serif; line-height: 1.7; resize: vertical; transition: border-color 0.25s ease, box-shadow 0.25s ease; background: #fafbfc; color: #2d3436; }
+#video-player-page .note-textarea { width: 100%; min-height: 110px; max-height: 220px; padding: 14px 16px; border: 2px solid rgba(240,180,41,0.25); border-radius: 12px; font-size: 15px; font-family: 'Poppins', sans-serif; line-height: 1.7; resize: vertical; transition: border-color 0.25s ease, box-shadow 0.25s ease; background: rgba(11,19,48,0.5); color: #f5f7ff; }
 #video-player-page .note-textarea:focus { outline: none; border-color: #f7971e; box-shadow: 0 0 0 4px rgba(247,151,30,0.15); background: #ffffff; }
 #video-player-page .note-textarea::-webkit-scrollbar { width: 5px; }
-#video-player-page .note-textarea::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-#video-player-page .note-textarea::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+#video-player-page .note-textarea::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+#video-player-page .note-textarea::-webkit-scrollbar-thumb { background: rgba(240,180,41,0.4); border-radius: 10px; }
 #video-player-page .note-actions { display: none; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
 #video-player-page .note-actions.active { display: flex; }
 #video-player-page .note-save-btn { background: linear-gradient(135deg, #4caf50, #66bb6a); border: none; color: #fff; padding: 10px 28px; border-radius: 30px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 14px rgba(76,175,80,0.3); }
 #video-player-page .note-save-btn:hover { transform: scale(1.04); box-shadow: 0 6px 24px rgba(76,175,80,0.4); }
 #video-player-page .note-save-btn:active { transform: scale(0.94); }
-#video-player-page .note-cancel-btn { background: #e8ecf0; border: none; color: #2d3436; padding: 10px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; font-family: 'Poppins', sans-serif; }
-#video-player-page .note-cancel-btn:hover { background: #d5d9e0; transform: scale(1.02); }
+#video-player-page .note-cancel-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #f5f7ff; padding: 10px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; font-family: 'Poppins', sans-serif; }
+#video-player-page .note-cancel-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.02); }
 #video-player-page .note-cancel-btn:active { transform: scale(0.94); }
 #video-player-page .note-delete-btn { background: #ff6b6b; border: none; color: #fff; padding: 10px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(255,107,107,0.25); }
 #video-player-page .note-delete-btn:hover { transform: scale(1.04); background: #ff5252; }
 #video-player-page .note-delete-btn:active { transform: scale(0.94); }
 
 /* Important Info Box */
-#video-player-page .note-section { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.07); background: linear-gradient(145deg, #e8f0fe, #dde6f7); border: 1px solid #c5d5ea; transition: box-shadow 0.3s ease; }
-#video-player-page .note-section:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.10); }
-#video-player-page .note-header { background: linear-gradient(135deg, #2d3436, #434a4e); color: #ffffff; padding: 14px 18px; font-weight: 700; font-size: 16px; text-align: center; letter-spacing: 0.3px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; gap: 10px; }
+#video-player-page .note-section { margin-top: 20px; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3); background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(11,19,48,0.9)); border: 1px solid rgba(108,99,255,0.25); transition: box-shadow 0.3s ease; }
+#video-player-page .note-section:hover { box-shadow: 0 12px 32px rgba(108,99,255,0.25); }
+#video-player-page .note-header { background: linear-gradient(135deg, #6c63ff, #a78bfa); color: #ffffff; padding: 14px 18px; font-weight: 700; font-size: 16px; text-align: center; letter-spacing: 0.3px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; gap: 10px; }
 #video-player-page .note-header i { font-size: 18px; color: #ffd200; }
 #video-player-page .note-table { padding: 4px 0; }
-#video-player-page .note-row { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
+#video-player-page .note-row { display: flex; border-bottom: 1px solid rgba(255,255,255,0.08); }
 #video-player-page .note-row:last-child { border-bottom: none; }
-#video-player-page .note-cell { flex: 1; padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px; font-size: 14px; line-height: 1.7; color: #2d3436; }
-#video-player-page .note-cell i:not(.rotate-icon) { font-size: 20px; color: #2d3436; flex-shrink: 0; margin-top: 2px; background: rgba(255,255,255,0.5); padding: 6px; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+#video-player-page .note-cell { flex: 1; padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px; font-size: 14px; line-height: 1.7; color: #d3d8f5; }
+#video-player-page .note-cell i:not(.rotate-icon) { font-size: 20px; color: #ffd76e; flex-shrink: 0; margin-top: 2px; background: rgba(240,180,41,0.15); padding: 6px; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
 #video-player-page .note-cell .rotate-icon { display: inline-block; font-size: 10px; color: #2d3436; margin: 0 2px; background: transparent !important; padding: 0 !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
 #video-player-page .note-cell .bold-msg { font-weight: 700; color: #ffffff; display: block; margin-top: 8px; font-size: 14px; background: #c0392b; padding: 10px 14px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(192,57,43,0.25); }
 
@@ -2957,8 +3136,8 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     /* Drive Player Page Styles */
     #drive-player-page {
       display: none;
-      background: #f8f9fa;
-      color: #2d3436;
+      background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+      color: #f5f7ff;
       font-family: sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
@@ -2968,7 +3147,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       margin:0;
       padding:0;
       height:100%;
-      background:#f8f9fa;
+      background:#0b1330;
       overflow:hidden;
     }
 
@@ -2991,7 +3170,8 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 
     #drive-player-page .loader{
       position:fixed;top:0;left:0;width:100%;height:100%;
-      background:#f8f9fa;color:#2d3436;
+      background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+      color: #ffd76e;
       display:flex;flex-direction:column;align-items:center;justify-content:center;
       z-index:5000;
     }
@@ -3546,33 +3726,39 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 }
 
 /* নতুন পেজগুলোর ফোল্ডার আইকন স্টাইল */
-#classesGrid .pill i, 
-#missionsGrid .pill i, 
+#classesGrid .pill i {
+  font-size: 1.3rem;
+  color: #a29bfe;
+}
+#missionsGrid .pill i {
+  font-size: 1.3rem;
+  color: #ff9db3;
+}
 #documentsGrid .pill i {
   font-size: 1.3rem;
-  color: var(--primary);
+  color: #6ee7a8;
 }
 
 #classesGrid .pill {
-  background: linear-gradient(135deg, #ffffff, rgba(108, 99, 255, 0.05));
+  background: linear-gradient(160deg, rgba(108,99,255,0.28), rgba(17,23,52,0.92));
 }
 
 #missionsGrid .pill {
-  background: linear-gradient(135deg, #ffffff, rgba(255, 101, 132, 0.05));
+  background: linear-gradient(160deg, rgba(255,101,132,0.25), rgba(17,23,52,0.92));
 }
 
 #documentsGrid .pill {
-  background: linear-gradient(135deg, #ffffff, rgba(67, 233, 123, 0.05));
+  background: linear-gradient(160deg, rgba(67,233,123,0.22), rgba(17,23,52,0.92));
   }
 
     /* ===== পরিসংখ্যান প্যানেলের স্টাইল ===== */
 .stats-rect {
   width: 100%;
   max-width: 480px;
-  background: #ffffff;
-  border: 1px solid var(--card-border);
+  background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9));
+  border: 1px solid rgba(240, 180, 41, 0.22);
   border-radius: 28px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.3);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px 10px;
@@ -3586,23 +3772,24 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #f8f9fa;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(240, 180, 41, 0.12);
   border-radius: 20px;
-  padding: 8px 4px;
+  padding: 10px 4px;
 }
 
 .stat-number {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #2d3436;
+  color: #ffffff;
   line-height: 1.1;
-  text-shadow: 0 0 12px rgba(108, 99, 255, 0.2);
+  text-shadow: 0 0 14px rgba(240, 180, 41, 0.35);
 }
 
 .stat-unit {
   font-size: 1rem;
   font-weight: 600;
-  background: var(--gradient-primary);
+  background: linear-gradient(90deg, #f0b429, #ffd76e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -3612,12 +3799,12 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 .stat-label {
   font-size: 0.7rem;
   font-weight: 500;
-  color: #636e72;
+  color: #cfd6ff;
   text-transform: uppercase;
-  background: #ffffff;
+  background: rgba(255,255,255,0.06);
   padding: 3px 10px;
   border-radius: 30px;
-  border: 1px solid var(--card-border);
+  border: 1px solid rgba(240, 180, 41, 0.2);
   white-space: nowrap;
   margin-top: 4px;
 }
@@ -3859,23 +4046,23 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   </div>
 
   <style>
-  .mode-switcher{display:flex;gap:6px;background:#f2f0eb;padding:6px;border-radius:50px;margin-bottom:22px;}
-  .mode-tab{flex:1;text-align:center;padding:11px 6px;border:none;background:transparent;border-radius:40px;font-weight:600;font-size:0.86rem;color:var(--text-muted);cursor:pointer;}
-  .mode-tab.active{color:#fff;background:linear-gradient(135deg,#6c63ff,#a29bfe);}
+  .mode-switcher{display:flex;gap:6px;background:rgba(255,255,255,0.06);padding:6px;border-radius:50px;margin-bottom:22px;border:1px solid rgba(240,180,41,0.15);}
+  .mode-tab{flex:1;text-align:center;padding:11px 6px;border:none;background:transparent;border-radius:40px;font-weight:600;font-size:0.86rem;color:#b9c0e6;cursor:pointer;transition:all 0.25s ease;}
+  .mode-tab.active{color:#1e1408;background:linear-gradient(135deg,#f0b429,#ffd76e);}
   .auth-panel{display:none;}
   .auth-panel.active{display:block;}
   .gender-select{display:flex;gap:10px;}
-  .gender-option{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:12px;border:2px solid #e8e6ed;background:#faf8f5;color:var(--text-muted);font-weight:600;cursor:pointer;}
-  .gender-option.selected{border-color:#6c63ff;background:rgba(108,99,255,0.12);color:#6c63ff;}
+  .gender-option{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(11,19,48,0.5);color:#b9c0e6;font-weight:600;cursor:pointer;transition:all 0.25s ease;}
+  .gender-option.selected{border-color:#6c63ff;background:rgba(108,99,255,0.18);color:#a78bfa;}
   .id-success{display:none;text-align:center;}
   .id-success.active{display:block;}
-  .id-card{background:linear-gradient(135deg,#1e272e,#2d3436);border-radius:16px;padding:22px;margin-bottom:20px;}
-  .id-card .id-label{font-size:0.72rem;color:#fbbf24;font-weight:700;margin-bottom:8px;}
+  .id-card{background:linear-gradient(135deg,#0b1330,#1c2a5e);border-radius:16px;padding:22px;margin-bottom:20px;border:1px solid rgba(240,180,41,0.25);}
+  .id-card .id-label{font-size:0.72rem;color:#ffd76e;font-weight:700;margin-bottom:8px;}
   .id-card .id-value{font-size:1.4rem;font-weight:700;color:#fff;word-break:break-all;}
-  .copy-btn{margin-top:14px;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);cursor:pointer;}
+  .copy-btn{margin-top:14px;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);cursor:pointer;}
   #login-password-wrapper{display:none;margin-top:6px;}
   .error-message.show{display:flex !important;align-items:center;gap:8px;justify-content:center;}
-  .pw-msg{font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:8px;padding:10px 14px;background:#f0ebf8;border-radius:10px;border-left:4px solid #8b5cf6;}
+  .pw-msg{font-weight:600;font-size:0.9rem;color:#f5f7ff;margin-bottom:8px;padding:10px 14px;background:rgba(108,99,255,0.15);border-radius:10px;border-left:4px solid #6c63ff;}
 </style>
 
 <div id="login-page">
@@ -3896,7 +4083,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <!-- লগইন / রেজিস্ট্রেশন ফর্ম -->
     <div id="auth-forms-wrap">
       <div class="welcome-message">
-        <h1 class="bangla-font">DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE"</h1>
+        <h1 class="bangla-font">DAKHIL-27 "FINAL STAGE PREPARATION COURSE"</h1>
         <p class="bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) এর প্রাইভেট ব্যাচের দাখিল-২৭ শিক্ষার্থীদের জন্য প্রিমিয়াম লার্নিং এক্সপেরিয়েন্স</p>
       </div>
 
@@ -3986,7 +4173,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         <div class="brand">
           <i class="fas fa-graduation-cap"></i>
           <span>DAKHIL-27 <br>
-            <span class="tag">(TARGET GPA-5) "SUCCESS JOURNEY COURSE"</span></span>
+            <span class="tag">"FINAL STAGE PREPARATION COURSE"</span></span>
         </div>
         <div class="searchbar">
           <i class="fas fa-search"></i>
@@ -4003,8 +4190,8 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     </header>
     <div class="notice-bar bangla-font">
       <span>
-        <b class="notice-color1">🌟 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE" এ আপনাকে স্বাগতম!</b>
-        <b class="notice-color2">💬 আপনার মূল্যবান মতামত জানাতে "কমেন্ট করুন" বাটনে ক্লিক করুন।</b>
+        <b class="notice-color1">🌟 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" এ আপনাকে স্বাগতম!</b>
+        <b class="notice-color2">💬 আপনার মূল্যবান মতামত জানাতে "যোগাযোগ করুন" বাটনে ক্লিক করুন।</b>
         <b class="notice-color3">📝 আমরা প্রতিটি কমেন্ট গুরুত্বের সাথে বিবেচনা করি।</b>
         <b class="notice-color4">-- ধন্যবাদ সাথে থাকার জন্য!</b>
       </span>
@@ -4026,7 +4213,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       </div>
     <main class="container">
       <div class="hero fade-in">
-        <h1 class="bangla-font">DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE"</h1>
+        <h1 class="bangla-font">DAKHIL-27 "FINAL STAGE PREPARATION COURSE"</h1>
         <p class="bangla-font">শিক্ষার যাত্রায় এক নতুন দিগন্ত। বাংলাদেশ অনলাইন মাদ্রাসা (BOM) এর প্রাইভেট ব্যাচের দাখিল-২৭ শিক্ষার্থীদের জন্য প্রিমিয়াম লার্নিং এক্সপেরিয়েন্স</p>
       </div>
       <!-- New Slideshow Box - UPDATED -->
@@ -4210,15 +4397,19 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       </div>
     </div>
     <footer class="site-footer">
-      © 2026 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE" All rights reserved.
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
     </footer>
   </div>
   
   <style>
-  #bom-dashboard-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
-  .bomdash-header { background:#fff; border-bottom:1px solid #dfe6e9; box-shadow:0 2px 10px rgba(0,0,0,.05); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
-  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#2d3436; }
-  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid #dfe6e9; background:#fff; color:#2d3436; font-weight:500; cursor:pointer; }
+  #bom-dashboard-page { display:none; min-height:100vh; background: linear-gradient(160deg, #0f1c3f 0%, #24134d 55%, #3b0a45 100%); background-attachment: fixed; padding:0 0 40px; }
+  .bomdash-header { background: rgba(15,28,63,0.7); backdrop-filter: blur(10px); border-bottom:1px solid rgba(240,180,41,0.2); box-shadow:0 4px 20px rgba(0,0,0,.3); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#ffd76e; }
+  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#ffd76e; }
+  .bomdash-header { background: #141b3d !important; border-bottom: 2px solid #f0b429 !important; }
+  .bomdash-header > div { color: #ffd76e !important; text-shadow: 0 0 10px rgba(240,180,41,0.4); }
+  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid rgba(240,180,41,0.25); background:rgba(255,255,255,0.06); color:#f5f7ff; font-weight:500; cursor:pointer; transition: all 0.25s ease; }
+  .bomdash-back:hover { background: rgba(240,180,41,0.15); border-color: #f0b429; transform: translateX(-3px); }
   .bomdash-content { max-width:820px; margin:24px auto; padding:0 20px; }
   .bomdash-card { border-radius:22px; padding:30px 26px; background:linear-gradient(160deg,#08142b,#0d2145,#08142b); color:#eef3fb; box-shadow:0 24px 60px rgba(6,14,32,.3); margin-bottom:20px; }
   .bomdash-name { font-size:1.4rem; font-weight:800; color:#fff; text-align:center; margin-bottom:4px; }
@@ -4243,12 +4434,11 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 </style>
 
 <style>
-  #bom-dashboard-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
-  .bomdash-header { background:#fff; border-bottom:1px solid #dfe6e9; box-shadow:0 2px 10px rgba(0,0,0,.05); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
-  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#2d3436; }
-  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid #dfe6e9; background:#fff; color:#2d3436; font-weight:500; cursor:pointer; }
-  .bomdash-content { max-width:820px; margin:24px auto; padding:0 20px; }
-
+  #bom-dashboard-page { display:none; min-height:100vh; background: linear-gradient(160deg, #0f1c3f 0%, #24134d 55%, #3b0a45 100%); background-attachment: fixed; padding:0 0 40px; }
+  .bomdash-header { background: rgba(15,28,63,0.7); backdrop-filter: blur(10px); border-bottom:1px solid rgba(240,180,41,0.2); box-shadow:0 4px 20px rgba(0,0,0,.3); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .bomdash-title { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.2rem; color:#ffd76e; }
+  .bomdash-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid rgba(240,180,41,0.25); background:rgba(255,255,255,0.06); color:#f5f7ff; font-weight:500; cursor:pointer; transition: all 0.25s ease; }
+.bomdash-back:hover { background: rgba(240,180,41,0.15); border-color: #f0b429; transform: translateX(-3px); }
   .pf-wrap { position:relative; overflow:hidden; border-radius:22px; padding:30px 26px 34px; background:linear-gradient(160deg,#08142b,#0d2145,#08142b); color:#eef3fb; box-shadow:0 24px 60px rgba(6,14,32,.3); margin-bottom:20px; }
   .pf-hero { display:flex; flex-direction:column; align-items:center; text-align:center; padding-bottom:20px; margin-bottom:22px; border-bottom:1px solid rgba(255,255,255,.08); }
   .pf-avatar { width:86px; height:86px; flex-shrink:0; border-radius:50%; border:2px solid #d8b34a; overflow:hidden; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 6px rgba(216,179,74,.08); margin-bottom:12px; }
@@ -4432,76 +4622,77 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 </div>
 
 <style>
-  #bom-contact-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
-  .bomcontact-header { background:#fff; border-bottom:1px solid #dfe6e9; box-shadow:0 2px 10px rgba(0,0,0,.05); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; }
-  .bomcontact-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid #dfe6e9; background:#fff; color:#2d3436; font-weight:500; cursor:pointer; }
+  #bom-contact-page { display:none; min-height:100vh; background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%); padding:0 0 40px; }
+  .bomcontact-header { background: #141b3d; border-bottom:2px solid #f0b429; box-shadow:0 4px 20px rgba(0,0,0,.35); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; }
+.bomcontact-header > div:first-child { color: #ffd76e; text-shadow: 0 0 10px rgba(240,180,41,0.4); }
+.bomcontact-back { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:10px; border:1px solid rgba(240,180,41,0.25); background: rgba(255,255,255,0.06); color:#f5f7ff; font-weight:500; cursor:pointer; }
   .bomcontact-content { max-width:700px; margin:24px auto; padding:0 20px; }
-  .bomcontact-form-box { background:#fff; border-radius:16px; padding:20px; box-shadow:0 4px 16px rgba(0,0,0,.05); margin-bottom:24px; }
+  .bomcontact-form-box { background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.92)); border: 1px solid rgba(240,180,41,0.2); border-radius:16px; padding:20px; box-shadow:0 8px 22px rgba(0,0,0,.32); margin-bottom:24px; }
   .bomcontact-form-box h2 { font-size:1rem; color:#6c63ff; margin-bottom:14px; }
   .bomcontact-field { margin-bottom:12px; }
-  .bomcontact-field label { display:block; font-size:0.82rem; font-weight:600; margin-bottom:5px; color:#2d3436; }
-  .bomcontact-field input, .bomcontact-field select, .bomcontact-field textarea {
-    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e8e6ed; font-size:0.9rem; outline:none; background:#faf8f5;
+  .bomcontact-field label { display:block; font-size:0.82rem; font-weight:600; margin-bottom:5px; color:#ffd76e; }
+.bomcontact-field input, .bomcontact-field select, .bomcontact-field textarea {
+    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid rgba(240,180,41,0.25); font-size:0.9rem; outline:none; background: rgba(11,19,48,0.5); color:#f5f7ff;
   }
   .bomcontact-field input:focus, .bomcontact-field select:focus, .bomcontact-field textarea:focus { border-color:#6c63ff; }
-  .bomcontact-field input[readonly] { background:#f0edf5; color:#636e72; }
+  .bomcontact-field input[readonly] { background: rgba(255,255,255,0.04); color:#9fa8d9; }
   .bomcontact-submit-btn { width:100%; padding:13px; border:none; border-radius:10px; background:linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; font-weight:700; cursor:pointer; }
-  .bomcontact-list-title { font-size:0.95rem; font-weight:700; margin-bottom:12px; color:#2d3436; display:flex; justify-content:space-between; align-items:center; }
+  .bomcontact-list-title { font-size:0.95rem; font-weight:700; margin-bottom:12px; color:#f5f7ff; display:flex; justify-content:space-between; align-items:center; }
   .bomcontact-refresh { background:none; border:none; color:#6c63ff; cursor:pointer; font-size:0.85rem; }
 
-  .bomcomment-card { border:1px solid #dfe6e9; border-radius:12px; background:#fff; margin-bottom:10px; overflow:hidden; position:relative; }
-  .bomcomment-summary { display:flex; align-items:center; gap:8px; padding:12px 14px 12px 14px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; }
-  .bomcomment-summary:hover { background:#faf8fc; }
+  .bomcomment-card { border:1px solid rgba(240,180,41,0.2); border-radius:12px; background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9)); margin-bottom:10px; overflow:hidden; position:relative; }
+  .bomcomment-summary { display:flex; align-items:center; gap:8px; padding:12px 14px 12px 14px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; color:#e6e9fa; }
+  .bomcomment-summary:hover { background: rgba(240,180,41,0.08); }
   .bomcomment-summary .msg-preview { flex:1; font-weight:500; min-width:100px; padding-right:70px; }
   .bomcomment-category-badge { position:absolute; top:10px; right:10px; background:#f0edff; color:#6c63ff; padding:3px 10px; border-radius:12px; font-weight:700; font-size:0.62rem; }
-  .bomcomment-date-row { font-size:0.65rem; color:#636e72; margin-top:4px; display:flex; align-items:center; gap:6px; }
+  .bomcomment-date-row { font-size:0.65rem; color:#9fa8d9; margin-top:4px; display:flex; align-items:center; gap:6px; }
   .bomcomment-detail-btn { display:inline-flex; align-items:center; gap:4px; background:#f0edff; color:#6c63ff; border:1px solid rgba(108,99,255,.25); padding:5px 12px; border-radius:6px; font-size:0.68rem; font-weight:700; cursor:pointer; margin-top:8px; }
   .bomcomment-detail-btn:hover { background:#6c63ff; color:#fff; }
-  .bomcomment-detail { display:none; padding:12px 14px; border-top:1px solid #dfe6e9; background:#fbfaff; font-size:0.75rem; }
+  .bomcomment-detail { display:none; padding:12px 14px; border-top:1px solid rgba(240,180,41,0.15); background: rgba(11,19,48,0.4); font-size:0.75rem; }
   .bomcomment-detail.show { display:block; }
   .bomcomment-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
-  .bomcomment-detail-grid .dl { color:#636e72; font-size:0.65rem; display:block; }
-  .bomcomment-detail-grid .dv { font-weight:700; font-size:0.78rem; color:#2d3436; }
+  .bomcomment-detail-grid .dl { color:#9fa8d9; font-size:0.65rem; display:block; }
+  .bomcomment-detail-grid .dv { font-weight:700; font-size:0.78rem; color:#f5f7ff; }
   .bomcomment-detail-grid .full-row { grid-column:1/-1; }
-  .bomcomment-reply-box { background:#f0edff; border-radius:8px; padding:10px 12px; margin-top:10px; border-left:3px solid #6c63ff; }
-  .bomcomment-reply-box strong { color:#6c63ff; font-size:0.72rem; }
-  .bomcomment-reply-box .reply-text { font-size:0.85rem; font-weight:600; margin-top:4px; color:#2d3436; }
+  .bomcomment-reply-box { background: rgba(108,99,255,0.15); border-radius:8px; padding:10px 12px; margin-top:10px; border-left:3px solid #6c63ff; }
+  .bomcomment-reply-box strong { color:#a29bfe; font-size:0.72rem; }
+  .bomcomment-reply-box .reply-text { font-size:0.85rem; font-weight:600; margin-top:4px; color:#f5f7ff; }
 
   .bomstatus-progress { display:flex; gap:0; margin:12px 0 6px; overflow-x:auto; padding:4px 0; }
   .bomstatus-step { display:flex; flex-direction:column; align-items:center; flex:1; min-width:60px; position:relative; text-align:center; }
-  .bomstatus-step .circle { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:800; z-index:1; background:#e5e0e4; color:#999; box-shadow:0 2px 4px rgba(0,0,0,.06); }
+  .bomstatus-step .circle { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:800; z-index:1; background: rgba(255,255,255,0.1); color:#9fa8d9; box-shadow:0 2px 4px rgba(0,0,0,.2); }
   .bomstatus-step.completed .circle { background:#25a85a; color:#fff; }
   .bomstatus-step.current .circle { background:#6c63ff; color:#fff; box-shadow:0 0 0 4px rgba(108,99,255,.18); animation:bomPulse 1.5s infinite; }
   @keyframes bomPulse { 0%,100%{box-shadow:0 0 0 4px rgba(108,99,255,.18);} 50%{box-shadow:0 0 0 8px rgba(108,99,255,.06);} }
-  .bomstatus-step .line { position:absolute; top:12px; left:50%; right:-50%; height:3px; background:#e5e0e4; z-index:0; }
+  .bomstatus-step .line { position:absolute; top:12px; left:50%; right:-50%; height:3px; background: rgba(255,255,255,0.15); z-index:0; }
   .bomstatus-step.completed .line { background:#25a85a; }
   .bomstatus-step:last-child .line { display:none; }
-  .bomstatus-step .label { font-size:0.58rem; font-weight:700; margin-top:5px; color:#636e72; line-height:1.2; max-width:64px; }
+  .bomstatus-step .label { font-size:0.58rem; font-weight:700; margin-top:5px; color:#9fa8d9; line-height:1.2; max-width:64px; }
   .bomstatus-step.completed .label { color:#25a85a; }
   .bomstatus-step.current .label { color:#6c63ff; }
 </style>
 
 <style>
-  #bom-classcontrol-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
+  #bom-classcontrol-page { display:none; min-height:100vh; background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%); padding:0 0 40px; }
   .bomcc-stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
-  .bomcc-stat-card { background:#fff; border-radius:10px; padding:10px 6px; text-align:center; border:1px solid #dfe6e9; }
-  .bomcc-stat-card .num { font-weight:800; font-size:1.05rem; color:#6c63ff; }
-  .bomcc-stat-card .lbl { font-size:0.6rem; font-weight:600; color:#636e72; }
+  .bomcc-stat-card { background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9)); border-radius:10px; padding:10px 6px; text-align:center; border:1px solid rgba(240,180,41,0.2); }
+  .bomcc-stat-card .num { font-weight:800; font-size:1.05rem; color:#ffd76e; }
+  .bomcc-stat-card .lbl { font-size:0.6rem; font-weight:600; color:#9fa8d9; }
   .bomcc-search-row { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
-  .bomcc-search-row input { flex:1; min-width:140px; padding:9px 12px; border-radius:8px; border:1.5px solid #dfe6e9; font-size:0.8rem; }
-  .bomcc-add-btn { background:#6c63ff; color:#fff; border:none; padding:9px 16px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .bomcc-refresh-btn { background:#f0edff; color:#6c63ff; border:1px solid #dfe6e9; padding:9px 12px; border-radius:8px; font-size:0.8rem; cursor:pointer; white-space:nowrap; }
-  .bomcc-item-row { border:1px solid #dfe6e9; border-radius:10px; background:#fff; margin-bottom:8px; overflow:hidden; position:relative; }
-  .bomcc-item-header { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; }
-  .bomcc-item-header:hover { background:#faf8fc; }
+  .bomcc-search-row input { flex:1; min-width:140px; padding:9px 12px; border-radius:8px; border:1.5px solid rgba(240,180,41,0.25); font-size:0.8rem; background: rgba(11,19,48,0.5); color:#f5f7ff; }
+  .bomcc-add-btn { background: linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; border:none; padding:9px 16px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .bomcc-refresh-btn { background: rgba(108,99,255,0.15); color:#a29bfe; border:1px solid rgba(108,99,255,0.3); padding:9px 12px; border-radius:8px; font-size:0.8rem; cursor:pointer; white-space:nowrap; }
+  .bomcc-item-row { border:1px solid rgba(240,180,41,0.2); border-radius:10px; background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9)); margin-bottom:8px; overflow:hidden; position:relative; }
+  .bomcc-item-header { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; color:#e6e9fa; }
+  .bomcc-item-header:hover { background: rgba(240,180,41,0.08); }
   .bomcc-item-name { font-weight:600; flex:1; min-width:100px; }
-  .bomcc-item-subject { font-size:0.65rem; color:#6c63ff; font-weight:700; background:#f0edff; padding:2px 8px; border-radius:10px; }
-  .bomcc-item-detail-btn { background:#f0edff; color:#6c63ff; border:1px solid rgba(108,99,255,.2); padding:5px 10px; border-radius:6px; font-size:0.68rem; font-weight:600; cursor:pointer; }
-  .bomcc-item-detail { display:none; padding:10px 12px; border-top:1px solid #dfe6e9; background:#fbfaff; font-size:0.75rem; }
+  .bomcc-item-subject { font-size:0.65rem; color:#a29bfe; font-weight:700; background: rgba(108,99,255,0.15); padding:2px 8px; border-radius:10px; }
+  .bomcc-item-detail-btn { background: rgba(108,99,255,0.15); color:#a29bfe; border:1px solid rgba(108,99,255,.3); padding:5px 10px; border-radius:6px; font-size:0.68rem; font-weight:600; cursor:pointer; }
+  .bomcc-item-detail { display:none; padding:10px 12px; border-top:1px solid rgba(240,180,41,0.15); background: rgba(11,19,48,0.4); font-size:0.75rem; }
   .bomcc-item-detail.show { display:block; }
   .bomcc-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px; font-size:0.68rem; }
-  .bomcc-detail-grid .dl { color:#636e72; }
-  .bomcc-detail-grid .dv { font-weight:600; word-break:break-all; }
+  .bomcc-detail-grid .dl { color:#9fa8d9; }
+  .bomcc-detail-grid .dv { font-weight:600; word-break:break-all; color:#f5f7ff; }
   .bomcc-action-row { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
   .bomcc-action-row button { border:none; border-radius:6px; padding:6px 12px; font-size:0.68rem; font-weight:700; cursor:pointer; color:#fff; }
   .bomcc-edit-btn { background:#6c63ff; }
@@ -4511,20 +4702,20 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 </style>
 
 <style>
-  #bom-studentcontrol-page, #bom-commentcontrol-page { display:none; min-height:100vh; background:#f8f9fa; padding:0 0 40px; }
+  #bom-studentcontrol-page, #bom-commentcontrol-page { display:none; min-height:100vh; background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%); padding:0 0 40px; }
   .bomsc-tabs { display:flex; gap:6px; background:#f2f0eb; padding:6px; border-radius:50px; margin-bottom:16px; }
   .bomsc-tab { flex:1; text-align:center; padding:10px 6px; border:none; background:transparent; border-radius:40px; font-weight:700; font-size:0.8rem; color:#636e72; cursor:pointer; }
   .bomsc-tab.active { color:#fff; background:linear-gradient(135deg,#6c63ff,#a29bfe); }
-  .bomsc-student-row { border:1px solid #dfe6e9; border-radius:10px; background:#fff; margin-bottom:8px; overflow:hidden; }
-  .bomsc-student-header { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; }
-  .bomsc-student-header:hover { background:#faf8fc; }
+  .bomsc-student-row { border:1px solid rgba(240,180,41,0.2); border-radius:10px; background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(17,23,52,0.9)); margin-bottom:8px; overflow:hidden; }
+  .bomsc-student-header { display:flex; align-items:center; gap:8px; padding:10px 12px; cursor:pointer; flex-wrap:wrap; font-size:0.78rem; color:#e6e9fa; }
+  .bomsc-student-header:hover { background: rgba(240,180,41,0.08); }
   .bomsc-student-name { font-weight:600; flex:1; min-width:100px; }
   .bomsc-badge { font-size:0.6rem; font-weight:800; padding:3px 9px; border-radius:10px; }
   .bomsc-badge.processing { background:#fff3cd; color:#856404; }
   .bomsc-badge.approved { background:#d4edda; color:#155724; }
   .bomsc-badge.blocked { background:#f8d7da; color:#721c24; }
-  .bomsc-detail-btn { background:#f0edff; color:#6c63ff; border:1px solid rgba(108,99,255,.2); padding:5px 10px; border-radius:6px; font-size:0.68rem; font-weight:600; cursor:pointer; }
-  .bomsc-detail { display:none; padding:10px 12px; border-top:1px solid #dfe6e9; background:#fbfaff; font-size:0.75rem; }
+  .bomsc-detail-btn { background: rgba(108,99,255,0.15); color:#a29bfe; border:1px solid rgba(108,99,255,.3); padding:5px 10px; border-radius:6px; font-size:0.68rem; font-weight:600; cursor:pointer; }
+  .bomsc-detail { display:none; padding:10px 12px; border-top:1px solid rgba(240,180,41,0.15); background: rgba(11,19,48,0.4); font-size:0.75rem; }
   .bomsc-detail.show { display:block; }
 </style>
 
@@ -4620,7 +4811,10 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   <div id="subject-page" style="display: none;">
     <header>
       <nav class="nav container">
-        <button class="brand back-button" id="back-to-main"><i class="fas fa-arrow-left"></i> <span class="bangla-font">মেন পেজ</span></button>
+        <button class="brand back-button" id="back-to-main"><i class="fas fa-arrow-left"></i> <span class="bangla-font">মেইন পেজ</span></button>
+        <button class="brand back-button" id="back-to-classes-page-sub" style="display:none;"><i class="fas fa-arrow-left"></i> <span class="bangla-font">ব্যাক করুন</span></button>
+        <button class="brand back-button" id="back-to-missions-page-sub" style="display:none;"><i class="fas fa-arrow-left"></i> <span class="bangla-font">ব্যাক করুন</span></button>
+        <button class="brand back-button" id="back-to-documents-page-sub" style="display:none;"><i class="fas fa-arrow-left"></i> <span class="bangla-font">ব্যাক করুন</span></button>
         <div class="filter-bar">
           <input id="search" type="search" placeholder="🔍 সার্চ...">
           <select id="sort">
@@ -4644,7 +4838,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       </div>
     </div>
     <footer class="site-footer">
-      © 2026 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE". All rights reserved.
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
     </footer>
   </div>
   
@@ -4669,7 +4863,9 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
                 <div id="aspect" class="aspect">
                     <div id="player"></div>
                     <div id="loading">
-                        <div class="spinner"></div>
+                        <div class="video-loading-ring" id="vlrRing">
+                          <img class="vlr-logo" src="https://i.postimg.cc/d0PLTTZF/file-0000000094dc820b878ff001f81b43d8.png" alt="BOM">
+                        </div>
                         <p id="loading-text">ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন</p>
                     </div>
                     <div id="blocker" class="blocker" title="ট্যাপ করে কন্ট্রোল দেখুন"></div>
@@ -5057,7 +5253,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     </div>
   </div>
   <footer class="site-footer">
-    © 2026 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE". All rights reserved.
+    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
   </footer>
 </div>
 
@@ -5094,7 +5290,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     </div>
   </div>
   <footer class="site-footer">
-    © 2026 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE". All rights reserved.
+    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
   </footer>
 </div>
 
@@ -5131,7 +5327,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     </div>
   </div>
   <footer class="site-footer">
-    © 2026 DAKHIL-27 (TARGET GPA-5) "SUCCESS JOURNEY COURSE". All rights reserved.
+    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
   </footer>
 </div>
 
@@ -5524,7 +5720,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       try {
         const result = await bomApiPost({
           action: 'register', name, institution, whatsapp,
-          gender: window.selectedGenderBom, batch: 'DAKHIL-27', course: 'SUCCESS JOURNEY COURSE'
+          gender: window.selectedGenderBom, batch: 'DAKHIL-27', course: 'FINAL STAGE PREPARATION COURSE'
         });
         btn.disabled = false;
         btn.innerHTML = 'রেজিস্ট্রেশন করুন';
@@ -5716,19 +5912,38 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       window.scrollTo(0, 0);
 
       const contentEl = document.getElementById('bomdash-content');
-      contentEl.innerHTML = '<p class="bangla-font" style="text-align:center;padding:40px;color:#636e72;">লোড হচ্ছে...</p>';
+      contentEl.innerHTML = '<p class="bangla-font" style="text-align:center;padding:40px;color:#9fa8d9;"><div class="loading" style="margin:0 auto 12px;"></div>লোড হচ্ছে...</p>';
 
       try {
         const result = await bomApiGet({ action: 'loadDashboard', studentId: studentId });
         if (!result.ok) {
-          contentEl.innerHTML = '<p style="text-align:center;color:red;">তথ্য লোড করা যায়নি।</p>';
+          contentEl.innerHTML = bomDashboardErrorHtml('তথ্য লোড করা যায়নি।');
+          bomBindDashRetry();
           return;
         }
         window._bomDashData = result;
         renderBomDashboard(result);
       } catch (e) {
-        contentEl.innerHTML = '<p style="text-align:center;color:red;">নেটওয়ার্ক সমস্যা হয়েছে।</p>';
+        contentEl.innerHTML = bomDashboardErrorHtml('নেটওয়ার্ক সমস্যা হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করুন।');
+        bomBindDashRetry();
       }
+    }
+
+    function bomDashboardErrorHtml(msg) {
+      return `
+        <div style="text-align:center;padding:50px 20px;">
+          <i class="fas fa-exclamation-triangle" style="font-size:40px;color:#ff6584;margin-bottom:16px;display:block;"></i>
+          <p class="bangla-font" style="color:#ffb3c0;margin-bottom:20px;font-size:1rem;">${msg}</p>
+          <button id="bomdash-retry-btn" class="bangla-font" style="padding:12px 30px;border:none;border-radius:12px;background:linear-gradient(135deg,#6c63ff,#a29bfe);color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;box-shadow:0 4px 14px rgba(108,99,255,0.35);">
+            <i class="fas fa-redo"></i> রিট্রাই করুন
+          </button>
+        </div>
+      `;
+    }
+
+    function bomBindDashRetry() {
+      const btn = document.getElementById('bomdash-retry-btn');
+      if (btn) btn.addEventListener('click', function() { showDashboardBom(); });
     }
     
     function bomGetAvatarUrl(gender) {
@@ -7188,6 +7403,182 @@ async function bomDownloadIdPng() {
       bomPreloadImage(BOM_AVATAR_URLS.LOGO);
     }
     bomPreloadAllIdCardImages(); // পেজ লোড হওয়ার সাথে সাথেই শুরু হবে
+    // ===== ভিজিটর ও ওয়াচ ট্র্যাকিং (নতুন, একক সিস্টেম) =====
+    async function bomLogVisit() {
+      const role = getUserRole();
+      let category = 'A NEW PERSON';
+      if (role === 'user') category = 'USER';
+      else if (role === 'owner') category = 'ADMIN';
+      else if (role === 'editor') return; // এডিটর ট্র্যাক হবে না
+
+      const studentId = getCurrentStudentId() || '';
+      const name = getCurrentName() || '';
+      const roll = localStorage.getItem('bom_roll') || '';
+      const batch = role === 'user' ? 'DAKHIL-27' : '';
+
+      try {
+        await bomApiPost({ action: 'logVisit', studentId, category, name, batch, roll });
+      } catch (e) { /* নীরবে ব্যর্থ হবে, ব্যবহারকারীর কাজে বাধা দেবে না */ }
+    }
+
+    
+
+    async function bomLogWatch(title, watchCategory) {
+      const role = getUserRole();
+      if (role !== 'user') return; // শুধু স্টুডেন্টের ভিউ কাউন্ট হবে
+
+      const studentId = getCurrentStudentId() || '';
+      const roll = localStorage.getItem('bom_roll') || '';
+      const name = getCurrentName() || '';
+      const batch = 'DAKHIL-27';
+
+      try {
+        await bomApiPost({
+          action: 'logWatch', studentId, roll, name,
+          userCategory: 'USER', batch, watchCategory, title
+        });
+      } catch (e) { /* নীরবে ব্যর্থ হবে */ }
+    }
+
+    // ===== ক্লাস/মিশন/ডকুমেন্ট/লিংক খোলার সময় ভিউ লগ করা =====
+    window.addEventListener('load', function() {
+      const bomOrigOpenVideo = window.openVideoPlayer;
+      const bomOrigOpenDrive = window.openDrivePlayer;
+      const bomOrigTrackLink = window.trackAndOpenLink;
+
+      window.openVideoPlayer = function(url, trackId, type) {
+        let title = 'অজানা';
+        try {
+          const card = event?.target?.closest('.card');
+          if (card) { const t = card.querySelector('.video-title'); if (t) title = t.innerText.trim(); }
+        } catch (e) {}
+        bomLogWatch(title, type);
+        bomOrigOpenVideo(url, trackId, type);
+      };
+
+      window.openDrivePlayer = function(url, trackId, type) {
+        let title = 'অজানা';
+        try {
+          const card = event?.target?.closest('.card');
+          if (card) { const t = card.querySelector('.video-title'); if (t) title = t.innerText.trim(); }
+        } catch (e) {}
+        bomLogWatch(title, type);
+        bomOrigOpenDrive(url, trackId, type);
+      };
+
+      window.trackAndOpenLink = function(url, trackId, type) {
+        let title = 'অজানা';
+        try {
+          const card = event?.target?.closest('.card');
+          if (card) { const t = card.querySelector('.video-title'); if (t) title = t.innerText.trim(); }
+        } catch (e) {}
+        bomLogWatch(title, type);
+        bomOrigTrackLink(url, trackId, type);
+      };
+    });
+
+    // ===== পরিসংখ্যান বক্স লোড করা (নতুন, একক Apps Script থেকে) =====
+    async function bomLoadStatsBoxes() {
+      try {
+        const result = await bomApiGet({ action: 'getStatsBom' });
+        if (!result.ok) return false;
+        const elVisits = document.getElementById('visits');
+        const elClassViews = document.getElementById('classViews');
+        const elComments = document.getElementById('comments');
+        const elReplies = document.getElementById('replies');
+        if (elVisits) elVisits.innerText = result.visits;
+        if (elClassViews) elClassViews.innerText = result.watches;
+        if (elComments) elComments.innerText = result.comments;
+        if (elReplies) elReplies.innerText = result.replies;
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // পেজ পুরোপুরি প্রস্তুত না থাকলেও, কিছুক্ষণ পরপর চেষ্টা করে ডেটা লোড নিশ্চিত করা
+    async function bomLoadStatsBoxesWithRetry(attempt) {
+      attempt = attempt || 1;
+      const success = await bomLoadStatsBoxes();
+      if (!success && attempt < 5) {
+        setTimeout(() => bomLoadStatsBoxesWithRetry(attempt + 1), 1500 * attempt);
+      }
+    }
+    // পেজের HTML স্ট্রাকচার তৈরি হওয়ার সাথে সাথেই (পুরো লোড হওয়ার অপেক্ষা না করেই) স্ট্যাটস লোড শুরু
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bomLoadStatsBoxesWithRetry);
+    } else {
+      bomLoadStatsBoxesWithRetry();
+    }
+
+    // পেজ লোড হওয়ার সময় প্রতিবারই ভিজিট লগ করা ও স্ট্যাটস দেখানো (নির্ভরযোগ্যভাবে, retry সহ)
+    window.addEventListener('load', function() {
+      setTimeout(bomLogVisit, 2000);
+      bomLoadStatsBoxesWithRetry();
+    });
+    // ===== সাবজেক্ট পেজের ব্যাক বাটন সিস্টেম (ক্লাস/মিশন/ডকুমেন্ট অনুযায়ী) + পুরনো শর্টকাট বাটন সরানো =====
+    window.addEventListener('load', function() {
+      // পুরনো টপ শর্টকাট বাটন সিস্টেম (ক্লাস/মিশন/ডকুমেন্ট) সম্পূর্ণ নিষ্ক্রিয় করা
+      window.injectSubjectNavButtons = function() {
+        const existing = document.querySelector('.subject-nav-buttons');
+        if (existing) existing.remove();
+      };
+      const existingNavBtns = document.querySelector('.subject-nav-buttons');
+      if (existingNavBtns) existingNavBtns.remove();
+
+      const backMain = document.getElementById('back-to-main');
+      const backClasses = document.getElementById('back-to-classes-page-sub');
+      const backMissions = document.getElementById('back-to-missions-page-sub');
+      const backDocuments = document.getElementById('back-to-documents-page-sub');
+
+      function bomUpdateSubjectBackButton() {
+        [backMain, backClasses, backMissions, backDocuments].forEach(b => { if (b) b.style.display = 'none'; });
+        const subj = (typeof currentSubject !== 'undefined' && currentSubject) ? currentSubject : '';
+        if (subj.includes('(ক্লাস)')) {
+          if (backClasses) backClasses.style.display = 'inline-flex';
+        } else if (subj.includes('(মিশন)')) {
+          if (backMissions) backMissions.style.display = 'inline-flex';
+        } else if (subj.includes('(ডকুমেন্ট)')) {
+          if (backDocuments) backDocuments.style.display = 'inline-flex';
+        } else {
+          if (backMain) backMain.style.display = 'inline-flex';
+        }
+      }
+
+      const subjectPageEl = document.getElementById('subject-page');
+      if (subjectPageEl) {
+        const bomObserver = new MutationObserver(function() {
+          if (subjectPageEl.style.display === 'block') {
+            bomUpdateSubjectBackButton();
+            const nav = document.querySelector('.subject-nav-buttons');
+            if (nav) nav.remove();
+          }
+        });
+        bomObserver.observe(subjectPageEl, { attributes: true, attributeFilter: ['style'] });
+      }
+
+      if (backClasses) {
+        backClasses.addEventListener('click', function() {
+          document.getElementById('subject-page').style.display = 'none';
+          document.getElementById('classes-page').style.display = 'block';
+          window.scrollTo(0, 0);
+        });
+      }
+      if (backMissions) {
+        backMissions.addEventListener('click', function() {
+          document.getElementById('subject-page').style.display = 'none';
+          document.getElementById('missions-page').style.display = 'block';
+          window.scrollTo(0, 0);
+        });
+      }
+      if (backDocuments) {
+        backDocuments.addEventListener('click', function() {
+          document.getElementById('subject-page').style.display = 'none';
+          document.getElementById('documents-page').style.display = 'block';
+          window.scrollTo(0, 0);
+        });
+      }
+    });
     // ============ নতুন সিস্টেম শেষ ============
     
     function $(sel, root = document) { return root.querySelector(sel); }
@@ -8321,6 +8712,8 @@ const dakhil27Submissions = response.data.filter(item =>
     }
 
     async function loadInitialData() {
+      const loadStartTime = Date.now();
+      const MIN_LOADING_MS = 1500;
       showLoadingOverlay();
       updateLoadingProgress(10);
       if (!checkLoginExpiry()) {
@@ -8328,31 +8721,39 @@ const dakhil27Submissions = response.data.filter(item =>
         return;
       }
 
-      const rows = await fetchData();
-      
-      // ডেটা সফলভাবে লোড হলে ব্যনার লুকান
+      const role = getUserRole();
+      let rowsPromise;
+      if (role === 'owner' || role === 'editor') {
+        rowsPromise = fetchData();
+      } else if (window._bomPrefetchPromise) {
+        updateLoadingProgress(60);
+        rowsPromise = window._bomPrefetchPromise;
+      } else {
+        rowsPromise = fetchData();
+      }
+
+      const rows = await rowsPromise;
+      updateLoadingProgress(95);
+
+      const elapsed = Date.now() - loadStartTime;
+      const remaining = MIN_LOADING_MS - elapsed;
+      if (remaining > 0) {
+        await new Promise(resolve => setTimeout(resolve, remaining));
+      }
+
       if (rows && rows.length > 0) {
         hideDataLoadFailedBanner();
-        updateLoadingProgress(95);
         allClasses = normalizeRows(rows);
         renderTodayClassesSummary(filterTodayClasses(allClasses));
 
         showAddClassButton();
         showDashboardButton();
-        
-        // Check for replies
         checkForReplies();
-        
-        // Set button visibility
         setButtonVisibility();
-        
-        // Hide loading overlay after a short delay to ensure everything is loaded
-        setTimeout(() => {
-          hideLoadingOverlay();
-          updateLoadingProgress(0);
-        }, 100);
+
+        hideLoadingOverlay();
+        updateLoadingProgress(0);
       } else {
-        // ডেটা লোড ব্যর্থ হলে ব্যনার দেখান এবং লোডিং লুকান
         hideLoadingOverlay();
         showDataLoadFailedBanner();
       }
@@ -8580,6 +8981,33 @@ const noteSaveBtn = document.getElementById('noteSaveBtn');
 const noteCancelBtn = document.getElementById('noteCancelBtn');
 const noteDeleteBtn = document.getElementById('noteDeleteBtn');
 
+// ===== Video Loading Ring (border progress) =====
+let vlrInterval = null;
+let vlrProgress = 0;
+function vlrSetProgress(pct) {
+    const ring = document.getElementById('vlrRing');
+    if (!ring) return;
+    const deg = (pct/100) * 360;
+    ring.style.background = `conic-gradient(#f0b429 ${deg}deg, rgba(255,255,255,0.12) ${deg}deg)`;
+}
+function vlrStart() {
+    vlrProgress = 0;
+    vlrSetProgress(0);
+    if (vlrInterval) clearInterval(vlrInterval);
+    vlrInterval = setInterval(() => {
+        if (vlrProgress < 90) {
+            vlrProgress += (90 - vlrProgress) * 0.08 + 0.3;
+            if (vlrProgress > 90) vlrProgress = 90;
+            vlrSetProgress(vlrProgress);
+        }
+    }, 200);
+}
+function vlrComplete() {
+    if (vlrInterval) clearInterval(vlrInterval);
+    vlrProgress = 100;
+    vlrSetProgress(100);
+}
+
 // ===== State =====
 let player = null;
 let videoId = null;
@@ -8749,6 +9177,7 @@ function refreshVideo() {
     videoLoaded = false; isPlayerReady = false; isReloading = true;
     loadingDiv.classList.remove('hidden', 'error-state');
     loadingText.innerHTML = 'ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন';
+    vlrStart();
     clearTimeout(videoLoadingTimeout);
     videoLoadingTimeout = setTimeout(() => {
         if (!videoLoaded) { loadingText.innerHTML = 'সম্ভবত নেটওয়ার্ক জনিত সমস্যা হচ্ছে!<br>দয়া করে আরো কিছুক্ষণ অপেক্ষা করুন অথবা রিফ্রেশ বাটনে চাপ দিয়ে রিলোড করুন।'; }
@@ -8836,7 +9265,7 @@ function createPlayer() {
 function onPlayerReady(event) {
     videoLoaded = true; isPlayerReady = true; isReloading = false;
     clearTimeout(videoLoadingTimeout); videoLoadingTimeout = null;
-    loadingDiv.classList.remove('error-state'); loadingDiv.classList.add('hidden');
+   vlrComplete(); loadingDiv.classList.remove('error-state'); loadingDiv.classList.add('hidden');
     applySpeed(); updateMainButton();
 
     // ---- Panel Controls ----
@@ -8988,6 +9417,7 @@ function openVideoPlayer(url, trackId, type) {
     isPlayerReady = false;
     loadingDiv.classList.remove('hidden', 'error-state');
     loadingText.innerHTML = 'ভিডিও লোড হচ্ছে...<br>ইন্টারনেট স্পিড ঠিক রাখুন';
+    vlrStart();
     clearTimeout(videoLoadingTimeout);
     videoLoadingTimeout = setTimeout(() => {
         if (!videoLoaded) {
@@ -11318,511 +11748,7 @@ setTimeout(rebindFolderAndSubjectListeners, 300);
   console.log('✅ কাউন্টিং ব্যাজ সিস্টেম চালু হয়েছে (ফিক্সড ভার্সন)');
 })();
 </script>
-  <script>
-// Visitor Tracking System - Compatible Version
-const TRACKER_API_URL = "https://script.google.com/macros/s/AKfycby2wLxJohBiTRkGx-XUfxB-VLgKhsJ9k__IIcSvhz_pT-DEAt0WQRS2Q0ORHETq0zrV/exec";
-
-// Track visitor function
-function trackVisitor() {
-  try {
-    console.log("Tracking visitor...");
-    
-    // Get user info from localStorage
-    let userType = "A NEW PERSON";
-    let userName = "A NEW PERSON";
-    
-    // Check for existing user data
-    const userRole = localStorage.getItem('alim26_user_role');
-    const isLoggedIn = localStorage.getItem('alim26_is_logged_in') === 'true';
-    
-    console.log("User role:", userRole, "Logged in:", isLoggedIn);
-    
-    // Skip for EDITOR
-    if (userRole === 'editor') {
-      console.log("Editor detected - skipping tracking");
-      return;
-    }
-    
-    // Determine type and name
-    if (isLoggedIn && userRole) {
-      if (userRole === 'user') {
-        userType = "USER";
-        // Priority 1: Comment system name
-        if (localStorage.getItem('userName')) {
-          userName = localStorage.getItem('userName');
-          console.log("Using comment name:", userName);
-        } 
-        // Priority 2: Dashboard name
-        else if (localStorage.getItem('alim26_dashboard_student_name')) {
-          userName = localStorage.getItem('alim26_dashboard_student_name');
-          console.log("Using dashboard name:", userName);
-        } 
-        // Default
-        else {
-          userName = "A PERSON";
-        }
-      } else if (userRole === 'owner') {
-        userType = "ADMIN";
-        // Priority: Owner reply name
-        if (localStorage.getItem('alim26_owner_name')) {
-          userName = localStorage.getItem('alim26_owner_name');
-          console.log("Using owner name:", userName);
-        } else {
-          userName = "A ADMIN";
-        }
-      }
-    }
-    
-    // Batch is fixed for DAKHIL-27
-    const batch = "DAKHIL-27";
-    
-    console.log("Final tracking data:", {type: userType, name: userName, batch: batch});
-    
-    // Prepare data for sending
-    const formData = new FormData();
-    formData.append('type', userType);
-    formData.append('name', userName);
-    formData.append('batch', batch);
-    
-    // Method 1: Try using fetch with form data
-    sendWithFormData({type: userType, name: userName, batch: batch});
-    
-    // Method 2: Also try with URL params as backup
-    sendWithURLParams({type: userType, name: userName, batch: batch});
-    
-    // Mark that we've tracked this session
-    sessionStorage.setItem('visitorTracked', 'true');
-    
-  } catch (error) {
-    console.error("Tracking error:", error);
-  }
-}
-
-// Send using FormData (modern browsers)
-function sendWithFormData(data) {
-  try {
-    const formData = new FormData();
-    formData.append('type', data.type);
-    formData.append('name', data.name);
-    formData.append('batch', data.batch);
-    
-    // Use navigator.sendBeacon if available
-    if (navigator.sendBeacon) {
-      const blob = new Blob([`type=${encodeURIComponent(data.type)}&name=${encodeURIComponent(data.name)}&batch=${encodeURIComponent(data.batch)}`], 
-                            {type: 'application/x-www-form-urlencoded'});
-      navigator.sendBeacon(TRACKER_API_URL, blob);
-      console.log("Data sent via sendBeacon");
-    } else {
-      // Fallback to fetch
-      fetch(TRACKER_API_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: `type=${encodeURIComponent(data.type)}&name=${encodeURIComponent(data.name)}&batch=${encodeURIComponent(data.batch)}`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }).catch(e => console.log("FormData fetch failed:", e));
-    }
-  } catch (error) {
-    console.error("FormData send error:", error);
-  }
-}
-
-// Send using URL parameters (most compatible)
-function sendWithURLParams(data) {
-  try {
-    // Create image pixel method (works everywhere)
-    const img = new Image(1,1);
-    img.src = TRACKER_API_URL + 
-              '?type=' + encodeURIComponent(data.type) + 
-              '&name=' + encodeURIComponent(data.name) + 
-              '&batch=' + encodeURIComponent(data.batch) + 
-              '&r=' + Math.random();
-    
-    console.log("Data sent via image pixel");
-  } catch (error) {
-    console.error("URL params send error:", error);
-  }
-}
-
-// Wait for page to fully load
-window.addEventListener('load', function() {
-  // Check if we've already tracked in this session
-  if (!sessionStorage.getItem('visitorTracked')) {
-    // Wait 3 seconds then track
-    setTimeout(trackVisitor, 3000);
-    
-    // Also track when user logs in
-    const originalCheckPassword = window.checkPassword;
-    if (typeof originalCheckPassword === 'function') {
-      window.checkPassword = function() {
-        // Call original function
-        const result = originalCheckPassword.apply(this, arguments);
-        
-        // Track after successful login (1 second delay)
-        setTimeout(trackVisitor, 1000);
-        
-        return result;
-      };
-    }
-  }
   
-  // Track when name is set in comment system
-  const nameForm = document.getElementById('nameForm');
-  if (nameForm) {
-    nameForm.addEventListener('submit', function(e) {
-      setTimeout(trackVisitor, 500);
-    });
-  }
-  
-  // Track when owner name is set
-  const ownerNameForm = document.getElementById('ownerNameForm');
-  if (ownerNameForm) {
-    ownerNameForm.addEventListener('submit', function(e) {
-      setTimeout(trackVisitor, 500);
-    });
-  }
-  
-  // Track when dashboard name is set
-  const dashboardNameForm = document.querySelector('.name-input-form');
-  if (dashboardNameForm) {
-    dashboardNameForm.addEventListener('submit', function(e) {
-      setTimeout(trackVisitor, 500);
-    });
-  }
-});
-
-// Track on page visibility change (for SPA navigation)
-document.addEventListener('visibilitychange', function() {
-  if (document.visibilityState === 'visible') {
-    // Check last track time to avoid too many requests
-    const lastTrackTime = localStorage.getItem('lastVisitorTrackTime');
-    const now = Date.now();
-    
-    // Only track if 30 minutes have passed since last track
-    if (!lastTrackTime || (now - parseInt(lastTrackTime)) > 30 * 60 * 1000) {
-      setTimeout(trackVisitor, 2000);
-      localStorage.setItem('lastVisitorTrackTime', now.toString());
-    }
-  }
-});
-
-// Make trackVisitor available globally for manual testing
-window.trackVisitor = trackVisitor;
-console.log("Visitor tracking system loaded");
-  </script>
-      <script>
-// ==================== RESOURCE CLICK TRACKING ====================
-// Replace with your actual Google Apps Script URL
-const TRACK_CLICK_API_URL = "https://script.google.com/macros/s/AKfycbyUn4RQR-I81XI85pojPPmiXSuJiEWEsmz3e-oYJ5VWmOoT4GHFX7eM0kMOSuWcvlx8/exec";
-
-// Helper: get visitor name (same logic as visitor tracking)
-function getVisitorNameForTracking() {
-  const userRole = localStorage.getItem('alim26_user_role');
-  const isLoggedIn = localStorage.getItem('alim26_is_logged_in') === 'true';
-
-  // Skip editors
-  if (userRole === 'editor') return null;
-
-  let name = "A NEW PERSON";
-
-  if (isLoggedIn && userRole) {
-    if (userRole === 'user') {
-      // Priority 1: comment system name
-      if (localStorage.getItem('userName')) {
-        name = localStorage.getItem('userName');
-      }
-      // Priority 2: dashboard name
-      else if (localStorage.getItem('alim26_dashboard_student_name')) {
-        name = localStorage.getItem('alim26_dashboard_student_name');
-      } else {
-        name = "A PERSON";
-      }
-    } else if (userRole === 'owner') {
-      // Priority: owner reply name
-      if (localStorage.getItem('alim26_owner_name')) {
-        name = localStorage.getItem('alim26_owner_name');
-      } else {
-        name = "A ADMIN";
-      }
-    }
-  }
-  return name;
-}
-
-// Send click data - প্রতি ক্লিকে একবার করে পাঠাবে (একাধিক পদ্ধতি নেই)
-function sendClickTracking(title, url) {
-  try {
-    const userRole = localStorage.getItem('alim26_user_role');
-    // Skip editors
-    if (userRole === 'editor') return;
-
-    const visitorName = getVisitorNameForTracking();
-    if (!visitorName) return;
-
-    const batch = "DAKHIL-27";
-
-    const data = {
-      name: visitorName,
-      batch: batch,
-      title: title
-    };
-
-    console.log("Tracking resource click:", data);
-
-    // শুধু sendBeacon ব্যবহার করো (সবচেয়ে নির্ভরযোগ্য)
-    if (navigator.sendBeacon) {
-      const params = new URLSearchParams(data).toString();
-      const blob = new Blob([params], { type: 'application/x-www-form-urlencoded' });
-      navigator.sendBeacon(TRACK_CLICK_API_URL, blob);
-    } else {
-      // sendBeacon না থাকলে fetch ব্যবহার করো
-      fetch(TRACK_CLICK_API_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data)
-      }).catch(() => {});
-    }
-
-  } catch (error) {
-    console.error("Resource tracking error:", error);
-  }
-}
-
-// ========== Override existing open functions to include tracking ==========
-
-// 1. For external links
-window.trackAndOpenLink = function(url, trackId, type) {
-  // Find the title of the clicked item
-  let title = "অজানা";
-  try {
-    const card = event?.target?.closest('.card');
-    if (card) {
-      const titleEl = card.querySelector('.video-title');
-      if (titleEl) title = titleEl.innerText.trim();
-    }
-  } catch (e) {}
-  
-  // ট্র্যাক করো (একবারই হবে)
-  sendClickTracking(title, url);
-  
-  // Original functionality
-  trackItem(trackId, type);
-  window.open(url, '_blank');
-};
-
-// 2. For YouTube videos
-const originalOpenVideoPlayer = window.openVideoPlayer;
-window.openVideoPlayer = function(url, trackId, type) {
-  // Extract title
-  let title = "অজানা";
-  try {
-    const card = event?.target?.closest('.card');
-    if (card) {
-      const titleEl = card.querySelector('.video-title');
-      if (titleEl) title = titleEl.innerText.trim();
-    }
-  } catch (e) {}
-  
-  // ট্র্যাক করো (একবারই হবে)
-  sendClickTracking(title, url);
-  
-  // Original function call করো
-  if (originalOpenVideoPlayer) {
-    originalOpenVideoPlayer(url, trackId, type);
-  } else {
-    // ফ্যালব্যাক: সরাসরি লজিক (তোমার মূল কোড অনুযায়ী)
-    videoUrl = url;
-    videoTrackId = trackId;
-    videoType = type;
-    videoIsYouTube = url.includes('youtube.com') || url.includes('youtu.be');
-    
-    subjectScrollPosition = window.scrollY;
-    
-    if (videoIsYouTube) {
-      subjectPage.style.display = 'none';
-      videoPlayerPage.style.display = 'block';
-      
-      document.getElementById('folderBtn').addEventListener('click', () => {
-        closeVideoPlayer();
-      });
-      
-      history.pushState({ page: 'video', url: url, trackId: trackId, type: type }, '');
-      currentPageState = 'video';
-      
-      window.scrollTo(0, 0);
-      
-      const videoId = extractVideoId(url);
-      if (videoId) {
-        initializeYouTubePlayer(videoId);
-        videoLoadingTimeout = setTimeout(() => {
-          const loadingText = document.getElementById('loading-text');
-          if (loadingText) {
-            loadingText.innerHTML = "সম্ভবত নেটওয়ার্ক জনিত সমস্যা হচ্ছে!<br>দয়া করে আরো কিছুক্ষণ অপেক্ষা করুন অথবা পুনরায় চেষ্টা করুন..";
-          }
-        }, 20000);
-      } else {
-        showNotification("ভিডিও লোড করতে সমস্যা হয়েছে", true);
-      }
-    } else {
-      trackAndOpenLink(url, trackId, type);
-    }
-  }
-};
-
-// 3. For Drive documents
-const originalOpenDrivePlayer = window.openDrivePlayer;
-window.openDrivePlayer = function(url, trackId, type) {
-  // Extract title
-  let title = "অজানা";
-  try {
-    const card = event?.target?.closest('.card');
-    if (card) {
-      const titleEl = card.querySelector('.video-title');
-      if (titleEl) title = titleEl.innerText.trim();
-    }
-  } catch (e) {}
-  
-  // ট্র্যাক করো (একবারই হবে)
-  sendClickTracking(title, url);
-  
-  // Original function call করো
-  if (originalOpenDrivePlayer) {
-    originalOpenDrivePlayer(url, trackId, type);
-  } else {
-    // ফ্যালব্যাক
-    driveUrl = url;
-    driveTrackId = trackId;
-    driveType = type;
-    
-    driveScrollPosition = window.scrollY;
-    
-    subjectPage.style.display = 'none';
-    drivePlayerPage.style.display = 'block';
-    
-    history.pushState({ page: 'drive', url: url, trackId: trackId, type: type }, '');
-    currentPageState = 'drive';
-    
-    window.scrollTo(0, 0);
-    
-    const driveId = extractDriveId(url);
-    if (driveId) {
-      initializeDrivePlayer(driveId);
-    } else {
-      showNotification("ডকুমেন্ট লোড করতে সমস্যা হয়েছে", true);
-    }
-  }
-};
-      </script>
-  <script>
-// ===== পরিসংখ্যান প্যানেলের জন্য ডাটা লোডার =====
-(function() {
-  const SHEET_IDS = {
-    classViews: '17Rbg9EFhqq2Q3w94QKKw0R2vAWb4Stod4NO_CJ_XD64',
-    visits: '1id0hNy1lAZZzW4Eyl3h7KoyGhRyHEkWltWz8BrhvrUM',
-    comments: '1CRMYdLBG4SENhLdWVKqofmVH9ChUK8A48oxPIg_-M3s',
-    replies: '1CRMYdLBG4SENhLdWVKqofmVH9ChUK8A48oxPIg_-M3s'
-  };
-
-  const CELL_RANGES = {
-    classViews: 'S4',
-    visits: 'G5',
-    comments: 'N6',
-    replies: 'P6'
-  };
-
-  const elements = {
-    classViews: document.getElementById('classViews'),
-    visits: document.getElementById('visits'),
-    comments: document.getElementById('comments'),
-    replies: document.getElementById('replies')
-  };
-
-  async function fetchSheetValue(sheetId, cell) {
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Network error');
-      const csvText = await response.text();
-      const rows = csvText.split('\n').map(row => row.split(','));
-      const colLetter = cell.match(/[A-Z]+/)[0];
-      const rowNum = parseInt(cell.match(/[0-9]+/)[0]);
-
-      let colIndex = 0;
-      for (let i = 0; i < colLetter.length; i++) {
-        colIndex = colIndex * 26 + (colLetter.charCodeAt(i) - 64);
-      }
-      colIndex = colIndex - 1; // zero-based
-
-      if (rows.length >= rowNum && rows[rowNum-1] && rows[rowNum-1][colIndex] !== undefined) {
-        const value = rows[rowNum-1][colIndex].trim().replace(/^"|"$/g, '');
-        const num = Number(value);
-        return isNaN(num) ? 0 : num;
-      }
-      return 0;
-    } catch (error) {
-      console.error('ফেচ করতে সমস্যা:', error);
-      return 0;
-    }
-  }
-
-  async function loadAllStats() {
-    const promises = [
-      fetchSheetValue(SHEET_IDS.classViews, CELL_RANGES.classViews),
-      fetchSheetValue(SHEET_IDS.visits, CELL_RANGES.visits),
-      fetchSheetValue(SHEET_IDS.comments, CELL_RANGES.comments),
-      fetchSheetValue(SHEET_IDS.replies, CELL_RANGES.replies)
-    ];
-
-    const results = await Promise.all(promises);
-    startAnimation({
-      classViews: results[0],
-      visits: results[1],
-      comments: results[2],
-      replies: results[3]
-    });
-  }
-
-  function startAnimation(finalValues) {
-    let current = { classViews: 0, visits: 0, comments: 0, replies: 0 };
-    const steps = 45;
-    const stepTime = 5000 / steps;
-    const increments = {
-      classViews: finalValues.classViews / steps,
-      visits: finalValues.visits / steps,
-      comments: finalValues.comments / steps,
-      replies: finalValues.replies / steps
-    };
-
-    let stepCount = 0;
-    const interval = setInterval(() => {
-      stepCount++;
-      let allDone = true;
-
-      for (let key in current) {
-        if (current[key] < finalValues[key]) {
-          allDone = false;
-          current[key] = Math.min(current[key] + increments[key], finalValues[key]);
-          if (elements[key]) elements[key].innerText = Math.floor(current[key]);
-        } else {
-          if (elements[key]) elements[key].innerText = finalValues[key];
-        }
-      }
-
-      if (stepCount >= steps || allDone) {
-        for (let key in finalValues) {
-          if (elements[key]) elements[key].innerText = finalValues[key];
-        }
-        clearInterval(interval);
-      }
-    }, stepTime);
-  }
-
-  // পৃষ্ঠা লোড হলে ডাটা আনা শুরু করবে
-  document.addEventListener('DOMContentLoaded', loadAllStats);
-})();
-  </script>
 
         <script>
 // ========== ড্রাইভ ডকুমেন্ট স্ক্রল ও জুম সক্রিয়করণ ==========
@@ -11914,8 +11840,8 @@ window.openDrivePlayer = function(url, trackId, type) {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background: #f8f9fa;
-    color: #2d3436;
+    background: linear-gradient(150deg, #0b1330 0%, #1c2a5e 55%, #2a1f5e 100%);
+    color: #f5f7ff;
     font-family: 'Poppins', sans-serif;
     z-index: 10000;
 }
@@ -11936,7 +11862,8 @@ window.openDrivePlayer = function(url, trackId, type) {
 }
 
 #alim-live-player .player-card {
-    background: #ffffff;
+    background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(11,19,48,0.9));
+    border: 1px solid rgba(240, 180, 41, 0.2);
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -12087,9 +12014,9 @@ window.openDrivePlayer = function(url, trackId, type) {
 
 #alim-live-player .note-section {
     margin-top: 20px;
-    background: #ffffff;
+    background: linear-gradient(160deg, rgba(28,42,94,0.55), rgba(11,19,48,0.9));
+    border: 1px solid rgba(108,99,255,0.25);
     border-radius: 12px;
-    border: 1px solid var(--card-border);
     overflow: hidden;
     box-shadow: var(--shadow-md);
 }
@@ -12133,6 +12060,9 @@ window.openDrivePlayer = function(url, trackId, type) {
     flex-shrink: 0;
 }
 
+#alim-live-player .note-cell {
+    color: #d3d8f5 !important;
+}
 #alim-live-player #alim-progress-container {
     width: 100%;
     height: 12px;
@@ -12278,16 +12208,16 @@ window.openDrivePlayer = function(url, trackId, type) {
 #alim-live-player .comment-table-container {
     max-height: 350px;
     overflow-y: auto;
-    background: #f8f9fa;
+    background: rgba(11,19,48,0.5);
+    border: 1px solid rgba(255,77,77,0.2);
     border-radius: 12px;
     padding: 10px;
-    border: 1px solid #dfe6e9;
     scroll-behavior: smooth;
     margin-bottom: 15px;
 }
 
 #alim-live-player .comment-row {
-    background: #ffffff;
+    background: rgba(255,255,255,0.06);
     border-radius: 18px;
     padding: 10px 16px;
     margin-bottom: 8px;
@@ -12301,7 +12231,7 @@ window.openDrivePlayer = function(url, trackId, type) {
 #alim-live-player .comment-name {
     font-size: 13px;
     font-weight: 500;
-    color: #2d3436;
+    color: #ffffff;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -12313,7 +12243,7 @@ window.openDrivePlayer = function(url, trackId, type) {
 }
 #alim-live-player .comment-message {
     font-size: 16px;
-    color: #2d3436;
+    color: #e6e9fa;
     line-height: 1.4;
     padding-left: 6px;
 }
@@ -12327,10 +12257,10 @@ window.openDrivePlayer = function(url, trackId, type) {
     display: flex;
     gap: 10px;
     align-items: center;
-    background: #ffffff;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,77,77,0.25);
     padding: 6px 6px 6px 16px;
     border-radius: 40px;
-    border: 1px solid #dfe6e9;
 }
 
 #alim-live-player .comment-form input {
@@ -12338,7 +12268,7 @@ window.openDrivePlayer = function(url, trackId, type) {
     background: transparent;
     border: none;
     padding: 12px 0;
-    color: #2d3436;
+    color: #f5f7ff;
     font-size: 15px;
     outline: none;
 }
@@ -12392,7 +12322,7 @@ window.openDrivePlayer = function(url, trackId, type) {
 }
 
 #alim-live-player .modal-content {
-    background: #ffffff;
+    background: linear-gradient(160deg, #1c2a5e, #0b1330);
     padding: 30px;
     border-radius: 28px;
     width: 90%;
@@ -12404,7 +12334,7 @@ window.openDrivePlayer = function(url, trackId, type) {
 #alim-live-player .modal-content h3 {
     font-size: 24px;
     margin-bottom: 15px;
-    color: #2d3436;
+    color: #ffd76e;
 }
 
 #alim-live-player .modal-content input {
@@ -12412,8 +12342,8 @@ window.openDrivePlayer = function(url, trackId, type) {
     padding: 16px;
     border-radius: 40px;
     border: none;
-    background: #f8f9fa;
-    color: #2d3436;
+    background: rgba(255,255,255,0.08);
+    color: #f5f7ff;
     font-size: 18px;
     margin: 20px 0;
     outline: 2px solid #ff4d4d70;
@@ -12437,7 +12367,7 @@ window.openDrivePlayer = function(url, trackId, type) {
 }
 
 #alim-live-player .code-display {
-    background: #f8f9fa;
+    background: rgba(255,255,255,0.06);
     padding: 15px;
     border-radius: 12px;
     font-family: monospace;
@@ -12578,21 +12508,22 @@ body.fullscreen-active {
     text-align: center;
 }
 .live-class-box {
-    background: #ffffff;
+    background: linear-gradient(160deg, rgba(60,20,20,0.55), rgba(17,23,52,0.92));
     backdrop-filter: blur(5px);
     border: 2px solid #ff4d4d;
     border-radius: 20px;
     padding: 15px 20px;
     display: inline-block;
-    box-shadow: 0 0 30px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 0 30px rgba(255, 77, 77, 0.25);
 }
 .live-class-box h3 {
-    color: #ff4d4d;
+    color: #ff6b6b;
     font-size: 24px;
     margin-bottom: 5px;
+    text-shadow: 0 0 12px rgba(255, 77, 77, 0.4);
 }
 .live-class-box p {
-    color: #2d3436;
+    color: #e6e9fa;
     margin-bottom: 10px;
 }
 .live-btn-small {
@@ -14472,297 +14403,7 @@ label {
 })();
 </script>
             <script>
-(function() {
-    'use strict';
-
-    // ==================== 1. সাবজেক্ট পেজে নেভিগেশন বাটন যুক্ত করা (সেন্টার + ব্যাক অ্যারো) ====================
-    function injectSubjectNavButtons() {
-        const subjectPage = document.getElementById('subject-page');
-        if (!subjectPage || subjectPage.style.display !== 'block') return;
-
-        if (document.querySelector('.subject-nav-buttons')) return;
-
-        const navContainer = subjectPage.querySelector('nav.nav.container');
-        if (!navContainer) return;
-
-        const backButton = navContainer.querySelector('.brand.back-button');
-        if (!backButton) return;
-
-        // ধারক ডিভ
-        const buttonsDiv = document.createElement('div');
-        buttonsDiv.className = 'subject-nav-buttons';
-        buttonsDiv.style.display = 'flex';
-        buttonsDiv.style.gap = '8px';
-        buttonsDiv.style.marginLeft = '16px';
-        buttonsDiv.style.alignItems = 'center';
-
-        // তিনটি বাটন (ব্যাক অ্যারো + টেক্সট)
-        const buttons = [
-            { name: 'ক্লাস', action: () => {
-                if (typeof window.showClassesPage === 'function') window.showClassesPage();
-                else console.warn('showClassesPage not found');
-            }},
-            { name: 'মিশন', action: () => {
-                if (typeof window.showMissionsPage === 'function') window.showMissionsPage();
-                else console.warn('showMissionsPage not found');
-            }},
-            { name: 'ডকুমেন্ট', action: () => {
-                if (typeof window.showDocumentsPage === 'function') window.showDocumentsPage();
-                else console.warn('showDocumentsPage not found');
-            }}
-        ];
-
-        buttons.forEach(btn => {
-            const button = document.createElement('button');
-            button.className = 'btn subject-nav-btn';
-            button.style.display = 'inline-flex';
-            button.style.alignItems = 'center';
-            button.style.justifyContent = 'center';
-            button.style.gap = '6px';
-            button.style.padding = '8px 12px';
-            button.style.fontSize = '13px';
-            button.style.fontWeight = '500';
-            button.style.minWidth = '80px';
-            button.style.textAlign = 'center';
-            button.style.background = '#ffffff';
-            button.style.border = '1px solid #dfe6e9';
-            button.style.borderRadius = '12px';
-            button.style.color = '#2d3436';
-            button.style.cursor = 'pointer';
-            button.style.transition = 'var(--transition)';
-            button.style.boxShadow = 'var(--shadow-sm)';
-
-            // ব্যাক অ্যারো আইকন
-            const arrowSpan = document.createElement('span');
-            arrowSpan.innerHTML = '←';
-            arrowSpan.style.fontSize = '14px';
-            arrowSpan.style.fontWeight = 'bold';
             
-            const textSpan = document.createElement('span');
-            textSpan.textContent = btn.name;
-            
-            button.appendChild(arrowSpan);
-            button.appendChild(textSpan);
-
-            // হোভার ইফেক্ট
-            button.addEventListener('mouseenter', () => {
-                button.style.transform = 'translateY(-2px)';
-                button.style.borderColor = '#6c63ff';
-                button.style.boxShadow = 'var(--shadow-md)';
-            });
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'translateY(0)';
-                button.style.borderColor = '#dfe6e9';
-                button.style.boxShadow = 'var(--shadow-sm)';
-            });
-
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                btn.action();
-            });
-
-            buttonsDiv.appendChild(button);
-        });
-
-        backButton.insertAdjacentElement('afterend', buttonsDiv);
-    }
-
-    // ==================== 2. নির্ভরযোগ্য ইউটিউব বাটন ট্র্যাকিং ====================
-    function trackViaYouTubeButton() {
-        // সব সম্ভাব্য আইডি চেক করি (সাধারণ ও লাইভ প্লেয়ার)
-        const possibleIds = ['youtubeBtn', 'alim-youtube-btn'];
-        let youtubeBtn = null;
-        for (let id of possibleIds) {
-            const btn = document.getElementById(id);
-            if (btn) {
-                youtubeBtn = btn;
-                break;
-            }
-        }
-        if (!youtubeBtn) return false;
-        if (youtubeBtn.hasAttribute('data-track-fixed')) return true;
-
-        // ক্লিক ইভেন্ট
-        youtubeBtn.addEventListener('click', function(e) {
-            // বর্তমান ভিডিওর ট্র্যাকিং তথ্য বের করি
-            let trackId = null;
-            let trackType = null;
-
-            // ১. window ভেরিয়েবল থেকে
-            if (window.videoTrackId && window.videoType) {
-                trackId = window.videoTrackId;
-                trackType = window.videoType;
-            }
-            // ২. লোকাল স্টোরেজের সর্বশেষ দেখা ভিডিও থেকে (যদি window না থাকে)
-            else {
-                try {
-                    const lastVideo = localStorage.getItem('last_video_track');
-                    if (lastVideo) {
-                        const parsed = JSON.parse(lastVideo);
-                        trackId = parsed.id;
-                        trackType = parsed.type;
-                    }
-                } catch(e) {}
-            }
-
-            if (trackId && trackType && typeof window.trackItem === 'function') {
-                const completed = JSON.parse(localStorage.getItem('alim26_dashboard_completed_items') || '[]');
-                if (!completed.includes(trackId)) {
-                    window.trackItem(trackId, trackType);
-                    // সংরক্ষণ করে রাখি যাতে বারবার ট্র্যাক না হয়
-                    localStorage.setItem('last_tracked_via_youtube', trackId);
-                    console.log(`✅ YouTube বাটনে ক্লিক: ট্র্যাক সম্পন্ন (${trackId})`);
-                }
-            } else {
-                console.warn('ট্র্যাকিং তথ্য পাওয়া যায়নি');
-            }
-        });
-
-        youtubeBtn.setAttribute('data-track-fixed', 'true');
-        return true;
-    }
-
-    // ভিডিও প্লেয়ার খোলার সময় ট্র্যাকিং সেটআপ ও ভেরিয়েবল সংরক্ষণ
-    function patchOpenVideoPlayer() {
-        if (typeof window.openVideoPlayer !== 'function') return;
-        const original = window.openVideoPlayer;
-        window.openVideoPlayer = function(url, trackId, type) {
-            // সংরক্ষণ করি
-            window.videoTrackId = trackId;
-            window.videoType = type;
-            try {
-                localStorage.setItem('last_video_track', JSON.stringify({ id: trackId, type: type }));
-            } catch(e) {}
-            original(url, trackId, type);
-            // বাটন ট্র্যাকিং সেটআপ
-            setTimeout(() => {
-                trackViaYouTubeButton();
-                // যদি লাইভ প্লেয়ার হয়, সেখানেও চেষ্টা
-                const liveBtn = document.getElementById('alim-youtube-btn');
-                if (liveBtn && !liveBtn.hasAttribute('data-track-fixed')) {
-                    liveBtn.addEventListener('click', () => {
-                        if (window.videoTrackId && window.videoType && typeof window.trackItem === 'function') {
-                            const completed = JSON.parse(localStorage.getItem('alim26_dashboard_completed_items') || '[]');
-                            if (!completed.includes(window.videoTrackId)) {
-                                window.trackItem(window.videoTrackId, window.videoType);
-                            }
-                        }
-                    });
-                    liveBtn.setAttribute('data-track-fixed', 'true');
-                }
-            }, 800);
-        };
-    }
-
-    // ==================== 3. মিশন পেজ ঠিক করা (L2 দেখানোর জন্য) ====================
-    function fixMissionsPage() {
-        // showMissionsPage ফাংশন যদি না থাকে, তাহলে ডিফাইন করি
-        if (typeof window.showMissionsPage !== 'function') {
-            window.showMissionsPage = function() {
-                // প্রথমে main পেজ লুকিয়ে missions-page দেখাই
-                const mainPage = document.getElementById('main-page');
-                const missionsPage = document.getElementById('missions-page');
-                if (mainPage) mainPage.style.display = 'none';
-                if (missionsPage) {
-                    missionsPage.style.display = 'block';
-                    // নিউ মিশন সিস্টেমের ট্যাব ও লোডিং ট্রিগার
-                    if (typeof window.setupMissionsL2 === 'function') {
-                        window.setupMissionsL2();
-                    } else {
-                        // যদি setupMissionsL2 না থাকে, তাহলে ম্যানুয়ালি রেন্ডার ট্রিগার
-                        if (window.allMissions && window.allMissions.length === 0 && typeof window.loadAndRender === 'function') {
-                            window.loadAndRender();
-                        }
-                        // ট্যাব সক্রিয় করা (ডিফল্ট L2)
-                        const newTab = document.querySelector('#missionTabsContainer .mission-tab[data-tab="new"]');
-                        if (newTab) newTab.click();
-                    }
-                }
-                window.currentPageState = 'missions';
-                if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
-            };
-        } else {
-            // ইতিমধ্যে থাকলে ওভাররাইড করি যাতে L2 নিশ্চিত হয়
-            const originalMissions = window.showMissionsPage;
-            window.showMissionsPage = function() {
-                originalMissions();
-                setTimeout(() => {
-                    const newTab = document.querySelector('#missionTabsContainer .mission-tab[data-tab="new"]');
-                    if (newTab && !newTab.classList.contains('active')) newTab.click();
-                    if (window.allMissions && window.allMissions.length === 0 && typeof window.loadAndRender === 'function') {
-                        window.loadAndRender();
-                    }
-                }, 100);
-            };
-        }
-    }
-
-    // ==================== 4. পেজ ভিজিবিলিটি মনিটরিং ====================
-    function observeSubjectPage() {
-        const subjectPage = document.getElementById('subject-page');
-        if (!subjectPage) return;
-        const observer = new MutationObserver(() => {
-            if (subjectPage.style.display === 'block') {
-                setTimeout(injectSubjectNavButtons, 50);
-            }
-        });
-        observer.observe(subjectPage, { attributes: true, attributeFilter: ['style'] });
-        if (subjectPage.style.display === 'block') setTimeout(injectSubjectNavButtons, 50);
-    }
-
-    function observeVideoPlayer() {
-        const vp = document.getElementById('video-player-page');
-        if (!vp) return;
-        const observer = new MutationObserver(() => {
-            if (vp.style.display === 'block') {
-                setTimeout(() => trackViaYouTubeButton(), 500);
-            }
-        });
-        observer.observe(vp, { attributes: true, attributeFilter: ['style'] });
-        if (vp.style.display === 'block') setTimeout(() => trackViaYouTubeButton(), 500);
-    }
-
-    // ==================== 5. ড্রাইভ প্লেয়ারের জন্যও ট্র্যাকিং (ঐচ্ছিক) ====================
-    function patchOpenDrivePlayer() {
-        if (typeof window.openDrivePlayer !== 'function') return;
-        const originalDrive = window.openDrivePlayer;
-        window.openDrivePlayer = function(url, trackId, type) {
-            // ড্রাইভ ফাইল সরাসরি ট্র্যাক করা যায় (ক্লিকেই সম্পন্ন)
-            if (typeof window.trackItem === 'function') {
-                const completed = JSON.parse(localStorage.getItem('alim26_dashboard_completed_items') || '[]');
-                if (!completed.includes(trackId)) {
-                    window.trackItem(trackId, type);
-                }
-            }
-            originalDrive(url, trackId, type);
-        };
-    }
-
-    // ==================== 6. সবকিছু শুরু ====================
-    function init() {
-        patchOpenVideoPlayer();
-        patchOpenDrivePlayer();
-        fixMissionsPage();
-        observeSubjectPage();
-        observeVideoPlayer();
-        setTimeout(injectSubjectNavButtons, 300);
-        setTimeout(trackViaYouTubeButton, 800);
-        // প্রতি 3 সেকেন্ডে চেষ্টা (যাতে পরে লোড হওয়া বাটনও ধরা পড়ে)
-        setInterval(() => {
-            if (document.getElementById('video-player-page')?.style.display === 'block') {
-                trackViaYouTubeButton();
-            }
-        }, 3000);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-})();
-  </script>
-  <script>
   				// ======== কন্ট্রোল প্যানেল (সম্পূর্ণ স্বয়ংসম্পূর্ণ) ========
 function showAdminMainModal() {
     // আগের মডেল থাকলে সরিয়ে ফেলি
@@ -14873,7 +14514,115 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 			</script>
-			
+			<script>
+(function() {
+    'use strict';
+
+    // ==================== কনফিগারেশন ====================
+    // ⚙️ এখানে false দিলে মিশন বন্ধ, true দিলে চালু
+    const ENABLE_MISSIONS = false;
+
+    // ==================== ১. normalizeRows ফাংশন ওভাররাইড ====================
+    if (typeof window.normalizeRows === 'function') {
+        const originalNormalizeRows = window.normalizeRows;
+        window.normalizeRows = function(rows) {
+            const result = originalNormalizeRows(rows);
+            if (!ENABLE_MISSIONS && Array.isArray(result)) {
+                // যেসব আইটেমের টাইপ 'mission' সেগুলো বাদ
+                return result.filter(item => item.type !== 'mission');
+            }
+            return result;
+        };
+    }
+
+    // ==================== ২. getItemsFromAllClasses ফাংশন ওভাররাইড ====================
+    if (typeof window.getItemsFromAllClasses === 'function') {
+        const originalGetItems = window.getItemsFromAllClasses;
+        window.getItemsFromAllClasses = function() {
+            const items = originalGetItems.call(this);
+            if (!ENABLE_MISSIONS) {
+                items.missions = []; // মিশন কাউন্ট ০
+            }
+            return items;
+        };
+    }
+
+    // ==================== ৩. মিশন ফোল্ডার লিংক হাইড ====================
+    function hideMissionsFolder() {
+        const folder = document.getElementById('missions-folder');
+        if (folder) {
+            folder.style.display = ENABLE_MISSIONS ? '' : 'none';
+        }
+    }
+    hideMissionsFolder();
+
+    // ==================== ৪. missions-page ডিভ হাইড ====================
+    function hideMissionsPage() {
+        const page = document.getElementById('missions-page');
+        if (page) {
+            page.style.display = ENABLE_MISSIONS ? '' : 'none';
+        }
+    }
+    hideMissionsPage();
+
+    // ==================== ৫. showMissionsPage ফাংশন নিষ্ক্রিয় ====================
+    if (typeof window.showMissionsPage === 'function') {
+        const originalShowMissions = window.showMissionsPage;
+        window.showMissionsPage = function() {
+            if (!ENABLE_MISSIONS) {
+                alert('⚠️ মিশন ফিচারটি বর্তমানে বন্ধ আছে।');
+                return;
+            }
+            originalShowMissions.call(this);
+        };
+    }
+
+    // ==================== ৬. ডাইনামিক কন্টেন্টের জন্য অবজারভার ====================
+    const observer = new MutationObserver(function() {
+        hideMissionsFolder();
+        hideMissionsPage();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // ==================== ৭. রিফ্রেশ বাটনে হুক ====================
+    const refreshBtn = document.getElementById('refresh-data-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            setTimeout(() => {
+                hideMissionsFolder();
+                hideMissionsPage();
+            }, 500);
+        });
+    }
+
+    // ==================== ৮. পেজ লোড শেষে আরও একবার ====================
+    window.addEventListener('load', function() {
+        hideMissionsFolder();
+        hideMissionsPage();
+        // allClasses থেকে মিশন বাদ (যদি আগে থেকে লোড হয়ে থাকে)
+        if (!ENABLE_MISSIONS && Array.isArray(window.allClasses)) {
+            window.allClasses = window.allClasses.filter(item => {
+                return !(item.subject && item.subject.includes('(মিশন)'));
+            });
+            window.groupedClassesCache = {};
+            if (typeof renderTodayClassesSummary === 'function') {
+                const sortValue = document.getElementById('sort-classes')?.value || 'today';
+                const filtered = typeof filterClassesByTimeRange === 'function' 
+                    ? filterClassesByTimeRange(sortValue) 
+                    : [];
+                renderTodayClassesSummary(filtered);
+            }
+            if (document.getElementById('subject-page').style.display === 'block' && window.currentSubject) {
+                if (typeof window.showSubjectPage === 'function') {
+                    window.showSubjectPage(window.currentSubject);
+                }
+            }
+        }
+    });
+
+    console.log('✅ মিশন ফিচার ' + (ENABLE_MISSIONS ? 'চালু' : 'বন্ধ') + ' করা হয়েছে।');
+})();
+</script>
 	
 </body>
 </html>
