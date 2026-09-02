@@ -450,9 +450,9 @@
 
 /* প্রত্যেক শিক্ষকের বক্সে আলাদা আলাদা রঙ */
 #default-page .single-teacher:nth-child(2) {
-  background: linear-gradient(160deg, rgba(108,99,255,0.32), rgba(17,23,52,0.92));
-  border-top: 3px solid #6c63ff;
-  box-shadow: 0 8px 22px rgba(108, 99, 255, 0.3);
+  background: linear-gradient(160deg, rgba(255,101,132,0.3), rgba(17,23,52,0.92));
+  border-top: 3px solid #ff6584;
+  box-shadow: 0 8px 22px rgba(255, 101, 132, 0.3);
 }
 #default-page .single-teacher:nth-child(3) {
   background: linear-gradient(160deg, rgba(240,180,41,0.28), rgba(17,23,52,0.92));
@@ -1269,13 +1269,13 @@
       gap: 8px;
       padding: 12px 20px;
       border-radius: 12px;
-      border: none;
-      background: var(--gradient-primary);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: linear-gradient(135deg, #14b8c4 0%, #0e7c8f 100%);
       color: white;
       font-weight: 600;
       transition: var(--transition);
       cursor: pointer;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 6px 18px rgba(20, 184, 196, 0.35);
       position: relative;
       overflow: hidden;
       font-size: 0.9rem;
@@ -1283,11 +1283,14 @@
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 10px 26px rgba(20, 184, 196, 0.5);
+      background: linear-gradient(135deg, #22d3dd 0%, #0e8ea3 100%);
     }
 
     .btn.disabled {
-      background: var(--text-muted);
+      background: rgba(255,255,255,0.1);
+      color: #8891c2;
+      border-color: rgba(255,255,255,0.08);
       cursor: not-allowed;
       box-shadow: none;
       opacity: 0.7;
@@ -1359,19 +1362,133 @@
       box-shadow: var(--shadow-sm);
     }
 
+    /* ===== প্রিমিয়াম ফুটার (CEO + ডিজাইনার + কপিরাইট একসাথে) ===== */
     .owner-wrap {
       max-width: 980px;
-      margin: 32px auto 16px;
-      padding: 26px;
-      border-radius: var(--radius);
-      background: linear-gradient(150deg, rgba(28,42,94,0.55), rgba(17,23,52,0.92));
+      margin: 40px auto 0;
+      padding: 34px 30px 26px;
+      border-radius: 22px 22px 0 0;
+      background: linear-gradient(150deg, rgba(28,42,94,0.6), rgba(17,23,52,0.95));
       border: 1px solid rgba(240, 180, 41, 0.22);
+      border-bottom: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
       align-items: center;
       text-align: center;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.32);
+      box-shadow: 0 -6px 20px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .owner-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6c63ff, #f0b429, #ff6584);
+    }
+
+    .pf-block {
+      max-width: 620px;
+      margin-bottom: 10px;
+    }
+
+    .pf-tagline {
+      font-size: 0.88rem;
+      color: #b9c0e6;
+      line-height: 1.75;
+      margin-bottom: 8px;
+    }
+
+    .pf-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #ffd76e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pf-social {
+      display: inline-flex;
+      gap: 8px;
+      -webkit-text-fill-color: initial;
+    }
+
+    .pf-social a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(240, 180, 41, 0.35);
+      color: #ffd76e;
+      font-size: 13px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .pf-social a:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 6px 16px rgba(240, 180, 41, 0.35);
+    }
+
+    .pf-social a.fb:hover {
+      background: #1877f2;
+      color: #ffffff;
+      border-color: #1877f2;
+    }
+
+    .pf-social a.wa:hover {
+      background: #25D366;
+      color: #ffffff;
+      border-color: #25D366;
+    }
+
+    .pf-role {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #101a3f;
+      background: linear-gradient(135deg, #f0b429, #ffd76e);
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .pf-divider {
+      width: 70%;
+      max-width: 260px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240, 180, 41, 0.45), transparent);
+      margin: 16px 0;
+    }
+
+    .pf-powered {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #9fa8d9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pf-powered-brand {
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #6c63ff, #a29bfe);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 0.95rem;
     }
 
     .owner-messages {
@@ -1442,15 +1559,16 @@
 
     .site-footer {
       max-width: 980px;
-      margin: 16px auto 64px;
-      padding: 20px 24px;
-      border-radius: 12px;
-      background: linear-gradient(150deg, rgba(28,42,94,0.5), rgba(17,23,52,0.85));
-      border: 1px solid rgba(240, 180, 41, 0.18);
-      color: #b9c0e6;
+      margin: 0 auto;
+      padding: 14px 24px;
+      border-radius: 0;
+      background: linear-gradient(150deg, rgba(17,23,52,0.95), rgba(11,19,48,0.98));
+      border: 1px solid rgba(240, 180, 41, 0.22);
+      border-top: 1px solid rgba(240, 180, 41, 0.15);
+      color: #8891c2;
       text-align: center;
-      font-size: 0.85rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+      font-size: 0.78rem;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
     }
 
     @media (max-width: 768px) {
@@ -1545,11 +1663,12 @@
 
     .loading {
       display: inline-block;
-      width: 24px;
-      height: 24px;
-      border: 3px solid rgba(0, 0, 0, 0.1);
+      width: 26px;
+      height: 26px;
+      border: 3px solid rgba(255, 255, 255, 0.15);
       border-radius: 50%;
-      border-top-color: var(--primary);
+      border-top-color: #f0b429;
+      border-right-color: #6c63ff;
       animation: spin 0.8s linear infinite;
     }
 
@@ -3989,7 +4108,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       <i class="fab fa-facebook-square"></i>
       <span class="social-tooltip">Facebook Page</span>
     </a>
-    <a href="https://wa.me/8801806234120" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp">
+    <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp">
       <i class="fab fa-whatsapp"></i>
       <span class="social-tooltip">WhatsApp</span>
     </a>
@@ -4069,7 +4188,24 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   <div class="login-container">
 
     <!-- রেজিস্ট্রেশন সফল হলে এটা দেখাবে -->
-    <div class="id-success bangla-font" id="id-success-screen">
+    <style>
+  .bomreg-success-box { text-align:center; padding:10px 0; }
+  .bomreg-success-icon { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,#34d399,#059669); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:1.6rem; color:#fff; box-shadow:0 14px 30px rgba(5,150,105,.3); }
+  .bomreg-success-title { font-family:"Baloo Da 2","Hind Siliguri",sans-serif; font-size:1.1rem; color:var(--primary-dark); margin-bottom:10px; }
+  .bomreg-success-msg { font-size:0.86rem; color:var(--text-muted); line-height:1.7; margin-bottom:20px; padding:0 4px; }
+  .bomreg-info-card { background:linear-gradient(160deg,#08142b,#0d2145,#08142b); border-radius:18px; padding:20px 18px; margin-bottom:16px; text-align:left; box-shadow:0 20px 40px rgba(6,14,32,.25); }
+  .bomreg-info-title { color:#d8b34a; font-size:0.72rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px; text-align:center; }
+  .bomreg-info-row { margin-bottom:12px; }
+  .bomreg-info-row:last-child { margin-bottom:0; }
+  .bomreg-info-label { font-size:0.68rem; color:#9fb0cc; font-weight:600; margin-bottom:3px; }
+  .bomreg-info-value { font-size:0.98rem; color:#fff; font-weight:700; word-break:break-all; }
+  .bomreg-info-value.id { color:#f6d365; letter-spacing:0.03em; }
+  .bomreg-copy-btn { margin-top:14px; width:100%; padding:9px; border-radius:10px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:0.78rem; font-weight:600; cursor:pointer; }
+  .bomreg-save-note { background:#fff3cd; border-radius:12px; padding:12px 14px; margin-bottom:12px; font-size:0.78rem; color:#856404; line-height:1.7; text-align:left; }
+  .bomreg-server-note { background:#e7f3ff; border-radius:12px; padding:12px 14px; margin-bottom:20px; font-size:0.76rem; color:#084298; line-height:1.7; text-align:left; }
+</style>
+
+<div class="id-success bangla-font" id="id-success-screen">
       <h2 class="bangla-font">রেজিস্ট্রেশন সম্পন্ন হয়েছে!</h2>
       <p class="bangla-font">আপনার BOM Student ID তৈরি হয়েছে। পরবর্তীতে লগইন করতে এই আইডিটি প্রয়োজন হবে — অবশ্যই সংরক্ষণ করুন।</p>
       <div class="id-card">
@@ -4078,6 +4214,30 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         <button class="copy-btn" id="copy-id-btn" type="button">কপি করুন</button>
       </div>
       <button class="login-btn bangla-font" id="continue-to-main-btn">মেইন পেইজে যান</button>
+      <button class="login-btn bangla-font" id="sync-reload-btn-register" style="display:none; margin-top:10px; background: linear-gradient(135deg, #25D366, #128C7E);">🔄 রিলোড করুন</button>
+    </div>
+    <!-- শিক্ষার্থী লগইন সফল হলে এই মডেল দেখাবে -->
+    <div class="id-success bangla-font" id="login-success-screen" style="display:none;">
+      <h2 class="bangla-font">লগইন সফল হয়েছে!</h2>
+      <p class="bangla-font">আপনি সফলভাবে আপনার অ্যাকাউন্টে প্রবেশ করেছেন।</p>
+      <div class="id-card">
+        <div class="id-label">নাম</div>
+        <div class="id-value" id="login-success-name" style="font-size:1.1rem;">--------</div>
+      </div>
+      <button class="login-btn bangla-font" id="sync-reload-btn-login" style="display:none; background: linear-gradient(135deg, #25D366, #128C7E);">🔄 রিলোড করুন</button>
+      <button class="login-btn bangla-font" id="continue-after-login-btn" style="margin-top:10px;">মেইন পেইজে যান</button>
+    </div>
+
+    <!-- এডমিন লগইন সফল হলে এই মডেল দেখাবে -->
+    <div class="id-success bangla-font" id="admin-login-success-screen" style="display:none;">
+      <h2 class="bangla-font">লগইন সফল হয়েছে!</h2>
+      <p class="bangla-font">আপনি এডমিন/এডিটর হিসেবে সফলভাবে প্রবেশ করেছেন।</p>
+      <div class="id-card">
+        <div class="id-label">নাম</div>
+        <div class="id-value" id="admin-login-success-name" style="font-size:1.1rem;">--------</div>
+      </div>
+      <button class="login-btn bangla-font" id="sync-reload-btn-admin" style="display:none; background: linear-gradient(135deg, #25D366, #128C7E);">🔄 রিলোড করুন</button>
+      <button class="login-btn bangla-font" id="continue-after-admin-btn" style="margin-top:10px;">মেইন পেইজে যান</button>
     </div>
 
     <!-- লগইন / রেজিস্ট্রেশন ফর্ম -->
@@ -4159,7 +4319,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 
       <div class="support-info">
         <p class="bangla-font">সহায়তা প্রয়োজন হলে BOM এর এডমিনের সাথে যোগাযোগ করুন</p>
-        <a href="https://wa.me/8801806234120" class="whatsapp-link" target="_blank">
+        <a href="https://wa.me/8801334443300" class="whatsapp-link" target="_blank">
           <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
         </a>
       </div>
@@ -4218,9 +4378,9 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       </div>
       <!-- New Slideshow Box - UPDATED -->
       <div class="slideshow-container fade-in" id="slideshowContainer">
-        <img class="slideshow-image active" src="https://i.imgur.com/n6ssB2D.jpeg" alt="Image 1">
-        <img class="slideshow-image" src="https://i.imgur.com/LYH55XN.jpeg" alt="Image 2">
-        <img class="slideshow-image" src="https://i.imgur.com/0pMdXeq.png" alt="Image 3">
+        <img class="slideshow-image active" src="https://i.postimg.cc/T3J1t5rn/IMG-20260813-WA0015.jpg" alt="Image 1">
+        <img class="slideshow-image" src="https://i.postimg.cc/PfvqBRmR/IMG-20260813-WA0014.jpg" alt="Image 2">
+        <img class="slideshow-image" src="https://i.postimg.cc/MTMWJnj7/file-000000004a94820ba33be8a26a15497c.png" alt="Image 3">
         <div class="slideshow-dots">
           <div class="slideshow-dot active" data-index="0"></div>
           <div class="slideshow-dot" data-index="1"></div>
@@ -4260,11 +4420,13 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         </table>
       </div>
       <!-- লাইভ ক্লাস ফিচার (আজকের ক্লাস টেবিলের নিচে যুক্ত করুন) -->
+<div class="section-title">
+  <h2 class="bangla-font">লাইভ ক্লাস</h2>
+</div>
 <div class="live-class-feature">
     <div class="live-class-box">
-        <h3>লাইভ ক্লাস</h3>
-        <p>আমাদের লাইভ ক্লাস চলাকালীন সময়ে সরাসরি ক্লাসে যুক্ত হতে পারবেন।</p>
-        <button class="live-btn-small" id="alim-open-live-player">🔴 লাইভ ক্লাস</button>
+        <p class="bangla-font">আমাদের লাইভ ক্লাস চলাকালীন সময়ে সরাসরি ক্লাসে যুক্ত হতে পারবেন।</p>
+        <button class="live-btn-small bangla-font" id="alim-open-live-player">লাইভ ক্লাস</button>
     </div>
 </div>
       <div class="section-title">
@@ -4388,13 +4550,31 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   </div>
 </div>
     <div class="owner-wrap">
-      <div class="owner-sub2">The Visionary Mind Behind Bangladesh Online Madrasa - transforming students into top achievers with guidance, discipline, and excellence.</div>
-      <div class="owner-name bangla-font">MD. RIAD HASAN<span style="font-weight:600; font-size:0.86rem; color:rgba(0,0,0,0.8); margin-left:8px;">(CEO & Founder)</span></div>
-      <div class="owner-sub">building brighter paths for ambitious learners</div>
-      <div class="designer-credit">
-        <span class="bangla-font" style="opacity:0.9;">design & powered by</span>
-        <span class="designer-name">.SIUM GROUP</span>
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) প্ল্যাটফর্মের পরিচালক, যিনি নিরলস পরিশ্রম ও নিষ্ঠা দিয়ে হাজারো শিক্ষার্থীর স্বপ্নযাত্রায় পথ দেখাচ্ছেন</p>
+        <div class="pf-name bangla-font">
+          MD. RIAD HASAN<span class="pf-role">CEO & Founder</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/profile.php?id=61579876770021" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
       </div>
+
+      <div class="pf-divider"></div>
+
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">শিক্ষার্থীদের সহজ ও সুন্দর শেখার অভিজ্ঞতা উপহার দিতে, ভালোবাসা ও যত্ন নিয়ে এই প্ল্যাটফর্মটি তৈরি করেছেন</p>
+        <div class="pf-name">
+          SAHIBUL MUSA SIUM<span class="pf-role">Design &amp; Development</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/sahibulmusasiam" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801921996424" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-powered">Powered by <span class="pf-powered-brand">.SIUM GROUP</span></div>
     </div>
     <footer class="site-footer">
       © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
@@ -4497,6 +4677,22 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
   .lb-label { font-size:.7rem; text-transform:uppercase; color:#9fb0cc; font-weight:600; }
   .lb-pw-status { font-size:.85rem; font-weight:600; color:#9fb0cc; margin-bottom:10px; }
   .lb-pw-btn { border:none; border-radius:10px; padding:9px 20px; font-weight:700; font-size:.82rem; cursor:pointer; background:linear-gradient(135deg,#6c63ff,#a29bfe); color:#fff; }
+  
+  .lb-pw-notice-wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .lb-pw-notice { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; font-size: 0.78rem; line-height: 1.65; animation: bomNoticeFade 0.4s ease; }
+  .lb-pw-notice i { font-size: 1.05rem; margin-top: 2px; flex-shrink: 0; }
+  .lb-pw-notice.warning-notice { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #ffc2c7; }
+  .lb-pw-notice.warning-notice i { color: #ff4757; text-shadow: 0 0 10px rgba(255,71,87,0.6); }
+  .lb-pw-notice.warning-notice strong { color: #ff8a94; }
+  .lb-pw-notice.info-notice { background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.3); color: #f5e6bd; }
+  .lb-pw-notice.info-notice i { color: #f0b429; text-shadow: 0 0 10px rgba(240,180,41,0.5); }
+  .lb-pw-notice.info-notice strong { color: #ffd76e; }
+  .lb-pw-notice b { color: #ffd76e; }
+
+  @keyframes bomNoticeFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   .pf-id-box { margin-top:26px; padding:18px 20px; border-radius:16px; background:rgba(216,179,74,.10); border:1px solid rgba(216,179,74,.28); display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .pf-id-box .info { display:flex; align-items:center; gap:12px; }
@@ -4829,16 +5025,34 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       <div id="classGrid" class="grid"></div>
     </main>
     <div class="owner-wrap">
-      <div class="owner-sub2">The Visionary Mind Behind Bangladesh Online Madrasa - transforming students into top achievers with guidance, discipline, and excellence.</div>
-      <div class="owner-name bangla-font">MD. RIAD HASAN<span style="font-weight:600; font-size:0.86rem; color:rgba(0,0,0,0.8); margin-left:8px;">(CEO & Founder)</span></div>
-      <div class="owner-sub">building brighter paths for ambitious learners</div>
-      <div class="designer-credit">
-        <span class="bangla-font" style="opacity:0.9;">design & powered by</span>
-        <span class="designer-name">.SIUM GROUP</span>
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) প্ল্যাটফর্মের পরিচালক, যিনি নিরলস পরিশ্রম ও নিষ্ঠা দিয়ে হাজারো শিক্ষার্থীর স্বপ্নযাত্রায় পথ দেখাচ্ছেন</p>
+        <div class="pf-name bangla-font">
+          MD. RIAD HASAN<span class="pf-role">CEO & Founder</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/profile.php?id=61579876770021" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
       </div>
+
+      <div class="pf-divider"></div>
+
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">শিক্ষার্থীদের সহজ ও সুন্দর শেখার অভিজ্ঞতা উপহার দিতে, ভালোবাসা ও যত্ন নিয়ে এই প্ল্যাটফর্মটি তৈরি করেছেন</p>
+        <div class="pf-name">
+          SAHIBUL MUSA SIUM<span class="pf-role">Design &amp; Development</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/sahibulmusasiam" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801921996424" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-powered">Powered by <span class="pf-powered-brand">.SIUM GROUP</span></div>
     </div>
     <footer class="site-footer">
-      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
     </footer>
   </div>
   
@@ -5244,17 +5458,35 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <div id="classesGrid" class="grid"></div>
   </main>
   <div class="owner-wrap">
-    <div class="owner-sub2">The Visionary Mind Behind Bangladesh Online Madrasa - transforming students into top achievers with guidance, discipline, and excellence.</div>
-    <div class="owner-name bangla-font">MD. RIAD HASAN<span style="font-weight:600; font-size:0.86rem; color:rgba(0,0,0,0.8); margin-left:8px;">(CEO & Founder)</span></div>
-    <div class="owner-sub">building brighter paths for ambitious learners</div>
-    <div class="designer-credit">
-      <span class="bangla-font" style="opacity:0.9;">design & powered by</span>
-      <span class="designer-name">.SIUM GROUP</span>
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) প্ল্যাটফর্মের পরিচালক, যিনি নিরলস পরিশ্রম ও নিষ্ঠা দিয়ে হাজারো শিক্ষার্থীর স্বপ্নযাত্রায় পথ দেখাচ্ছেন</p>
+        <div class="pf-name bangla-font">
+          MD. RIAD HASAN<span class="pf-role">CEO & Founder</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/profile.php?id=61579876770021" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-divider"></div>
+
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">শিক্ষার্থীদের সহজ ও সুন্দর শেখার অভিজ্ঞতা উপহার দিতে, ভালোবাসা ও যত্ন নিয়ে এই প্ল্যাটফর্মটি তৈরি করেছেন</p>
+        <div class="pf-name">
+          SAHIBUL MUSA SIUM<span class="pf-role">Design &amp; Development</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/sahibulmusasiam" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801921996424" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-powered">Powered by <span class="pf-powered-brand">.SIUM GROUP</span></div>
     </div>
-  </div>
-  <footer class="site-footer">
-    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
-  </footer>
+    <footer class="site-footer">
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
+    </footer>
 </div>
 
 <!-- Missions Page -->
@@ -5281,17 +5513,35 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <div id="missionsGrid" class="grid"></div>
   </main>
   <div class="owner-wrap">
-    <div class="owner-sub2">The Visionary Mind Behind Bangladesh Online Madrasa - transforming students into top achievers with guidance, discipline, and excellence.</div>
-    <div class="owner-name bangla-font">MD. RIAD HASAN<span style="font-weight:600; font-size:0.86rem; color:rgba(0,0,0,0.8); margin-left:8px;">(CEO & Founder)</span></div>
-    <div class="owner-sub">building brighter paths for ambitious learners</div>
-    <div class="designer-credit">
-      <span class="bangla-font" style="opacity:0.9;">design & powered by</span>
-      <span class="designer-name">.SIUM GROUP</span>
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) প্ল্যাটফর্মের পরিচালক, যিনি নিরলস পরিশ্রম ও নিষ্ঠা দিয়ে হাজারো শিক্ষার্থীর স্বপ্নযাত্রায় পথ দেখাচ্ছেন</p>
+        <div class="pf-name bangla-font">
+          MD. RIAD HASAN<span class="pf-role">CEO & Founder</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/profile.php?id=61579876770021" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-divider"></div>
+
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">শিক্ষার্থীদের সহজ ও সুন্দর শেখার অভিজ্ঞতা উপহার দিতে, ভালোবাসা ও যত্ন নিয়ে এই প্ল্যাটফর্মটি তৈরি করেছেন</p>
+        <div class="pf-name">
+          SAHIBUL MUSA SIUM<span class="pf-role">Design &amp; Development</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/sahibulmusasiam" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801921996424" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-powered">Powered by <span class="pf-powered-brand">.SIUM GROUP</span></div>
     </div>
-  </div>
-  <footer class="site-footer">
-    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
-  </footer>
+    <footer class="site-footer">
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
+    </footer>
 </div>
 
 <!-- Documents Page -->
@@ -5318,17 +5568,35 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     <div id="documentsGrid" class="grid"></div>
   </main>
   <div class="owner-wrap">
-    <div class="owner-sub2">The Visionary Mind Behind Bangladesh Online Madrasa - transforming students into top achievers with guidance, discipline, and excellence.</div>
-    <div class="owner-name bangla-font">MD. RIAD HASAN<span style="font-weight:600; font-size:0.86rem; color:rgba(0,0,0,0.8); margin-left:8px;">(CEO & Founder)</span></div>
-    <div class="owner-sub">building brighter paths for ambitious learners</div>
-    <div class="designer-credit">
-      <span class="bangla-font" style="opacity:0.9;">design & powered by</span>
-      <span class="designer-name">.SIUM GROUP</span>
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">বাংলাদেশ অনলাইন মাদ্রাসা (BOM) প্ল্যাটফর্মের পরিচালক, যিনি নিরলস পরিশ্রম ও নিষ্ঠা দিয়ে হাজারো শিক্ষার্থীর স্বপ্নযাত্রায় পথ দেখাচ্ছেন</p>
+        <div class="pf-name bangla-font">
+          MD. RIAD HASAN<span class="pf-role">CEO & Founder</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/profile.php?id=61579876770021" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801334443300" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-divider"></div>
+
+      <div class="pf-block">
+        <p class="pf-tagline bangla-font">শিক্ষার্থীদের সহজ ও সুন্দর শেখার অভিজ্ঞতা উপহার দিতে, ভালোবাসা ও যত্ন নিয়ে এই প্ল্যাটফর্মটি তৈরি করেছেন</p>
+        <div class="pf-name">
+          SAHIBUL MUSA SIUM<span class="pf-role">Design &amp; Development</span>
+          <span class="pf-social">
+            <a href="https://www.facebook.com/sahibulmusasiam" target="_blank" rel="noopener noreferrer" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/8801921996424" target="_blank" rel="noopener noreferrer" class="wa"><i class="fab fa-whatsapp"></i></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="pf-powered">Powered by <span class="pf-powered-brand">.SIUM GROUP</span></div>
     </div>
-  </div>
-  <footer class="site-footer">
-    © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE". All rights reserved.
-  </footer>
+    <footer class="site-footer">
+      © 2026 DAKHIL-27 "FINAL STAGE PREPARATION COURSE" All rights reserved.
+    </footer>
 </div>
 
 <!-- =============== নতুন পেজ শেষ =============== -->
@@ -5637,6 +5905,52 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
     function getUserRole() { return localStorage.getItem('bom_user_role') || null; }
     function getCurrentStudentId() { return localStorage.getItem('bom_student_id') || ''; }
     function getCurrentName() { return localStorage.getItem('bom_user_name') || ''; }
+    
+    // ============ ক্রস-সার্ভার সিঙ্ক সিস্টেম ============
+const CROSS_SERVER_SYNC_ENABLED = true; // false করলে পুরনো সিস্টেম, true করলে নতুন সিঙ্ক সিস্টেম
+const SYNC_HUB_URL = 'https://dotsiumgroup.github.io/rastv/';
+
+// সিঙ্ক করার মতো সব দরকারি তথ্য জড়ো করা (localStorage থেকে)
+function bomBuildSyncPayload() {
+  return {
+    role: localStorage.getItem('bom_user_role') || '',
+    name: localStorage.getItem('bom_user_name') || '',
+    studentId: localStorage.getItem('bom_student_id') || '',
+    institution: localStorage.getItem('bom_institution') || '',
+    whatsapp: localStorage.getItem('bom_whatsapp') || '',
+    gender: localStorage.getItem('bom_gender') || '',
+    roll: localStorage.getItem('bom_roll') || '',
+    loggedIn: localStorage.getItem('bom_logged_in') || '',
+    accessApproved: localStorage.getItem('bom_access_approved') || ''
+  };
+}
+
+// অবজেক্টকে Base64 টোকেনে রূপান্তর করা
+function bomEncodeSyncToken(payload) {
+  try {
+    const json = JSON.stringify(payload);
+    return btoa(unescape(encodeURIComponent(json)));
+  } catch (e) {
+    return '';
+  }
+}
+
+// Base64 টোকেন থেকে আবার অবজেক্টে ফিরিয়ে আনা
+function bomDecodeSyncToken(token) {
+  try {
+    const json = decodeURIComponent(escape(atob(token)));
+    return JSON.parse(json);
+  } catch (e) {
+    return null;
+  }
+}
+
+// হাব সাইটে টোকেনসহ পাঠানোর URL তৈরি করা (মূল ওয়েবসাইট থেকে একবারই ব্যবহৃত হবে)
+function bomBuildHubRedirectUrl() {
+  const payload = bomBuildSyncPayload();
+  const token = bomEncodeSyncToken(payload);
+  return SYNC_HUB_URL + '?sync=' + encodeURIComponent(token);
+}
 
     function setLoginData(role, name, studentId) {
       localStorage.setItem('bom_logged_in', 'true');
@@ -5684,9 +5998,20 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         showLoadingOverlay();
         setTimeout(() => { hideLoadingOverlay(); showMainPage('user'); }, 1500);
       });
+      // সিঙ্ক সিস্টেম চালু থাকলে "মেইন পেইজে যান" লুকিয়ে "রিলোড করুন" দেখানো
+      if (CROSS_SERVER_SYNC_ENABLED) {
+        document.getElementById('continue-to-main-btn').style.display = 'none';
+        document.getElementById('sync-reload-btn-register').style.display = 'block';
+      }
+      document.getElementById('sync-reload-btn-register').addEventListener('click', function() {
+        window.location.href = bomBuildHubRedirectUrl();
+      });
       document.getElementById('copy-id-btn').addEventListener('click', function() {
-        const id = document.getElementById('generated-id-text').textContent;
-        navigator.clipboard.writeText(id).then(() => {
+      const id = document.getElementById('generated-id-text').textContent;
+      const wa = document.getElementById('bomreg-whatsapp-text').textContent;
+      const sec = document.getElementById('bomreg-secret-text').textContent;
+      const fullText = `BOM STUDENT ID: ${id}\nWhatsApp: ${wa}\nSecret Password: ${sec}`;
+      navigator.clipboard.writeText(fullText).then(() => {
           this.innerHTML = 'কপি হয়েছে ✓';
           setTimeout(() => { this.innerHTML = 'কপি করুন'; }, 1800);
         });
@@ -5730,7 +6055,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
           document.getElementById('auth-forms-wrap').style.display = 'none';
           document.getElementById('id-success-screen').classList.add('active');
           setLoginData('user', result.name, result.studentId);
-       }
+        }
       } catch (e) {
         btn.disabled = false;
         btn.innerHTML = 'রেজিস্ট্রেশন করুন';
@@ -5755,6 +6080,8 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
 
       const btn = document.getElementById('student-login-btn');
       btn.disabled = true;
+      const originalLoginBtnText = btn.innerHTML;
+      btn.innerHTML = 'প্রসেসিং...';
 
       const password = bomLoginState === 'password_required'
         ? document.getElementById('login-student-password').value.trim()
@@ -5763,6 +6090,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       try {
         const result = await bomApiPost({ action: 'login', studentId, whatsapp, password });
         btn.disabled = false;
+        btn.innerHTML = originalLoginBtnText;
 
         if (result.error === 'password_required') {
           document.getElementById('login-pw-student-name').textContent = result.name;
@@ -5799,14 +6127,38 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         localStorage.setItem('bom_roll', result.roll);
         bomSetCachedAccess(result.status === 'APPROVED');
         bomLoginState = 'idle';
-        showLoadingOverlay();
-        setTimeout(() => { hideLoadingOverlay(); showMainPage('user'); }, 1500);
+        bomShowLoginSuccessModal(result.name);
 
       } catch (e) {
         btn.disabled = false;
         errEl.querySelector('span').textContent = 'নেটওয়ার্ক সমস্যা, আবার চেষ্টা করুন।';
         errEl.classList.add('show');
       }
+    }
+    
+    function bomShowLoginSuccessModal(name) {
+      document.getElementById('auth-forms-wrap').style.display = 'none';
+      document.getElementById('login-success-name').textContent = name || 'শিক্ষার্থী';
+      document.getElementById('login-success-screen').style.display = 'block';
+
+      const reloadBtn = document.getElementById('sync-reload-btn-login');
+      const continueBtn = document.getElementById('continue-after-login-btn');
+
+      if (CROSS_SERVER_SYNC_ENABLED) {
+        reloadBtn.style.display = 'block';
+        continueBtn.style.display = 'none';
+      } else {
+        reloadBtn.style.display = 'none';
+        continueBtn.style.display = 'block';
+      }
+
+      reloadBtn.onclick = function() {
+        window.location.href = bomBuildHubRedirectUrl();
+      };
+      continueBtn.onclick = function() {
+        showLoadingOverlay();
+        setTimeout(() => { hideLoadingOverlay(); showMainPage('user'); }, 1500);
+      };
     }
 
     // ===== এডমিন লগইন =====
@@ -5829,8 +6181,32 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
         return;
       }
       setLoginData(role, name, null);
-      showLoadingOverlay();
-      setTimeout(() => { hideLoadingOverlay(); showMainPage(role); }, 1500);
+      bomShowAdminLoginSuccessModal(name, role);
+    }
+    
+    function bomShowAdminLoginSuccessModal(name, role) {
+      document.getElementById('auth-forms-wrap').style.display = 'none';
+      document.getElementById('admin-login-success-name').textContent = name || 'এডমিন';
+      document.getElementById('admin-login-success-screen').style.display = 'block';
+
+      const reloadBtn = document.getElementById('sync-reload-btn-admin');
+      const continueBtn = document.getElementById('continue-after-admin-btn');
+
+      if (CROSS_SERVER_SYNC_ENABLED) {
+        reloadBtn.style.display = 'block';
+        continueBtn.style.display = 'none';
+      } else {
+        reloadBtn.style.display = 'none';
+        continueBtn.style.display = 'block';
+      }
+
+      reloadBtn.onclick = function() {
+        window.location.href = bomBuildHubRedirectUrl();
+      };
+      continueBtn.onclick = function() {
+        showLoadingOverlay();
+        setTimeout(() => { hideLoadingOverlay(); showMainPage(role); }, 1500);
+      };
     }
 
     // ===== showMainPage: role অনুযায়ী মেইন পেজ দেখানো =====
@@ -5843,6 +6219,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       showDashboardButton();
       setButtonVisibility();
       window.scrollTo(0, 0);
+      bomForceUpdateBadgesSoon();
       showAdminButtonsIfNeeded();
       bomLoadFolders();
       showSettingsButtonIfAdmin();
@@ -5880,6 +6257,19 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       div.textContent = text || '';
       return div.innerHTML;
     }
+    function bomPrettyDate(raw) {
+      if (!raw) return '';
+      const d = new Date(raw);
+      if (isNaN(d.getTime())) return raw;
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mmm = months[d.getMonth()];
+      const yyyy = d.getFullYear();
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mi = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      return `${dd} ${mmm} ${yyyy} ${hh}:${mi}:${ss}`;
+    }
 
     // ওয়েবসাইটে থাকা সব ক্লাস/মিশন/ডকুমেন্ট/পরীক্ষার মোট সংখ্যা বের করা
     function bomGetTotalCounts() {
@@ -5912,7 +6302,7 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
       window.scrollTo(0, 0);
 
       const contentEl = document.getElementById('bomdash-content');
-      contentEl.innerHTML = '<p class="bangla-font" style="text-align:center;padding:40px;color:#9fa8d9;"><div class="loading" style="margin:0 auto 12px;"></div>লোড হচ্ছে...</p>';
+      contentEl.innerHTML = '<div style="text-align:center;padding:50px;"><div class="loading" style="margin-bottom:16px;"></div><p class="bangla-font" style="color:#ffd76e;font-weight:600;margin:0;">লোড হচ্ছে...</p></div>';
 
       try {
         const result = await bomApiGet({ action: 'loadDashboard', studentId: studentId });
@@ -6047,6 +6437,16 @@ body.fullscreen-active { overflow: hidden !important; touch-action: none !import
             </div>
             <div class="lb-pw-status bangla-font">আইডি পাসওয়ার্ড: ${hasPassword ? '✅ সেট করা আছে' : '⚠️ সেট করা নেই'}</div>
             <button class="lb-pw-btn bangla-font" id="bomdash-pw-open-btn">${hasPassword ? 'পাসওয়ার্ড পরিবর্তন করুন' : 'পাসওয়ার্ড সেট করুন'}</button>
+            <div class="lb-pw-notice-wrap">
+              <div class="lb-pw-notice warning-notice">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="bangla-font"><strong>সতর্কতা:</strong> ${hasPassword ? `আপনার পাসওয়ার্ডটি হলো "<b>${bomEscapeHtml(d.password)}</b>"। ডায়েরিতে টুকে রাখুন, এই পাসওয়ার্ডটি ভুলে গেলে পরবর্তীতে আর লগইন করতে পারবেন না।` : 'যদি পাসওয়ার্ড ভুলে যাওয়ার আশঙ্কা থাকে তাহলে পাসওয়ার্ড সেট করা থেকে বিরত থাকুন, কেননা পাসওয়ার্ড ভুলে গেলে পরবর্তীতে আর লগইন করতে পারবেন না।'}</div>
+              </div>
+              <div class="lb-pw-notice info-notice">
+                <i class="fas fa-info-circle"></i>
+                <div class="bangla-font"><strong>বিষয়দ্রষ্টব্য:</strong> ${hasPassword ? 'পরবর্তীতে লগইনের সময় আপনার আইডির পাসওয়ার্ড, স্টুডেন্ট আইডি, হোয়াটসঅ্যাপ নাম্বার এবং অ্যাপের সিক্রেট পাসওয়ার্ড দরকার হবে, সুতরাং এগুলো সংরক্ষণ করুন।' : 'পরবর্তীতে লগইনের সময় আপনার স্টুডেন্ট আইডি, হোয়াটসঅ্যাপ নাম্বার এবং অ্যাপের সিক্রেট পাসওয়ার্ড প্রয়োজন হবে।'}</div>
+              </div>
+            </div>
           </div>
 
           <div class="pf-id-box">
@@ -6779,7 +7179,7 @@ async function bomDownloadIdPng() {
             <div class="bomcomment-summary">
               <div style="width:100%;">
                 <span class="msg-preview bangla-font">${bomEscapeHtml(preview)}</span>
-                <div class="bomcomment-date-row bangla-font">📅 ${bomEscapeHtml(c.date)}</div>
+                <div class="bomcomment-date-row bangla-font">📅 ${bomEscapeHtml(bomPrettyDate(c.date))}</div>
                 <button class="bomcomment-detail-btn bangla-font" onclick="event.stopPropagation();bomToggleCommentDetail('${did}', this)">
                   <i class="fas fa-info-circle"></i> বিস্তারিত
                 </button>
@@ -6791,7 +7191,7 @@ async function bomDownloadIdPng() {
                 <div><span class="dl bangla-font">ব্যাচ</span><span class="dv bangla-font">${bomEscapeHtml(c.batch)}</span></div>
                 <div><span class="dl bangla-font">রোল</span><span class="dv bangla-font">${bomEscapeHtml(c.roll)}</span></div>
                 <div><span class="dl bangla-font">বিষয়</span><span class="dv bangla-font">${bomEscapeHtml(c.category)}</span></div>
-                <div class="full-row"><span class="dl bangla-font">তারিখ ও সময়</span><span class="dv bangla-font">${bomEscapeHtml(c.date)}</span></div>
+                <div class="full-row"><span class="dl bangla-font">তারিখ ও সময়</span><span class="dv bangla-font">${bomEscapeHtml(bomPrettyDate(c.date))}</span></div>
                 <div class="full-row"><span class="dl bangla-font">বার্তা</span><span class="dv bangla-font">${bomEscapeHtml(c.message)}</span></div>
               </div>
               ${bomBuildStatusProgress(c)}
@@ -6960,7 +7360,7 @@ async function bomDownloadIdPng() {
               <div class="bomcc-detail-grid">
                 <div class="dl bangla-font">সাবজেক্ট:<br><span class="dv bangla-font">${bomEscapeHtml(item.subject)}</span></div>
                 <div class="dl bangla-font">টাইটেল:<br><span class="dv bangla-font">${bomEscapeHtml(item.title)}</span></div>
-                <div class="dl bangla-font">সময়:<br><span class="dv bangla-font">${bomEscapeHtml(item.timestamp)}</span></div>
+                <div class="dl bangla-font">সময়:<br><span class="dv bangla-font">${bomEscapeHtml(bomPrettyDate(item.timestamp))}</span></div>
                 <div class="dl bangla-font">স্ট্যাটাস:<br><span class="dv bangla-font">${bomEscapeHtml(item.status)}</span></div>
                 <div class="dl bangla-font" style="grid-column:1/-1;">লিংক:<br><span class="dv bangla-font" style="word-break:break-all;">${bomEscapeHtml(item.link)}</span></div>
               </div>
@@ -7271,7 +7671,7 @@ async function bomDownloadIdPng() {
             <div class="bomcomment-summary">
               <div style="width:100%;">
                 <span class="msg-preview bangla-font"><strong>${bomEscapeHtml(c.name)}</strong>: ${bomEscapeHtml(preview)}</span>
-                <div class="bomcomment-date-row bangla-font">📅 ${bomEscapeHtml(c.date)}</div>
+                <div class="bomcomment-date-row bangla-font">📅 ${bomEscapeHtml(bomPrettyDate(c.date))}</div>
                 <button class="bomcomment-detail-btn bangla-font" onclick="event.stopPropagation();bomToggleCommentDetail('${did}', this)">
                   <i class="fas fa-info-circle"></i> বিস্তারিত
                 </button>
@@ -7579,6 +7979,21 @@ async function bomDownloadIdPng() {
         });
       }
     });
+    // ===== মেইন পেজে ঢোকার সাথে সাথে কাউন্টিং ব্যাজ নিশ্চিতভাবে দেখানো =====
+    function bomForceUpdateBadgesSoon() {
+      let attempts = 0;
+      const maxAttempts = 15;
+      const interval = setInterval(() => {
+        attempts++;
+        const hasData = (typeof allClasses !== 'undefined' && Array.isArray(allClasses) && allClasses.length > 0);
+        if (typeof updateAllBadges === 'function') {
+          updateAllBadges();
+        }
+        if (hasData || attempts >= maxAttempts) {
+          clearInterval(interval);
+        }
+      }, 500);
+    }
     // ============ নতুন সিস্টেম শেষ ============
     
     function $(sel, root = document) { return root.querySelector(sel); }
@@ -7996,7 +8411,6 @@ const documentsPage = $('#documents-page');
         }
       } catch (error) {
         console.error("ডেটা লোড করতে সমস্যা:", error);
-        showDataLoadFailedBanner();
         return [];
       }
     }
@@ -10363,6 +10777,35 @@ function goToMainWebsite() {
     
     // Check if user has visited main website before
     document.addEventListener('DOMContentLoaded', () => {
+    // ============ ইনকামিং সিঙ্ক টোকেন চেক করা (ক্রস-সার্ভার অটো-লগইন) ============
+      if (CROSS_SERVER_SYNC_ENABLED) {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const syncToken = urlParams.get('sync');
+          if (syncToken) {
+            const payload = bomDecodeSyncToken(syncToken);
+            if (payload && payload.studentId) {
+              // টোকেনের সব তথ্য লোকাল স্টোরেজে বসিয়ে দেওয়া
+              if (payload.role) localStorage.setItem('bom_user_role', payload.role);
+              if (payload.name) localStorage.setItem('bom_user_name', payload.name);
+              if (payload.studentId) localStorage.setItem('bom_student_id', payload.studentId);
+              if (payload.institution) localStorage.setItem('bom_institution', payload.institution);
+              if (payload.whatsapp) localStorage.setItem('bom_whatsapp', payload.whatsapp);
+              if (payload.gender) localStorage.setItem('bom_gender', payload.gender);
+              if (payload.roll) localStorage.setItem('bom_roll', payload.roll);
+              if (payload.loggedIn) localStorage.setItem('bom_logged_in', payload.loggedIn);
+              if (payload.accessApproved) localStorage.setItem('bom_access_approved', payload.accessApproved);
+            }
+            // URL থেকে টোকেন সরিয়ে ফেলা (ঠিকানা বার পরিষ্কার রাখতে, আবার রিলোড হলে দ্বিতীয়বার প্রসেস না হয়)
+            urlParams.delete('sync');
+            const cleanUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '') + window.location.hash;
+            window.history.replaceState({}, document.title, cleanUrl);
+          }
+        } catch (e) {
+          console.warn('sync token processing failed', e);
+        }
+      }
+      
       // শুধুমাত্র ইভেন্ট লিসেনার ইনিশিয়ালাইজ করা
       defaultPage.style.display = 'none';
       loginPage.style.display = 'none';
@@ -10742,407 +11185,227 @@ body.fullscreen-active {
 <script>
 (function() {
   // ==================== সম্পূর্ণ FAQ ডাটা (আপডেটেড) ====================
-  const faqData = [
+    const faqData = [
+    // ================= লগইন ও রেজিস্ট্রেশন =================
     {
-      q: "DAKHIL-27 কোর্সের অ্যাপের ল্যান্ডিং পৃষ্ঠায় কী কী দেখতে পাব?",
-      a: "ল্যান্ডিং পৃষ্ঠায় আপনি BOM-এর অ্যানিমেটেড লোগো, কোর্সের শিরোনাম, শিক্ষকদের পরিচয়, একটি মোটিভেশনাল টেক্সট বক্স এবং ফুটারে যোগাযোগের তথ্য দেখতে পাবেন। মোটিভেশনাল টেক্সট প্রতি ৫ সেকেন্ড পর পর পরিবর্তিত হয়।"
+      q: "নতুন শিক্ষার্থী হিসেবে অ্যাপে কীভাবে যুক্ত হব?",
+      a: "প্রথম পাতায় 'আপনার এনরোলকৃত কোর্স' বাটনে ক্লিক করলে লগইন/রেজিস্ট্রেশন পাতায় যাবেন। সেখানে 'রেজিস্ট্রেশন' ট্যাব থেকে আপনার নাম, প্রতিষ্ঠানের নাম, WhatsApp নাম্বার ও লিঙ্গ দিয়ে ফর্ম পূরণ করলে আপনার জন্য একটি স্বতন্ত্র 'BOM Student ID' তৈরি হবে।"
     },
     {
-      q: "এই অ্যাপটি দেখার পর মূল কোর্স মেটেরিয়ালে কীভাবে প্রবেশ করব?",
-      a: "ল্যান্ডিং পৃষ্ঠার মাঝখানে অবস্থিত 'আপনার এনরোলকৃত কোর্স' বাটনে ক্লিক করলে আপনাকে লগইন পৃষ্ঠায় নিয়ে যাবে।"
+      q: "BOM Student ID পেলে এটা নিয়ে কী করব?",
+      a: "এই আইডিটি অবশ্যই সংরক্ষণ করে রাখুন (স্ক্রিনশট নিন বা লিখে রাখুন) — ভবিষ্যতে প্রতিবার লগইন করতে এই আইডি প্রয়োজন হবে। এটি হারিয়ে ফেললে আবার একই তথ্য দিয়ে লগইন করা কঠিন হয়ে যেতে পারে।"
     },
     {
-      q: "মূল কোর্স কন্টেন্ট দেখতে কি লগইন করতে হবে?",
-      a: "হ্যাঁ। কোর্সের কন্টেন্টগুলো সুরক্ষিত। আপনাকে 'সিকিউরিটি কোড' (পাসওয়ার্ড) দিয়ে লগইন করতে হবে।"
+      q: "রেজিস্ট্রেশনের পরেই কি ক্লাস দেখতে পারব?",
+      a: "রেজিস্ট্রেশনের পর আপনার আইডিটি প্রথমে 'প্রসেসিং' অবস্থায় থাকে — এডমিনের অনুমোদনের অপেক্ষায়। অনুমোদন হয়ে গেলেই আপনি সব ক্লাস/মিশন/ডকুমেন্টে প্রবেশ করতে পারবেন।"
     },
     {
-      q: "DAKHIL-27 ব্যাচের জন্য সঠিক সিকিউরিটি কোড কোনটি?",
-      a: "দাখিল-২৭ ব্যাচের সাধারণ শিক্ষার্থীদের জন্য সঠিক কোড হল `USERDAKHIL27`।"
+      q: "অনুমোদন পেতে কত সময় লাগতে পারে?",
+      a: "সাধারণত ২৪ ঘণ্টার মধ্যে যেকোনো এডমিন আপনার আইডি অনুমোদন করে দেন। কখনো কখনো অটো-অ্যাক্সেস সিস্টেম চালু থাকলে রেজিস্ট্রেশনের কিছু সময় পরই স্বয়ংক্রিয়ভাবে অ্যাক্সেস চালু হয়ে যেতে পারে। নির্দিষ্ট সময় পার হয়ে গেলেও অনুমোদন না পেলে WhatsApp-এ এডমিনের সাথে যোগাযোগ করুন।"
     },
     {
-      q: "লগইন পৃষ্ঠায় পাসওয়ার্ড দেওয়ার পর 'লগইন করুন' বাটনে ক্লিক করলে একটি সতর্কবার্তা দেখায়—এর মানে কী?",
-      a: "এই সতর্কবার্তাটি লগইন সফল হওয়ার পর দেখানো হয়। এতে বলা হয় যে আপনার পাসওয়ার্ড গোপন রাখতে হবে এবং কারো সাথে শেয়ার করা যাবে না। শেয়ার করলে আপনার অ্যাক্সেস স্থায়ীভাবে বাতিল করা হতে পারে।"
+      q: "শিক্ষার্থী লগইন করতে কী কী তথ্য লাগবে?",
+      a: "আপনার BOM Student ID এবং রেজিস্ট্রেশনের সময় দেওয়া WhatsApp নাম্বার দিতে হবে। আপনি যদি আগে পাসওয়ার্ড সেট করে থাকেন, তাহলে সেটাও দিতে হবে।"
     },
     {
-      q: "লগইন করার পর কি প্রতিবার আবার লগইন করতে হবে?",
-      a: "না। একবার লগইন করলে আপনার তথ্য ব্রাউজারের লোকাল স্টোরেজে সংরক্ষিত থাকে। ফলে আপনি পরবর্তীতে আবার অ্যাপে এলে স্বয়ংক্রিয়ভাবে লগইন থাকবেন।"
+      q: "লগইন পাসওয়ার্ড কোথা থেকে সেট করব?",
+      a: "প্রথমবার আইডি তৈরির সময় পাসওয়ার্ড লাগে না। পরবর্তীতে আপনি চাইলে ড্যাশবোর্ডে গিয়ে নিজের ইচ্ছামতো একটি পাসওয়ার্ড সেট করতে পারবেন, যা পরবর্তী লগইনগুলোতে অতিরিক্ত সুরক্ষা দেবে।"
     },
     {
-      q: "লগইন করতে না পারলে বা পাসওয়ার্ড ভুলে গেলে কী করব?",
-      a: "লগইন পৃষ্ঠার নিচেই WhatsApp-এর একটি লিংক দেওয়া আছে। সেখানে ক্লিক করে এডমিনের সাথে যোগাযোগ করে সাহায্য নিতে পারেন।"
+      q: "আমার আইডি যদি ব্লক হয়ে যায়, তাহলে কী করব?",
+      a: "আইডি ব্লক থাকলে লগইন করা যাবে না এবং একটি বার্তা দেখাবে যে আইডি ব্লক করা হয়েছে। এক্ষেত্রে এডমিনের সাথে WhatsApp-এ যোগাযোগ করে বিষয়টি জানাতে হবে।"
     },
     {
-      q: "প্রথম স্তরের লগইন করার পরও কেন আবার হোয়াটসঅ্যাপ নম্বর ও পাসওয়ার্ড চাচ্ছে?",
-      a: "এটি একটি অতিরিক্ত নিরাপত্তা স্তর। মূল কোর্সের লিংক (ক্লাস/মিশন/ডকুমেন্ট) ক্লিক করলে এই দ্বিতীয় স্তরের যাচাইকরণ চালু হয়। আপনি গুগল ফর্মের মাধ্যমে যে নাম, হোয়াটসঅ্যাপ নম্বর ও পাসওয়ার্ড দিয়েছিলেন, তা দিয়েই এখানে ভেরিফাই করতে হবে।"
+      q: "একবার লগইন করার পর কি বারবার লগইন করতে হবে?",
+      a: "না। একবার লগইন করলে আপনার তথ্য ব্রাউজারে সংরক্ষিত থাকে, ফলে পরবর্তীতে আবার অ্যাপে আসলে স্বয়ংক্রিয়ভাবে লগইন অবস্থায় থাকবেন — যতক্ষণ না আপনি নিজে লগআউট করেন বা ব্রাউজারের তথ্য মুছে ফেলেন।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনের জন্য কী কী তথ্য দিতে হবে?",
-      a: "আপনাকে আপনার হোয়াটসঅ্যাপ নম্বর এবং সেইসাথে জমা দেওয়া ব্যক্তিগত পাসওয়ার্ডটি দিতে হবে।"
+      q: "লগইন বাটনে চাপ দেওয়ার পর 'প্রসেসিং...' লেখা দেখায় কেন?",
+      a: "এটা নিশ্চিত করে যে আপনার অনুরোধ প্রসেস হচ্ছে। ফলাফল আসা পর্যন্ত অপেক্ষা করুন — এতে বোঝা যায় বাটনে চাপ সঠিকভাবে কাজ করেছে।",
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে 'হ্যাঁ/না' বাটন কেন দেওয়া আছে?",
-      a: "এটি নিশ্চিত করে যে আপনি আগে কখনো গুগল ফর্মের মাধ্যমে তথ্য জমা দিয়েছেন কিনা। 'হ্যাঁ' বাটন ক্লিক করলে আপনাকে তথ্য দিতে বলা হবে, আর 'না' ক্লিক করলে আপনাকে গুগল ফর্মটি পূরণ করার নির্দেশনা দেখাবে।"
+      q: "আমার লগইনের কোনো সীমা আছে কি?",
+      a: "প্রতিটি আইডির জন্য একটি নির্দিষ্ট সংখ্যক লগইনের সীমা থাকতে পারে, যা এডমিন নির্ধারণ করেন। সীমা শেষ হয়ে গেলে লগইন করতে না পারলে এডমিনের সাথে যোগাযোগ করে সীমা বাড়ানোর অনুরোধ করতে পারেন।"
     },
+
+    // ================= ল্যান্ডিং ও মূল পাতা =================
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে আমার নাম ও তথ্য মিললে 'শুভেচ্ছা!' জানিয়ে একটি বার্তা দেখায়—এর অর্থ কী?",
-      a: "এর অর্থ আপনার তথ্য সঠিক এবং আপনি এখন মাত্র ৫ বার পর্যন্ত লগইন করার অনুমতি পাবেন। এই বার্তায় দেখাবে আপনি এর আগে কতবার লগইন করেছেন এবং এখন লগইন করলে আর কতবার বাকি থাকবে।"
+      q: "ওয়েবসাইট খোলার পর প্রথম পাতায় কী কী দেখা যায়?",
+      a: "প্রথম পাতায় BOM-এর লোগো, কোর্সের নাম, প্রতিষ্ঠানের ব্যানার ছবি, একটি মোটিভেশনাল বার্তার বক্স, শিক্ষকদের পরিচিতি এবং প্রতিষ্ঠানের যোগাযোগ ও সোশ্যাল মিডিয়ার তথ্য দেখা যায়।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে আমি কি সর্বোচ্চ কতবার লগইন করতে পারব?",
-      a: "আপনি মোট ৫ বার লগইন করতে পারবেন।"
+      q: "লগইনের পর মূল পাতায় (Main Page) কী কী থাকে?",
+      a: "সার্চ বার, ডেটা রিফ্রেশ বাটন, ড্যাশবোর্ড বাটন, ঘোষণার নোটিস বার, ছবির স্লাইডশো, ডিজিটাল ঘড়ি ও পরীক্ষার কাউন্টডাউন, 'আজকের ক্লাস' তালিকা, লাইভ ক্লাসের বক্স, এবং সব সাবজেক্ট/ফোল্ডারের তালিকা থাকে।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে 'আপনার নাম্বারে ইতিমধ্যে একটি বৈধ আইডি রয়েছে' বলে একটি বার্তা দেখালে এর অর্থ কী?",
-      a: "এর অর্থ আপনার হোয়াটসঅ্যাপ নম্বর এবং পাসওয়ার্ড ব্যবহার করে ইতিমধ্যে একটি আইডি তৈরি হয়ে গেছে এবং আপনি দ্বিতীয়বার আরেকটি আইডি তৈরি করতে পারবেন না। এটি ডুপ্লিকেট আইডি তৈরি ঠেকানোর জন্য।"
+      q: "উপরের সার্চ বক্সে কী খোঁজা যায়?",
+      a: "যেকোনো ক্লাস, মিশন বা ডকুমেন্টের নাম লিখলে সাথে সাথে মিলে যাওয়া ফলাফল দেখাবে। কোনো ফলাফলে ক্লিক করলে সরাসরি সেই কনটেন্টের জায়গায় নিয়ে যাবে।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে 'অনুমোদিত তালিকায় পাওয়া যায়নি' বলে একটি বার্তা দেখালে কী করব?",
-      a: "এর অর্থ আপনার হোয়াটসঅ্যাপ নম্বরটি এখনও অনুমোদিত তালিকায় যুক্ত হয়নি। নির্দেশনা অনুযায়ী প্রয়োজনীয় প্রমাণসহ WhatsApp-এ যোগাযোগ করতে হবে।"
+      q: "'ডেটা রিফ্রেশ' বাটন কখন ব্যবহার করব?",
+      a: "নতুন কোনো ক্লাস/মিশন/ডকুমেন্ট যুক্ত হলে বা তথ্য ঠিকমতো না দেখালে এই বাটনে চাপ দিলে সর্বশেষ তথ্য আবার লোড হয়।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে 'লগইন সীমা অতিক্রম' বলে একটি বার্তা দেখালে এর অর্থ কী?",
-      a: "এর অর্থ আপনি ইতিমধ্যে সর্বোচ্চ ৫ বার লগইন সম্পন্ন করে ফেলেছেন। এখন আপনি আর লগইন করতে পারবেন না। লিমিট বাড়াতে চাইলে WhatsApp-এ যোগাযোগ করতে হবে।"
+      q: "'আজকের ক্লাস' তালিকার পাশের ড্রপডাউন থেকে কী করা যায়?",
+      a: "'আজকের ক্লাস', 'সপ্তাহের ক্লাস' বা 'মাসের ক্লাস' বেছে নিয়ে নির্দিষ্ট সময়সীমার সব ক্লাস একসাথে দেখতে পারবেন।"
     },
     {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে 'অ্যাক্সেস বাতিল' বলে একটি লাল বার্তা দেখালে এর অর্থ কী?",
-      a: "এর অর্থ আপনার আইডিটির বৈধতা কর্তৃপক্ষ বাতিল করেছে। যদি এটি কোনো ভুলবশত হয়, তাহলে প্রমাণাদি সহ WhatsApp-এ যোগাযোগ করুন। এই মডালে 'পুনরায় তথ্য যাচাই করুন' নামে একটি নতুন বাটন রয়েছে, যা ক্লিক করে নতুন করে ভেরিফিকেশন প্রক্রিয়া শুরু করা যায়।"
+      q: "সব সাবজেক্ট/ফোল্ডার কয় ভাগে ভাগ করা আছে?",
+      a: "মূলত তিনটা প্রধান ভাগ — 'ক্লাস', 'মিশন' ও 'ডকুমেন্ট'। এছাড়া 'ইক্সাম', 'পরীক্ষার রেজাল্ট শীট' ও 'সাজেশন্স'-এর জন্য আলাদা ফোল্ডার আছে। প্রয়োজনে এডমিন নতুন কাস্টম ফোল্ডারও যুক্ত করতে পারেন।"
     },
     {
-      q: "সফলভাবে লগইন করার পর প্রথম পৃষ্ঠায় (Main Page) কী কী দেখতে পাব?",
-      a: "এখানে একটি সার্চ বার, ডেটা রিফ্রেশ বাটন, ড্যাশবোর্ড বাটন, নোটিস বার, হিরো সেকশন, স্লাইডশো, একটি ডিজিটাল ঘড়ি ও তারিখ, 'আজকের ক্লাস' টেবিল এবং 'সব সাবজেক্ট' এর তালিকা দেখতে পাবেন।"
+      q: "ফোল্ডারের কোণায় থাকা ছোট সংখ্যার ব্যাজ কী বোঝায়?",
+      a: "এটা দেখায় ওই ফোল্ডারে মোট কতগুলো ক্লাস/মিশন/ডকুমেন্ট আছে।"
     },
     {
-      q: "পৃষ্ঠার শীর্ষে থাকা সার্চ বক্সটির কাজ কী?",
-      a: "এটি পুরো অ্যাপের সব ক্লাস, মিশন বা ডকুমেন্টের ভিডিওর শিরোনাম অনুসন্ধান করতে ব্যবহার করা হয়। কিছু লিখলেই সাথে সাথে ফলাফল দেখাবে।"
+      q: "সবার নিচে যে পরিসংখ্যান বক্স আছে, সেখানে কী দেখানো হয়?",
+      a: "মোট অ্যাপ ভিজিট, মোট ক্লাস/মিশন/ডকুমেন্ট দেখা হয়েছে কতবার, মোট কমেন্ট জমা পড়েছে, এবং মোট রিপ্লাই দেওয়া হয়েছে — এই সামগ্রিক (সবার মিলিত) পরিসংখ্যান দেখায়, ব্যক্তিগত অগ্রগতি না।"
     },
+
+    // ================= ক্লাস, মিশন, ডকুমেন্ট দেখা =================
     {
-      q: "'ডেটা রিফ্রেশ' বাটনের কাজ কী?",
-      a: "নতুন কোনো ক্লাস বা ডকুমেন্ট যুক্ত হলে বা ডেটা লোড নিয়ে সমস্যা হলে এই বাটনে ক্লিক করে স্টোরেজ থেকে নতুন করে ডেটা লোড করা যায়।"
+      q: "'ক্লাস', 'মিশন' ও 'ডকুমেন্ট' ফোল্ডারের মধ্যে পার্থক্য কী?",
+      a: "ক্লাস = নিয়মিত ভিডিও লেকচার। মিশন = নির্দিষ্ট টাস্ক/অ্যাসাইনমেন্ট। ডকুমেন্ট = লেকচার শীট, নোট বা অন্যান্য ফাইল। প্রতিটির জন্য আলাদা ফোল্ডার আছে।"
     },
     {
-      q: "উপরের দিকে যে ব্যানারটি ডানে-বামে সরে, সেটির নাম কী এবং এটি কীভাবে নিয়ন্ত্রণ করব?",
-      a: "এটিকে নোটিস বার (Notice Bar) বলে। এটি গুরুত্বপূর্ণ ঘোষণা, স্বাগতম বার্তা এবং অনুস্মারক (রিমাইন্ডার) দেখানোর জন্য। এটি আপনাআপনি স্ক্রল হতে থাকে।"
+      q: "কোনো সাবজেক্টে ঢুকলে কী দেখতে পাব?",
+      a: "সেই সাবজেক্টের সব ক্লাস/মিশন/ডকুমেন্ট কার্ড আকারে দেখাবে — প্রতিটি কার্ডে সিরিয়াল নম্বর, শিরোনাম, সময়-তারিখ এবং সম্পন্ন/বাকি নির্দেশক (✓ বা 🕒) থাকে। উপরে সার্চ ও সাজানোর অপশনও আছে।"
     },
     {
-      q: "স্লাইডশোতে থাকা ছবিগুলো কীভাবে নিয়ন্ত্রণ করব?",
-      a: "ছবিগুলো প্রতি ৪ সেকেন্ড পর পর পরিবর্তিত হয়। আপনি চাইলে স্লাইডশোর নিচের ছোট ডটগুলিতে ক্লিক করে সরাসরি নির্দিষ্ট ছবিতে যেতে পারেন। ছবিতে বা স্লাইডশোর যে কোনো জায়গায় ক্লিক করলে স্লাইডশোটি থেমে যাবে; আবার ক্লিক করলে চলতে শুরু করবে।"
+      q: "একটা ভিডিও দেখলে সেটা কীভাবে 'সম্পন্ন' হিসেবে গণ্য হয়?",
+      a: "ভিডিওর একটা যুক্তিসঙ্গত অংশ দেখে ফেললে এটি স্বয়ংক্রিয়ভাবে আপনার অগ্রগতিতে 'সম্পন্ন' হিসেবে যোগ হয়ে যায় এবং কার্ডে সবুজ টিক দেখাবে।"
     },
     {
-      q: "ডিজিটাল ঘড়িটি কী কী তথ্য দেখায়?",
-      a: "ঘড়িটি বর্তমান সময় (ঘণ্টা-মিনিট-সেকেন্ড), বাংলা তারিখ এবং 'বোর্ড পরীক্ষা শুরু: X মাস Y দিন পর' লিখে একটি কাউন্টডাউন দেখায়।"
+      q: "ভিডিও প্লেয়ারে কী কী সুবিধা আছে?",
+      a: "প্লে/পজ, ১০ সেকেন্ড আগে-পিছে, স্পিড কন্ট্রোল, কোয়ালিটি সিলেক্ট (360p থেকে 4K পর্যন্ত), মিউট, ফুলস্ক্রিন/রোটেট, এবং প্রতিটি ভিডিওর জন্য আলাদা ব্যক্তিগত নোট লিখে রাখার সুবিধা আছে।"
     },
     {
-      q: "'আজকের ক্লাস' টেবিলে কী দেখা যায়?",
-      a: "এই টেবিলে আজকের তারিখে নির্ধারিত ক্লাসগুলোর নাম, বিষয় এবং সময় দেখানো হয়।"
+      q: "ভিডিওর নিচে 'আমার নোট' বক্সে কী করা যায়?",
+      a: "প্রতিটি ভিডিওর জন্য আলাদা ব্যক্তিগত নোট লিখে সংরক্ষণ করতে পারবেন, যা পরবর্তীতে ওই ভিডিওতে আবার আসলে দেখতে পাবেন।"
     },
     {
-      q: "'আজকের ক্লাস' টেবিলের পাশের ড্রপডাউন মেনু থেকে 'সপ্তাহের ক্লাস' বা 'মাসের ক্লাস' নির্বাচন করলে কী হবে?",
-      a: "তাহলে টেবিলটি সেই নির্দিষ্ট সময়সীমার (গত ৭ দিন বা গত ৩০ দিন) মধ্যে পড়েছে এমন সব ক্লাস দেখাবে।"
+      q: "ডকুমেন্ট/পিডিএফ ফাইল কীভাবে দেখব?",
+      a: "'দেখুন' বাটনে ক্লিক করলে ফাইলটি একটি ভিউয়ারে খুলবে। জুম করতে চাইলে নির্দিষ্ট জায়গায় ডাবল-ট্যাপ করুন। উপরে একটা ডাউনলোড বাটনও থাকে যা ফাইলটি সরাসরি ডাউনলোড শুরু করে।"
     },
     {
-      q: "'আজকের ক্লাস' টেবিলের কোনো একটি সারিতে ক্লিক করলে কী হবে?",
-      a: "সেটি আপনাকে ঐ নির্দিষ্ট সাবজেক্টের (Subject Page) পাতায় নিয়ে যাবে এবং সংশ্লিষ্ট ক্লাসটিকে হাইলাইট করে দেখাবে।"
+      q: "পরীক্ষার (ইক্সাম) জন্য নির্ধারিত সময় শেষ হয়ে গেলে কী হয়?",
+      a: "কার্ডে একটি সতর্কবার্তা দেখাবে যে অংশগ্রহণের সময় শেষ হয়ে গেছে, এবং বাটনটি আর কাজ করবে না।"
     },
     {
-      q: "'সব সাবজেক্ট' তালিকাটি কয় ভাগে ভাগ করা হয়েছে এবং কী কী?",
-      a: "তালিকাটি তিনটি প্রধান ভাগে ভাগ করা হয়েছে: ক্লাস, মিশন, এবং ডকুমেন্ট। এছাড়াও ইক্সাম, রেজাল্ট শীট, সাজেশন্সের জন্য আলাদা ফোল্ডার রয়েছে।"
+      q: "লাইভ ক্লাসে কীভাবে যুক্ত হব?",
+      a: "মূল পাতায় 'লাইভ ক্লাস' বক্সে থাকা বাটনে ক্লিক করলে লাইভ স্ট্রিম চালু হবে। সেখানে লাইভ মন্তব্যও করা যায়, যা অন্য সব দর্শক দেখতে পাবেন।"
     },
+
+    // ================= কমেন্ট / যোগাযোগ =================
     {
-      q: "'সব সাবজেক্ট' তালিকার পাশে ছোট ছোট গোল্ডেন রঙের নম্বরগুলো কী নির্দেশ করে? (যেমন: কুরআন মাজীদ (ক্লাস) - ২৫)",
-      a: "এটি কাউন্টিং ব্যাজ। এটি নির্দেশ করে যে ঐ নির্দিষ্ট সাবজেক্ট বা ফোল্ডারে মোট কতগুলো ক্লাস/মিশন/ডকুমেন্ট আছে। উদাহরণস্বরূপ, '২৫' মানে ঐ সাবজেক্টে মোট ২৫টি ক্লাস ভিডিও রয়েছে।"
+      q: "কোনো মতামত, প্রশ্ন বা অভিযোগ জানাতে চাইলে কী করব?",
+      a: "'যোগাযোগ করুন' বাটনে ক্লিক করে বিষয় (সাধারণ বার্তা/মতামত/অভিযোগ/অন্যান্য) নির্বাচন করে বার্তা লিখে পাঠাতে পারবেন। নিচে আপনার আগের সব বার্তার তালিকাও দেখতে পাবেন।"
     },
     {
-      q: "'সব সাবজেক্ট' থেকে কোনো একটি সাবজেক্টে ক্লিক করলে কোথায় যাব?",
-      a: "আপনাকে সাবজেক্ট পাতা (Subject Page)-এ নিয়ে যাওয়া হবে, যেখানে ঐ নির্দিষ্ট বিষয়ের সবগুলো ক্লাস, মিশন বা ডকুমেন্টের তালিকা দেখতে পাবেন।"
+      q: "বার্তা পাঠানোর পর সেটার অবস্থা কীভাবে বুঝব?",
+      a: "প্রতিটি বার্তার নিচে একটা ধাপে-ধাপে অগ্রগতি দেখানো হয় (যেমন: বার্তা পাঠানো → পড়া হয়েছে → রিপ্লাই দেওয়া হয়েছে) — কোন ধাপে আছে তা রঙ দিয়ে বোঝানো হয়।"
     },
     {
-      q: "সাবজেক্ট পাতায় থাকা ফিল্টার বারটি কী কাজে লাগে?",
-      a: "এখানে আপনি সার্চ করে ঐ সাবজেক্টের ভেতরে নির্দিষ্ট কোনো ভিডিও খুঁজতে পারেন এবং 'নতুন থেকে পুরানো' বা 'পুরানো থেকে নতুন' অপশন ব্যবহার করে ভিডিওগুলোর ক্রম সাজাতে পারেন।"
+      q: "আমার বার্তার উত্তর দিলে আমি কীভাবে জানব?",
+      a: "পরের বার লগইন করলে স্বয়ংক্রিয়ভাবে একটি পপ-আপে আপনার প্রশ্ন ও তার উত্তর দেখানো হবে। উত্তর পড়ার পর 'বুঝেছি' বাটনে চাপ দিলে এটি আর দেখাবে না।"
     },
+
+    // ================= ড্যাশবোর্ড =================
     {
-      q: "সাবজেক্ট পাতায় প্রতিটি ক্লাসের জন্য একটি করে কার্ড দেখায়। এই কার্ডে কী কী তথ্য থাকে?",
-      a: "প্রতিটি কার্ডে থাকে: সাবজেক্টের নাম, একটি ব্যাজ (যেমন: ক্লাস ১, ক্লাস ২), ভিডিওর শিরোনাম (টাইটেল), ভিডিও আপলোডের সময় ও তারিখ, একটি স্ট্যাটাস ইনডিকেটর (সবুজ টিক = সম্পন্ন, কমলা ঘড়ি = বাকি), এবং ভিডিও দেখার জন্য একটি বাটন।"
+      q: "ড্যাশবোর্ডে কীভাবে ঢুকব এবং সেখানে কী দেখা যায়?",
+      a: "উপরের নেভিগেশনে 'ড্যাশবোর্ড' বাটনে ক্লিক করলে আপনার নাম, প্রতিষ্ঠান, রোল, সামগ্রিক অগ্রগতি (%), ক্লাস/মিশন/ডকুমেন্ট/পরীক্ষা আলাদা আলাদা পরিসংখ্যান, এবং একটি অর্জনের ব্যাজ দেখতে পাবেন।"
     },
     {
-      q: "ক্লাস কার্ডের উপরে ডান পাশে থাকা সবুজ টিক চিহ্ন বা কমলা ঘড়ির অর্থ কী?",
-      a: "সবুজ টিক চিহ্ন (✓) নির্দেশ করে আপনি ইতিমধ্যে এই ক্লাস/মিশন/ডকুমেন্ট সম্পন্ন করেছেন। কমলা ঘড়ি (🕒) নির্দেশ করে এটি এখনও বাকি আছে।"
+      q: "ড্যাশবোর্ডের ব্যাজ সিস্টেম কীভাবে কাজ করে?",
+      a: "আপনার সামগ্রিক অগ্রগতির শতাংশ অনুযায়ী ধাপে ধাপে ব্যাজ পাওয়া যায় — স্টার্টার থেকে শুরু করে ব্রোঞ্জ, সিলভার, গোল্ড এবং সবশেষে প্লাটিনাম ট্রফি পর্যন্ত।"
     },
     {
-      q: "ক্লাস কার্ডের বাটনটিতে 'ক্লাস দেখুন', 'মিশন দেখুন', 'ডকুমেন্ট দেখুন' বা 'পরীক্ষায় অংশগ্রহণ করুন' লেখা থাকে কেন?",
-      a: "এটি স্বয়ংক্রিয়ভাবে নির্ধারিত হয়। ফোল্ডারের ধরণ (ক্লাস/মিশন/ডকুমেন্ট) অনুযায়ী বাটনের লেখা পরিবর্তিত হয়।"
+      q: "ড্যাশবোর্ডে পাসওয়ার্ড সেট বা পরিবর্তন কীভাবে করব?",
+      a: "ড্যাশবোর্ডের 'লগইন ডেটা' অংশে পাসওয়ার্ড সেট/পরিবর্তনের বাটন আছে। এখান থেকে নতুন পাসওয়ার্ড দিয়ে ভবিষ্যতের লগইন আরও সুরক্ষিত করতে পারবেন।"
     },
     {
-      q: "কোনো ক্লাসের কার্ড থেকে 'ক্লাস দেখুন' বাটনে ক্লিক করলে কী হয়?",
-      a: "আপনাকে ভিডিও প্লেয়ার পাতা (Video Player Page)-এ নিয়ে যাবে, যেখানে ইউটিউব ভিডিওটি এম্বেড করা আছে।"
+      q: "আমার BOM Student ID কার্ড কীভাবে ডাউনলোড করব?",
+      a: "ড্যাশবোর্ডের নিচের দিকে 'Student ID Card' অংশে PDF অথবা ছবি (Image) আকারে ডাউনলোডের দুটি বাটন আছে — আপনার সুবিধামতো যেকোনো একটি দিয়ে ডাউনলোড করতে পারবেন।"
     },
     {
-      q: "ভিডিও প্লেয়ার পাতায় ভিডিওর উপরের দুটি বাটনের কাজ কী?",
-      a: "Download & YouTube Play: এই বাটনে ক্লিক করলে ভিডিওটি সরাসরি ইউটিউবে খুলবে, যা থেকে আপনি ডাউনলোড করতে পারবেন। Back to Folder Page: এই বাটনে ক্লিক করে আপনি পূর্বের সাবজেক্ট পাতায় ফিরে যেতে পারবেন।"
+      q: "ড্যাশবোর্ডে আমার মোট কতবার লগইন হয়েছে তা দেখা যায় কি?",
+      a: "হ্যাঁ, ড্যাশবোর্ডে আপনার মোট লগইন সংখ্যা এবং সর্বোচ্চ সীমার তুলনায় কত অবশিষ্ট আছে তা দেখানো হয়।"
     },
+
+    // ================= এডমিন/এডিটর কন্ট্রোল প্যানেল =================
     {
-      q: "ভিডিও প্লেয়ারে 'পোর্ট্রেট (ফুলস্ক্রিন)' বা 'Rotate & Fullscreen' বাটনটি কী কাজ করে?",
-      a: "এই বাটনে ক্লিক করলে ভিডিওটি ৯০ ডিগ্রি ঘুরে পোর্ট্রেট মোডে ফুলস্ক্রিন হবে। স্মার্টফোনে লম্বা ভিডিও (যেমন: মোবাইলে তোলা) দেখার জন্য এটি উপযোগী।"
+      q: "এডমিন/এডিটর হিসেবে নতুন শিক্ষার্থীর আইডি কীভাবে অনুমোদন করব?",
+      a: "'স্টুডেন্ট কন্ট্রোল' প্যানেলে গিয়ে 'শিক্ষার্থী অনুমোদন' ট্যাবে অপেক্ষমাণ (Processing) সব আইডির তালিকা দেখতে পাবেন। প্রতিটির পাশে 'অনুমোদন' বা 'ব্লক' বাটন দিয়ে সিদ্ধান্ত নিতে পারবেন।"
     },
     {
-      q: "পোর্ট্রেট ফুলস্ক্রিন মোড থেকে কীভাবে বের হব?",
-      a: "ভিডিওর ফ্রেমের যে কোনো জায়গায় ট্যাপ করলেই পোর্ট্রেট মোড থেকে বের হয়ে আসবেন।"
+      q: "কোনো শিক্ষার্থীর আইডি কীভাবে ব্লক বা পুনরায় সক্রিয় করব?",
+      a: "'স্টুডেন্ট কন্ট্রোল' → 'শিক্ষার্থী কন্ট্রোল' ট্যাবে সব শিক্ষার্থীর তালিকা থেকে নাম/আইডি সার্চ করে সংশ্লিষ্ট বাটনে ক্লিক করে ব্লক বা পুনরায় সক্রিয় করা যায়।"
     },
     {
-      q: "ভিডিও প্লেয়ারের প্রোগ্রেস বার (Progress Bar) টেনে কী করা যায়?",
-      a: "প্রোগ্রেস বারের থাম্বটিকে টেনে বা বারের যে কোনো জায়গায় ক্লিক করে আপনি ভিডিওর যে কোনো নির্দিষ্ট সময়ে চলে যেতে পারেন।"
+      q: "কোনো শিক্ষার্থীর লগইন সীমা কীভাবে বাড়াবো?",
+      a: "সেই শিক্ষার্থীর তথ্যের পাশে থাকা '+১ লগইন সীমা' বাটনে ক্লিক করলে তার সর্বোচ্চ লগইন সংখ্যা একটা করে বেড়ে যাবে।"
     },
     {
-      q: "প্লেয়ারের বিভিন্ন কন্ট্রোল বাটনের কাজ কী (যেমন: Play/Pause, Stop, « 10s, 10s », Mute)?",
-      a: "এগুলি ভিডিও নিয়ন্ত্রণের জন্য: Play/Pause: ভিডিও চালানো ও বিরত রাখা। Stop: ভিডিও বন্ধ করা। « 10s / 10s »: ভিডিও ১০ সেকেন্ড পিছনে বা সামনে নিয়ে যাওয়া। Mute: শব্দ বন্ধ বা চালু করা।"
+      q: "নতুন ক্লাস/মিশন/ডকুমেন্ট কীভাবে যুক্ত করব?",
+      a: "'ক্লাস ডকুমেন্ট কন্ট্রোল' প্যানেলে '➕ নতুন যুক্ত করুন' বাটনে ক্লিক করে সাবজেক্ট বেছে, টাইটেল ও লিংক দিয়ে সংরক্ষণ করলেই নতুন কনটেন্ট যুক্ত হয়ে যায়।"
     },
     {
-      q: "ভিডিও দেখার সময় আমার ইন্টারনেট সংযোগ ধীর হলে কী হবে?",
-      a: "প্লেয়ারটি স্বয়ংক্রিয়ভাবে আপনার ইন্টারনেট গতি অনুযায়ী ভিডিওর কোয়ালিটি কমিয়ে দেবে। নেটওয়ার্ক ভালো হলে ধীরে ধীরে কোয়ালিটি বাড়বে (যেমন: HD-তে চলে যাবে)।"
+      q: "কোনো ক্লাস/মিশন/ডকুমেন্ট এডিট, হাইড বা ডিলিট কীভাবে করব?",
+      a: "একই 'ক্লাস ডকুমেন্ট কন্ট্রোল' প্যানেলে প্রতিটি আইটেমের 'বিস্তারিত' খুললে এডিট, হাইড/আনহাইড ও ডিলিট বাটন পাবেন। হাইড করলে শিক্ষার্থীরা সেটা দেখতে পাবে না, কিন্তু এডমিনরা দেখতে পাবেন।"
     },
     {
-      q: "ভিডিও লোড হতে অনেক সময় নিচ্ছে বা 'লোড হচ্ছে...' বার্তায় আটকে আছে—এখন কী করব?",
-      a: "এটি নেটওয়ার্ক সমস্যার কারণে হতে পারে। কিছুক্ষণ অপেক্ষা করুন। ২০ সেকেন্ড পর বার্তাটি পরিবর্তিত হয়ে সমস্যার কথা জানাবে। আপনি চাইলে 'Download & YouTube Play' বাটন ব্যবহার করে সরাসরি ইউটিউবে ভিডিওটি দেখতে পারেন।"
+      q: "শিক্ষার্থীদের কমেন্ট/বার্তার উত্তর কীভাবে দেব?",
+      a: "'কমেন্ট কন্ট্রোল' প্যানেলে সব বার্তার তালিকা দেখা যায়। কোনো একটির 'অ্যাকশন' বাটনে ক্লিক করে বার্তা পড়া হয়েছে চিহ্নিত করা, ক্যাটাগরি অনুযায়ী ধাপ আপডেট করা এবং রিপ্লাই লিখে পাঠানো যায়।"
     },
     {
-      q: "কোনো ডকুমেন্ট বা পিডিএফ ফাইলের জন্য 'দেখুন' বাটনে ক্লিক করলে কী হবে?",
-      a: "আপনাকে ড্রাইভ প্লেয়ার পাতা (Drive Player Page)-এ নিয়ে যাবে, যেখানে ফাইলটি গুগল ড্রাইভ ভিউয়ারে খুলবে।"
+      q: "নতুন কাস্টম ফোল্ডার (যেমন বিশেষ কোনো ইভেন্টের জন্য) কীভাবে তৈরি করব?",
+      a: "মূল পাতায় 'নতুন ফোল্ডার যুক্ত করুন' অপশন থেকে নাম দিয়ে তৈরি করা যায়। প্রতিটি ফোল্ডারের পাশে থাকা '⋮' মেনু থেকে নাম পরিবর্তন, হাইড অথবা ডিলিট করা যায়।"
     },
     {
-      q: "ড্রাইভ প্লেয়ার পাতায় কীভাবে ফাইল দেখব এবং কীভাবে ফিরে যাব?",
-      a: "ফাইল লোড হওয়ার জন্য অপেক্ষা করুন। পৃষ্ঠার উপরে ডান পাশে একটি নির্দিষ্ট 'Back to Folder Page' বাটন রয়েছে, যা ক্লিক করে আপনি পূর্বের পাতায় ফিরে যেতে পারেন।"
+      q: "অটো-অ্যাক্সেস সিস্টেম কী এবং এটা কীভাবে নিয়ন্ত্রণ করব?",
+      a: "এটা চালু থাকলে নতুন রেজিস্ট্রেশনের নির্দিষ্ট সময় পর স্বয়ংক্রিয়ভাবে অ্যাক্সেস চালু হয়ে যায়, এডমিনের ম্যানুয়াল অনুমোদনের অপেক্ষা করতে হয় না। সিস্টেম সেটিংস প্যানেল থেকে এটা চালু/বন্ধ করা যায়।"
     },
-    // নতুন প্রশ্ন (ড্রাইভ প্লেয়ার পিডিএফ জুম)
     {
-      q: "ড্রাইভ প্লেয়ার পেজে কোন পিডিএফ ওপেন করলে সেটি জুম কিভাবে করব?",
-      a: "পিডিএফ ডকুমেন্ট জুম করার জন্য আপনি যে অংশ বড় করে দেখতে চান, সেখানে ডাবল-ট্যাপ (ডাবল ক্লিক) করুন। এতে সেটি জুম হয়ে যাবে। পুনরায় ডাবল-ট্যাপ করলে জুম কমে স্বাভাবিক অবস্থায় ফিরে আসবে। দুই আঙুল ব্যবহার করে পিঞ্চ-টু-জুম (Pinch-to-Zoom) কাজ করবে না।"
+      q: "নতুন শিক্ষার্থীদের জন্য সর্বোচ্চ লগইন সীমা কীভাবে বদলাবো?",
+      a: "সিস্টেম সেটিংস প্যানেলে 'সর্বোচ্চ লগইন সীমা' অংশে একটা সংখ্যা দিয়ে সংরক্ষণ করলে, তারপর থেকে নতুন রেজিস্ট্রেশনকারীরা সেই সংখ্যক লগইনের অনুমতি পাবে।"
     },
     {
-      q: "'কমেন্ট করুন' বাটনটি কোথায় এবং কী কাজে লাগে?",
-      a: "এটি প্রধান পাতার নিচের দিকে 'অ্যাকশন বাটন' সেকশনে অবস্থিত। এই বাটনে ক্লিক করে আপনি আপনার মতামত, পরামর্শ বা কোনো অভিযোগ পাঠাতে পারেন।"
+      q: "'সাবমিশন দেখুন' বা কন্ট্রোল প্যানেলের বাটনগুলো আমি দেখতে পাচ্ছি না কেন?",
+      a: "এই বাটনগুলো শুধুমাত্র এডমিন ও এডিটরদের জন্য দৃশ্যমান। সাধারণ শিক্ষার্থী হিসেবে লগইন করলে এগুলো দেখা যাবে না, এটাই স্বাভাবিক।"
     },
+
+    // ================= সাধারণ ব্যবহার ও সমস্যা সমাধান =================
     {
-      q: "প্রথমবার 'কমেন্ট করুন' বাটনে ক্লিক করলে কী হয়?",
-      a: "প্রথমবার ক্লিক করলে আপনাকে একটি নাম সেট করার মডেল দেখাবে, যেখানে আপনার পূর্ণ নাম সঠিক বানানে লিখতে বলা হবে। এই নাম একবার সেভ হলে পরে আর পরিবর্তন করা যাবে না।"
+      q: "পৃষ্ঠা লোড হতে অনেক সময় নিচ্ছে, কী করব?",
+      a: "প্রথমে ইন্টারনেট সংযোগ পরীক্ষা করুন, তারপর 'ডেটা রিফ্রেশ' বাটনে ক্লিক করুন। সমস্যা থাকলে কিছুক্ষণ পর আবার চেষ্টা করুন।"
     },
     {
-      q: "কমেন্ট জমা দেওয়ার পর একটি টোকেন নম্বর দেওয়া হয়। এই টোকেন নম্বরটি কী কাজে লাগে?",
-      a: "এই টোকেন নম্বরটি আপনার কমেন্টের ইউনিক আইডি। যখন এডমিন আপনার কমেন্টের উত্তর দেবেন, তখন এই টোকেন ব্যবহার করেই আপনাকে সেই উত্তর দেখানো হবে।"
+      q: "'ডেটা লোড ব্যর্থ' বার্তা দেখালে কী করব?",
+      a: "এই বার্তায় একটি কাউন্টডাউনসহ 'পুনরায় রিফ্রেশ' বাটন থাকে। সেটায় ক্লিক করে আবার ডেটা লোড করার চেষ্টা করুন এবং ইন্টারনেট সংযোগ ঠিক আছে কিনা দেখুন।"
     },
     {
-      q: "কেউ আমার কমেন্টের উত্তর দিলে আমি কীভাবে তা জানতে পারি?",
-      a: "আপনি যখন অ্যাপে লগইন করবেন, তখন যদি আপনার কোনো কমেন্টের উত্তর দেওয়া থাকে, তাহলে স্বয়ংক্রিয়ভাবে একটি 'উত্তর' মডেল (Answer Modal) ওপেন হবে। সেখানে আপনার প্রশ্ন এবং উত্তর দেখতে পাবেন।"
+      q: "ভিডিও লোড হচ্ছে না বা কালো পর্দা দেখাচ্ছে, কী করব?",
+      a: "নেটওয়ার্ক সমস্যার কারণে এটা হতে পারে। ভিডিও প্লেয়ারের উপরের 'Download & YouTube Play' বাটন ব্যবহার করে সরাসরি ইউটিউবেও দেখতে পারেন।"
     },
     {
-      q: "উত্তর দেখার পর মডেলের নিচে থাকা 'বুঝেছি!' বাটনটির কাজ কী?",
-      a: "এই বাটনে ক্লিক করলে আপনার লোকাল স্টোরেজ থেকে ঐ কমেন্টের টোকেনটি মুছে যাবে। ফলে ঐ নির্দিষ্ট উত্তরটি আর দেখানো হবে না।"
+      q: "এই অ্যাপে টেক্সট কপি বা স্ক্রিনশট কেন কাজ করে না?",
+      a: "কন্টেন্টের সুরক্ষার জন্য কপি, রাইট-ক্লিক, ড্র্যাগ এবং কিছু কীবোর্ড শর্টকাট ইচ্ছাকৃতভাবে নিষ্ক্রিয় রাখা হয়েছে, যাতে কোর্স মেটেরিয়াল অনুমতি ছাড়া বাইরে না যায়।"
     },
     {
-      q: "এডমিন বা এডিটররা 'সাবমিশন দেখুন' বাটন ব্যবহার করে কী করতে পারেন?",
-      a: "তারা এখানে ক্লিক করে সব শিক্ষার্থীর জমা দেওয়া কমেন্টের তালিকা দেখতে পারেন এবং যেসব কমেন্টের উত্তর দেওয়া হয়নি, সেগুলোর নিচে থাকা 'উত্তর দিন' বাটনে ক্লিক করে উত্তর দিতে পারেন।"
+      q: "মোবাইলে ভিডিও ল্যান্ডস্কেপ মোডে দেখা যায় কি?",
+      a: "হ্যাঁ, ফোন কাত করলে সাধারণ ফুলস্ক্রিনে চলে যাবে। পোর্ট্রেট/রোটেট বাটনটি মূলত লম্বা (মোবাইলে ধারণকৃত) ভিডিওর জন্য আলাদা করে তৈরি।"
     },
     {
-      q: "এডমিন বা এডিটর হিসেবে প্রথমবার 'উত্তর দিন' বাটনে ক্লিক করলে কী হবে?",
-      a: "তাদের কাছেও প্রথমবার একটি নাম সেট করার মডেল আসবে, যেখানে তাদের নাম লিখতে হবে। এই নামটিই 'উত্তর দাতা' হিসেবে শিক্ষার্থীদের কাছে দেখানো হবে।"
+      q: "আমি কি একাধিক ডিভাইস থেকে লগইন করতে পারব?",
+      a: "হ্যাঁ, তবে প্রতিটি নতুন ডিভাইসে লগইন করলে আপনার নির্ধারিত লগইন সীমা থেকে একটা করে কমে যায়।"
     },
     {
-      q: "ড্যাশবোর্ডে কীভাবে প্রবেশ করব?",
-      a: "প্রধান পাতার উপরের দিকে থাকা নেভিগেশন বারে 'ড্যাশবোর্ড' বাটনে ক্লিক করে।"
+      q: "সমস্যা হলে বা সাহায্য দরকার হলে কীভাবে যোগাযোগ করব?",
+      a: "লগইন পাতা বা ফুটারে দেওয়া WhatsApp লিংকে ক্লিক করে সরাসরি এডমিনের সাথে যোগাযোগ করতে পারেন। প্রয়োজনীয় স্ক্রিনশট/প্রমাণসহ বার্তা পাঠালে দ্রুত সমাধান পাবেন।"
     },
     {
-      q: "ড্যাশবোর্ডে প্রথমবার প্রবেশ করলে কী করতে হবে?",
-      a: "প্রথমবার প্রবেশ করলে আপনাকে আপনার নাম লিখতে বলা হবে। এই নামটি আপনার ড্যাশবোর্ড কাস্টমাইজ করার জন্য ব্যবহৃত হবে এবং একবার সেভ হলে পরে আর পরিবর্তন করা যাবে না।"
-    },
-    {
-      q: "ড্যাশবোর্ডে 'জয়েন-এর পর' টেবিলে কী দেখা যায়?",
-      a: "এই টেবিলে আপনি জয়েন করার পর যুক্ত হওয়া ক্লাস, মিশন ও পরীক্ষার মোট সংখ্যা, তার মধ্যে আপনি কতগুলো সম্পন্ন করেছেন এবং কতগুলো বাকি আছে, তা দেখায়।"
-    },
-    {
-      q: "ড্যাশবোর্ডের ব্যাজ সিস্টেমটি কীভাবে কাজ করে?",
-      a: "আপনার মোট অগ্রগতির শতাংশের উপর ভিত্তি করে আপনি বিভিন্ন ব্যাজ অর্জন করতে পারেন। যেমন: স্টার্টার (০%), ব্রোঞ্জ কাপ (৩০%), সিলভার কাপ (৫০%), গোল্ড কাপ (৬৫%) এবং প্লাটিনাম ট্রফি (৮০%)।"
-    },
-    {
-      q: "ড্যাশবোর্ডে এলার্ম/সতর্কতা কেন দেখায়?",
-      a: "এটি আপনার পড়াশোনার ধারাবাহিকতা বজায় রাখতে সাহায্য করে। যেমন, জয়েনের আগের পুরোনো কাজ বাকি থাকলে, আপনি ৭ দিনের বেশি নিষ্ক্রিয় থাকলে বা আপনার অগ্রগতি খুব কম হলে এটি সতর্ক করে দেয়।"
-    },
-    {
-      q: "ড্যাশবোর্ডে থাকা নোটস সিস্টেম কী কাজে লাগে?",
-      a: "আপনি এখানে নিজের পড়ার নোট, গুরুত্বপূর্ণ পয়েন্ট বা রিভিশন নোট সংরক্ষণ করতে পারবেন। নোট যোগ করা, দেখা এবং মুছে ফেলা যায়।"
-    },
-    {
-      q: "একটি ভিডিও দেখার পর কীভাবে তা 'সম্পন্ন' হিসেবে চিহ্নিত হয়?",
-      a: "যখন আপনি একটি ইউটিউব ভিডিওর মোট দৈর্ঘ্যের ৪০% (৪০%) দেখে ফেলবেন, তখন সেটি স্বয়ংক্রিয়ভাবে আপনার ড্যাশবোর্ডে 'সম্পন্ন' হিসেবে গণনা হবে এবং ক্লাস কার্ডের স্ট্যাটাস সবুজ টিক চিহ্নে পরিণত হবে।"
-    },
-    {
-      q: "ড্রাইভ ফাইল (যেমন পিডিএফ) বা অন্য কোনো বাহ্যিক লিংকে ক্লিক করলে তা কী ট্র্যাক করা হয়?",
-      a: "হ্যাঁ। ড্রাইভ ফাইল বা অন্য যেকোনো লিংকে ক্লিক করার সাথে সাথেই তা আপনার ড্যাশবোর্ডে 'সম্পন্ন' হিসেবে ট্র্যাক করা হবে।"
-    },
-    {
-      q: "প্রধান পাতার নিচে একটি ছোট পরিসংখ্যান প্যানেল (Stats Rect) দেখাচ্ছে। এগুলো কী?",
-      a: "এগুলো হলো অ্যাপের কিছু গুরুত্বপূর্ণ সামগ্রিক পরিসংখ্যান, যা একটি স্টোরেজ থেকে রিয়েল-টাইম (real-time) এনে দেখানো হয়।"
-    },
-    {
-      q: "এই প্যানেলে 'মোট অ্যাপে ভিজিট করা হয়েছে' সংখ্যাটি কী নির্দেশ করে?",
-      a: "এটি এখন পর্যন্ত মোট কতজন দর্শক (অনন্য ভিজিটর) অ্যাপটি ভিজিট করেছেন, তার একটি হিসাব।"
-    },
-    {
-      q: "'ক্লাস/মিশন/ডকুমেন্ট দেখা হয়েছে' সংখ্যাটি কীভাবে বৃদ্ধি পায়?",
-      a: "যখনই কোনো শিক্ষার্থী কোনো ক্লাস, মিশন বা ডকুমেন্ট খুলবে (অর্থাৎ একটি রিসোর্সে ক্লিক করবে), তখন এই সংখ্যা ১ করে বৃদ্ধি পায়।"
-    },
-    {
-      q: "'মোট কমেন্ট জমা পড়েছে' এবং 'রিপ্লাই প্রদান করা হয়েছে' সংখ্যা দুটি কী নির্দেশ করে?",
-      a: "এগুলো এখন পর্যন্ত মোট কতগুলো কমেন্ট জমা পড়েছে এবং তার মধ্যে কতগুলো কমেন্টের উত্তর দেওয়া হয়েছে, তার সামগ্রিক পরিসংখ্যান দেখায়।"
-    },
-    {
-      q: "এই অ্যাপ থেকে টেক্সট কপি বা ছবি ডাউনলোড করা যায় কেন?",
-      a: "কন্টেন্টের নিরাপত্তার জন্য অ্যাপে কপি, পেস্ট, রাইট-ক্লিক, ড্র্যাগ এবং এমনকি F12 বা Ctrl+U এর মতো সাধারণ কীবোর্ড শর্টকাটগুলো নিষ্ক্রিয় (disable) করে দেওয়া হয়েছে।"
-    },
-    {
-      q: "'ডেটা লোড ব্যর্থ!' বলে একটি লাল ব্যানার দেখালে কী করব?",
-      a: "এর অর্থ স্টোরেজ থেকে ডেটা আনতে সমস্যা হচ্ছে। ব্যানারের ভেতরে একটি কাউন্টডাউন থাকবে এবং 'পুনরায় রিফ্রেশ' বাটনে ক্লিক করে আপনি আবার ডেটা লোড করার চেষ্টা করতে পারেন।"
-    },
-    {
-      q: "হোয়াটসঅ্যাপ ভেরিফিকেশনের সময় 'নেটওয়ার্ক ত্রুটি' দেখালে কী করব?",
-      a: "নির্দেশনা অনুযায়ী, নেটওয়ার্ক ত্রুটির ক্ষেত্রে আপনাকে অস্থায়ীভাবে অ্যাক্সেস দেওয়া হতে পারে। সমস্যা সমাধানের জন্য নির্দেশিকা মেনে চলুন এবং পরে আবার চেষ্টা করুন।"
-    },
-    {
-      q: "আমি কি একাধিক ডিভাইসে এই একাউন্ট ব্যবহার করতে পারব?",
-      a: "হ্যাঁ, কিন্তু মনে রাখবেন আপনার দ্বিতীয় স্তরের লগইন সীমা মাত্র ৫ বার। আপনি যতবার নতুন ডিভাইসে লগইন করবেন, আপনার লগইন কাউন্ট ততবার কমবে।"
-    },
-    {
-      q: "পৃষ্ঠা লোড হতে অনেক সময় নিচ্ছে। কী করব?",
-      a: "প্রথমে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন। এরপর 'ডেটা রিফ্রেশ' বাটনে ক্লিক করুন। সমস্যা চলতে থাকলে কিছুক্ষণ পর আবার চেষ্টা করুন।"
-    },
-    {
-      q: "ভিডিও প্লেয়ারে ভিডিও দেখা যাচ্ছে না, শুধু একটা কালো পর্দা দেখাচ্ছে।",
-      a: "আপনার ব্রাউজার হয়তো ইউটিউব এম্বেডিং ব্লক করছে। 'Download & YouTube Play' বাটনে ক্লিক করে সরাসরি ইউটিউব অ্যাপ বা সাইটে দেখার চেষ্টা করুন।"
-    },
-    {
-      q: "ড্যাশবোর্ডে আমার অগ্রগতি (Progress) হালনাগাদ হচ্ছে না।",
-      a: "ড্যাশবোর্ডের তথ্য আপনার লোকাল স্টোরেজে সংরক্ষিত থাকে। কখনো কখনো এটি আটকে যেতে পারে। 'ডেটা রিফ্রেশ' বাটনে ক্লিক করে দেখুন অথবা একবার অ্যাপ রিফ্রেশ করুন।"
-    },
-    {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনে বারবার 'ভুল তথ্য' দেখাচ্ছে, অথচ আমি সঠিক তথ্যই দিচ্ছি।",
-      a: "আপনি যে হোয়াটসঅ্যাপ নম্বর ও পাসওয়ার্ড দিয়ে গুগল ফর্ম পূরণ করেছিলেন, তা নিশ্চিতভাবে সঠিক লিখছেন কিনা দেখুন। ক্যাপিটাল লক (Caps Lock) অন থাকলে পাসওয়ার্ড মেলে না। সমস্যা থেকে গেলে WhatsApp-এ যোগাযোগ করুন।"
-    },
-    {
-      q: "'সাবমিশন দেখুন' বাটনটি আমি দেখতে পাচ্ছি না। কেন?",
-      a: "কারণ আপনি সম্ভবত একজন সাধারণ শিক্ষার্থী (User) হিসেবে লগইন করেছেন। এই বাটনটি শুধুমাত্র এডমিন (Owner) এবং এডিটর (Editor) দের জন্যই দৃশ্যমান।"
-    },
-    {
-      q: "পরীক্ষার (Exam) জন্য নির্ধারিত সময় শেষ হয়ে গেলে কী হবে?",
-      a: "কার্ডে একটি লাল রঙের সতর্কবার্তা দেখাবে: 'পরীক্ষায় অংশগ্রহণ করার নির্দিষ্ট সময় শেষ হয়ে গেছে' এবং পরীক্ষায় অংশগ্রহণের বাটনটি নিষ্ক্রিয় হয়ে যাবে।"
-    },
-    {
-      q: "'ক্লাস', 'মিশন' এবং 'ডকুমেন্ট' ফোল্ডারগুলোর মধ্যে মৌলিক পার্থক্য কী?",
-      a: "ক্লাস: সাধারণ ক্লাস ভিডিও। মিশন: বিশেষ কাজ বা অ্যাসাইনমেন্ট (যেমন: কুইজ বা সংক্ষিপ্ত পরীক্ষা)। ডকুমেন্ট: ক্লাসের লেকচার শীট, পিডিএফ, রেজাল্ট শীট ইত্যাদি।"
-    },
-    {
-      q: "একটি ক্লাস কার্ডে থাকা লক আইকনটি (🔒) কী নির্দেশ করে?",
-      a: "এই আইকনটি নির্দেশ করে যে আপনি এখনও দ্বিতীয় স্তরের ভেরিফিকেশন সম্পন্ন করেননি। এই ক্লাসটি দেখতে হলে আপনাকে অবশ্যই আপনার হোয়াটসঅ্যাপ ও পাসওয়ার্ড দিয়ে ভেরিফাই করে নিতে হবে।"
-    },
-    {
-      q: "আমি কি আমার ড্যাশবোর্ডের 'জয়েন ডেট' পরিবর্তন করতে পারি?",
-      a: "না, এটি স্বয়ংক্রিয়ভাবে সেট হয়ে যায় এবং এটি পরিবর্তন করা যায় না। আপনার অগ্রগতি হিসাব করার জন্য এটি একটি রেফারেন্স পয়েন্ট হিসেবে কাজ করে।"
-    },
-    {
-      q: "হোয়াটসঅ্যাপে যোগাযোগের সময় কী কী তথ্য দিতে হবে?",
-      a: "আপনার সমস্যার ধরণ, যে নাম ও হোয়াটসঅ্যাপ নম্বর দিয়ে আপনি রেজিস্ট্রেশন করেছেন এবং প্রয়োজনীয় প্রমাণ (স্ক্রিনশট) দিতে হবে। উল্লেখ্য, সরাসরি ফোন কল না করে শুধু মেসেজ পাঠাতে বলা হয়েছে।"
-    },
-    {
-      q: "আমি কিভাবে বুঝব যে আমার আইডিটি ডুপ্লিকেট হিসেবে চিহ্নিত হয়েছে?",
-      a: "দ্বিতীয় স্তরের ভেরিফিকেশনের সময় 'ডুপ্লিকেট আইডি সনাক্ত' শিরোনামে একটি মডেল দেখালে বুঝবেন যে আপনার এই নাম্বার ও পাসওয়ার্ড দিয়ে ইতিমধ্যে একটি আইডি তৈরি করা হয়েছে।"
-    },
-    {
-      q: "আইডি ডুপ্লিকেট দেখালে আমার করণীয় কী?",
-      a: "নির্দেশনা মেনে, আপনি যদি মনে করেন এটি কোনো প্রতারণা তাহলে প্রয়োজনীয় প্রমাণসহ WhatsApp-এ যোগাযোগ করুন। অন্যথায়, পূর্বের আইডি দিয়েই লগইন করার চেষ্টা করুন।"
-    },
-    {
-      q: "'পুনরায় তথ্য যাচাই করুন' বাটনটি কোথায় এবং কখন ব্যবহার করব?",
-      a: "'অ্যাক্সেস বাতিল' (Revoked Modal) মডেলের ভেতরে এই বাটনটি থাকে। আপনার আইডি বাতিল হয়ে গেলে এবং এডমিনদের সাথে যোগাযোগ করে নতুন করে আইডি তৈরি করার অনুমতি পেলে, এই বাটনে ক্লিক করে পুনরায় যাচাইকরণ প্রক্রিয়া শুরু করতে পারেন।"
-    },
-    {
-      q: "ভিডিও প্লেয়ারে 'Rotate & Fullscreen' বাটনে ক্লিক করার পর ভিডিওটি যদি ঠিকমতো না ঘোরে বা অর্ধেক কাটা যায়?",
-      a: "এটি স্ক্রিনের সাইজের কারণে হতে পারে। এই অবস্থায় ভিডিও ফ্রেমে একবার ক্লিক করে বের হয়ে আবার বাটনে ক্লিক করার চেষ্টা করুন অথবা ভিডিও ফ্রেমের বাইরে খালি জায়গায় ট্যাপ করুন।"
-    },
-    {
-      q: "'পরিসংখ্যান প্যানেল'-এর সংখ্যাগুলো কি আমার ব্যক্তিগত অগ্রগতি দেখায়?",
-      a: "না। এটি একটি সামগ্রিক পরিসংখ্যান। অর্থাৎ এই কোর্সের সব শিক্ষার্থীর মোট ভিজিট, মোট ক্লিক, মোট কমেন্ট ইত্যাদির যোগফল দেখায়।"
-    },
-    {
-      q: "মোবাইলে ভিডিও দেখার সময় কি ল্যান্ডস্কেপ মোডে দেখতে পারব?",
-      a: "হ্যাঁ, পারবেন। পোর্ট্রেট মোডে না গিয়েও আপনি আপনার ফোন ঘুরিয়ে ল্যান্ডস্কেপ মোডে সাধারণ ফুলস্ক্রিনে ভিডিও দেখতে পারেন। পোর্ট্রেট বাটনটি শুধুমাত্র লম্বা ভিডিওর জন্য বিশেষভাবে তৈরি।"
-    },
-    {
-      q: "'আমার নোটস' সেকশনে কি ছবি সংযুক্ত করার সুযোগ আছে?",
-      a: "না, বর্তমানে শুধুমাত্র টেক্সট নোট সংরক্ষণ করা যায়।"
-    },
-    {
-      q: "একটি কমেন্ট জমা দেওয়ার পর আমি কি সেটি এডিট বা মুছে ফেলতে পারি?",
-      a: "বর্তমান সিস্টেমে, সাধারণ শিক্ষার্থীদের নিজেদের কমেন্ট এডিট বা মুছে ফেলার অপশন নেই। প্রয়োজনে নতুন কমেন্ট করে বিষয়টি জানাতে পারেন।"
-    },
-    {
-      q: "'সাজেশন্স' ফোল্ডারে কী ধরনের কন্টেন্ট থাকে?",
-      a: "এখানে পরীক্ষার জন্য গুরুত্বপূর্ণ সাজেশন, সম্ভাব্য প্রশ্ন বা নির্দেশনা সংবলিত ডকুমেন্ট বা ভিডিও থাকে।"
-    },
-    {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনের পর লগইন কাউন্ট কোথায় দেখতে পাব?",
-      a: "লগইন কাউন্ট সরাসরি দেখানো না হলেও, আপনি যখন দ্বিতীয়বারের মতো ভেরিফিকেশন করবেন, তখন কনফার্মেশন মডেলে আপনাকে জানিয়ে দেওয়া হবে যে আপনি পূর্বে কতবার লগইন করেছেন এবং এখন লগইন করলে আর কতবার বাকি থাকবে।"
-    },
-    {
-      q: "আমার লগইন কাউন্ট ৫ বার শেষ হয়ে গেলে আমি কি আর কখনো অ্যাপে প্রবেশ করতে পারব না?",
-      a: "নির্দিষ্ট সময় পর বা এডমিনদের সাথে যোগাযোগ করে হয়তো আপনার কাউন্ট রিসেট বা বাড়ানোর ব্যবস্থা করা হতে পারে। সেক্ষেত্রে প্রমাণাদি সহ WhatsApp-এ যোগাযোগ করতে হবে।"
-    },
-    {
-      q: "হোয়াটসঅ্যাপ নম্বর ভেরিফিকেশনের সময় 'আপনাকে চিনতে পেরেছি' বার্তায় আমার নাম ভুল দেখালে কী করব?",
-      a: "তাহলে আপনি সম্ভবত ভুল হোয়াটসঅ্যাপ নম্বর বা পাসওয়ার্ড দিয়েছেন। আপনি যে তথ্য দিয়ে গুগল ফর্ম পূরণ করেছিলেন, ঠিক সেই তথ্যটি ব্যবহার করুন।"
-    },
-    {
-      q: "একজন শিক্ষার্থী হিসেবে আমি কি ড্যাশবোর্ডে 'জয়েন-এর আগে' থাকা পুরোনো ক্লাসগুলো করব?",
-      a: "হ্যাঁ, ড্যাশবোর্ডের এলার্ম সিস্টেম আপনাকে সেটাই মনে করিয়ে দেয়। পুরোনো ক্লাসগুলো 'আজকের ক্লাস' এ সপ্তাহ বা মাস সিলেক্ট করে খুঁজে বের করে করতে পারেন।"
-    },
-    {
-      q: "ক্লাস কার্ডে লেখা ভিডিওর টাইটেল এবং সিরিয়াল নম্বর কি ভিডিওর অধ্যায় নির্দেশ করে?",
-      a: "সাধারণত হ্যাঁ। প্রতিটি সাবজেক্টের ভিডিওগুলো একটি নির্দিষ্ট ক্রম অনুসারে সাজানো থাকে এবং 'ক্লাস ১, ক্লাস ২' ইত্যাদি সিরিয়াল নম্বর সেই ক্রম নির্দেশ করে।"
-    },
-    {
-      q: "ক্লাসের কার্ডে ভিডিওর সময় ও তারিখ বাংলাদেশ সময় অনুযায়ী দেখায় কি?",
-      a: "হ্যাঁ, সময় ও তারিখ বাংলাদেশ সময় (Asia/Dhaka) অনুযায়ী ফরম্যাট করে দেখানো হয়।"
-    },
-    {
-      q: "একটি কমেন্টের উত্তর পাওয়ার পর 'বুঝেছি' বাটনে ক্লিক না করলে কি হবে?",
-      a: "আপনি যতবার লগইন করবেন, ততবারই উত্তর মডেলটি আবার ওপেন হবে। 'বুঝেছি' বাটনে ক্লিক করলেই এটি স্থায়ীভাবে বন্ধ হবে।"
-    },
-    {
-      q: "ফুটারে থাকা সোশ্যাল মিডিয়া আইকনগুলোর কাজ কী?",
-      a: "এগুলো BOM-এর অফিসিয়াল ফেসবুক গ্রুপ, ফেসবুক পেইজ, ইমেইল এবং ইউটিউব চ্যানেলের লিংক। এগুলোর উপর হোভার করলে টুলটিপ দেখায় যে এটি কোথায় নিয়ে যাবে।"
-    },
-    {
-      q: "'ক্লাস যুক্ত করুন' বাটনটি আমি দেখতে পাচ্ছি না, কিন্তু এডমিন হয়তো চাচ্ছেন আমি ক্লাস যুক্ত করি।",
-      a: "এই বাটনটি শুধুমাত্র মালিক (ADMIN) এবং এডিটর (Editor) রাই দেখতে পান। সাধারণ শিক্ষার্থীদের জন্য এটি দৃশ্যমান নয়।"
-    },
-    {
-      q: "ভিডিও প্লেয়ারের নিচে দেওয়া 'গুরুত্বপূর্ণ তথ্য' সেকশনটি পড়া জরুরি কেন?",
-      a: "সেখানে পোর্ট্রেট মোড কীভাবে কাজ করে, ইন্টারনেট সংযোগ কেমন হওয়া উচিত এবং ভিডিও দেখার সর্বোত্তম অভিজ্ঞতা অর্জনের টিপস দেওয়া থাকে।"
-    },
-    {
-      q: "একই ডিভাইসে একাধিক শিক্ষার্থী যদি আলাদা আইডি ব্যবহার করে, তাহলে কি তাদের ড্যাশবোর্ডের তথ্য গুলিয়ে যাবে?",
-      a: "না। ড্যাশবোর্ডের তথ্য ব্রাউজারের লোকাল স্টোরেজে সংরক্ষিত থাকে। যতক্ষণ পর্যন্ত তারা আলাদা ব্রাউজার প্রোফাইল বা ভিন্ন ব্যবহারকারী অ্যাকাউন্ট ব্যবহার না করে, ততক্ষণ তথ্য ওভাররাইট হতে পারে। এক্ষেত্রে সতর্ক থাকতে হবে।"
-    },
-    {
-      q: "দ্বিতীয় স্তরের ভেরিফিকেশনের সময় 'নতুন আইডি তৈরি করুন' বলে একটি অপশন দেখতে পাচ্ছি কেন?",
-      a: "এটি 'অ্যাক্সেস বাতিল' মডেলের ভেতরে 'পুনরায় তথ্য যাচাই করুন' বাটন হিসেবে আছে। এটি ব্যবহার করে বাতিল হওয়া আইডির জায়গায় নতুন করে ভেরিফিকেশন প্রক্রিয়া শুরু করা যায়।"
-    },
-    {
-      q: "আমি কি আমার মোবাইল ব্রাউজার এবং কম্পিউটার ব্রাউজার, দুই জায়গা থেকেই একাউন্ট ব্যবহার করতে পারব?",
-      a: "হ্যাঁ, পারবেন। কিন্তু মনে রাখবেন, প্রতিটি নতুন ডিভাইসে দ্বিতীয় স্তরের লগইন করতে হবে এবং আপনার লগইন কাউন্ট ৫ বার ব্যবহার হয়ে যেতে পারে।"
-    },
-    {
-      q: "কোর্সের মেয়াদ কতদিন? এবং এই মেয়াদের পর কি আমার অগ্রগতির তথ্য মুছে যাবে?",
-      a: "কোর্সের মেয়াদ সাধারণত বোর্ড পরীক্ষা পর্যন্ত। পরীক্ষা শেষ হওয়ার পরও কিছুদিন অ্যাক্সেস থাকতে পারে। আপনার ব্যক্তিগত অগ্রগতির তথ্য আপনার ডিভাইসের ব্রাউজারেই সংরক্ষিত থাকে, তাই আপনি চাইলে নিজে ডেটা না মুছলে তা থাকবে। তবে সার্ভারের ডেটা (কমেন্ট ইত্যাদি) স্টোরেজে সংরক্ষিত থাকবে।"
-    },
-    {
-      q: "কোথায় এবং কিভাবে সর্বশেষ আপডেট বা গুরুত্বপূর্ণ ঘোষণা পাব?",
-      a: "সব গুরুত্বপূর্ণ ঘোষণা প্রধান পাতার নোটিস বার (Notice Bar)-এ স্ক্রল হতে থাকবে। এছাড়াও, কমিউনিকেশনের জন্য অফিসিয়াল ফেসবুক গ্রুপ ও WhatsApp চ্যানেল ফলো করতে পারেন।"
+      q: "কোথায় গেলে সর্বশেষ ঘোষণা বা আপডেট পাব?",
+      a: "মূল পাতার উপরের 'নোটিস বার'-এ সব গুরুত্বপূর্ণ ঘোষণা স্ক্রল হতে থাকে। এছাড়া অফিসিয়াল ফেসবুক গ্রুপ/পেজ ও WhatsApp চ্যানেল ফলো করেও আপডেট পাওয়া যায়।"
     }
   ];
 
@@ -11573,16 +11836,16 @@ setTimeout(rebindFolderAndSubjectListeners, 300);
       position: absolute !important;
       bottom: 0px !important;
       right: 0px !important;
-      background: gold !important;
-      color: black !important;
-      font-size: 10px !important;
+      background: linear-gradient(135deg, #9333ea, #c026d3) !important;
+      color: #ffffff !important;
+      font-size: 9px !important;
       font-weight: bold !important;
-      padding: 2px 4px !important;
-      border-radius: 10px !important;
-      border: 1px solid white !important;
-      z-index: 99 !important;
-      line-height: 1 !important;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5) !important;
+      padding: 1px 5px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(255,255,255,0.3) !important;
+      z-index: 999999 !important;
+      line-height: 1.3 !important;
+      box-shadow: 0 2px 6px rgba(147, 51, 234, 0.5) !important;
       pointer-events: none !important;
     }
     .pill, .subject-link, .subject-link-class, .subject-link-mission, .subject-link-document,
@@ -12504,46 +12767,47 @@ body.fullscreen-active {
 
 /* লাইভ ক্লাস বক্সের জন্য অতিরিক্ত স্টাইল (DAKHIL-27 এর সাথে মিল রেখে) */
 .live-class-feature {
-    margin: 20px 0;
+    margin: 4px 0 20px;
     text-align: center;
 }
 .live-class-box {
-    background: linear-gradient(160deg, rgba(60,20,20,0.55), rgba(17,23,52,0.92));
-    backdrop-filter: blur(5px);
-    border: 2px solid #ff4d4d;
-    border-radius: 20px;
-    padding: 15px 20px;
-    display: inline-block;
-    box-shadow: 0 0 30px rgba(255, 77, 77, 0.25);
+    background: linear-gradient(160deg, rgba(28,42,94,0.6), rgba(17,23,52,0.92));
+    border: 1px solid rgba(240, 180, 41, 0.22);
+    border-radius: 18px;
+    padding: 24px 26px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.32);
 }
 .live-class-box h3 {
-    color: #ff6b6b;
+    color: #ffd76e;
     font-size: 24px;
     margin-bottom: 5px;
-    text-shadow: 0 0 12px rgba(255, 77, 77, 0.4);
 }
 .live-class-box p {
-    color: #e6e9fa;
-    margin-bottom: 10px;
+    color: #b9c0e6;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 .live-btn-small {
-    background: linear-gradient(135deg, #ff4d4d, #b30000);
-    border: none;
-    padding: 10px 25px;
+    background: linear-gradient(135deg, #14b8c4, #0e7c8f);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 12px 32px;
     border-radius: 50px;
     color: white;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(255,0,0,0.2);
+    box-shadow: 0 6px 18px rgba(20, 184, 196, 0.4);
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 .live-btn-small:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,77,77,0.3);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 24px rgba(20, 184, 196, 0.55);
 }
 </style>
 
@@ -13708,7 +13972,7 @@ label {
   padding: 2px 7px !important;
 }
 #newMissionsGrid .pill {
-  background: linear-gradient(135deg, #ffffff, rgba(108, 99, 255, 0.05));
+  background: linear-gradient(160deg, rgba(108,99,255,0.28), rgba(17,23,52,0.92));
   border-left: 3px solid #6c63ff;
 }
 #newMissionsGrid .pill:hover {
@@ -14623,6 +14887,186 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ মিশন ফিচার ' + (ENABLE_MISSIONS ? 'চালু' : 'বন্ধ') + ' করা হয়েছে।');
 })();
 </script>
-	
+	<script>
+(function() {
+  'use strict';
+
+  const CACHE_PREFIX = 'bomImgCache_';
+  const MAX_ITEM_SIZE = 900 * 1024; // এর চেয়ে বড় ছবি ক্যাশ করা হবে না (স্টোরেজ বাঁচাতে)
+
+  function loadFromCache(url) {
+    try { return localStorage.getItem(CACHE_PREFIX + url); }
+    catch (e) { return null; }
+  }
+
+  function saveToCache(url, dataUrl) {
+    try {
+      if (dataUrl && dataUrl.length <= MAX_ITEM_SIZE) {
+        localStorage.setItem(CACHE_PREFIX + url, dataUrl);
+      }
+    } catch (e) { /* স্টোরেজ পূর্ণ হলে চুপচাপ উপেক্ষা, সাইট স্বাভাবিক চলবে */ }
+  }
+
+  // ---------- সাধারণ <img> ট্যাগের ছবি ক্যাশ করা ----------
+  function getAllKnownImageUrls() {
+    const urls = new Set();
+    const source = document.documentElement.outerHTML;
+    const regex = /https?:\/\/[^\s"'<>\)]+?\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s"'<>\)]*)?/gi;
+    let match;
+    while ((match = regex.exec(source)) !== null) urls.add(match[0]);
+    document.querySelectorAll('img[src]').forEach(img => {
+      const src = img.getAttribute('src');
+      if (src && /^https?:\/\//i.test(src)) urls.add(src);
+    });
+    return urls;
+  }
+
+  function cleanupStaleImgCache(validUrls) {
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.indexOf(CACHE_PREFIX) === 0) {
+        const url = key.slice(CACHE_PREFIX.length);
+        if (url.indexOf('unsplash.com') === -1 && !validUrls.has(url)) {
+          keysToRemove.push(key);
+        }
+      }
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+  }
+
+  function processImage(img) {
+    const url = img.getAttribute('src');
+    if (!url || !/^https?:\/\//i.test(url)) return;
+
+    const cached = loadFromCache(url);
+    if (cached) {
+      if (img.src !== cached) img.src = cached;
+      return;
+    }
+
+    fetch(url, { mode: 'cors' })
+      .then(res => { if (!res.ok) throw new Error('fetch failed'); return res.blob(); })
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = function () { saveToCache(url, reader.result); };
+        reader.readAsDataURL(blob);
+      })
+      .catch(function () { /* ব্যর্থ হলে ছবি স্বাভাবিকভাবেই লোড হতে থাকবে */ });
+  }
+
+  function processAllImages() {
+    const validUrls = getAllKnownImageUrls();
+    cleanupStaleImgCache(validUrls);
+    document.querySelectorAll('img[src]').forEach(processImage);
+  }
+
+  // ---------- CSS ব্যাকগ্রাউন্ড ইমেজ (.animated-logo) ক্যাশ করা ----------
+  function extractUrlsFromBackground(bgValue) {
+    const urls = [];
+    const regex = /url\(["']?(https?:\/\/[^"')]+)["']?\)/gi;
+    let match;
+    while ((match = regex.exec(bgValue)) !== null) urls.push(match[1]);
+    return urls;
+  }
+
+  function cacheBackgroundImage(el) {
+    const computed = window.getComputedStyle(el).backgroundImage;
+    if (!computed || computed === 'none') return;
+    const urls = extractUrlsFromBackground(computed);
+    if (urls.length === 0) return;
+
+    const results = new Array(urls.length).fill(null);
+    let pending = urls.length;
+
+    function applyIfDone() {
+      if (pending > 0) return;
+      const finalUrls = results.map((val, i) => val || urls[i]);
+      el.style.backgroundImage = finalUrls.map(u => `url('${u}')`).join(', ');
+    }
+
+    urls.forEach((url, index) => {
+      const cached = loadFromCache(url);
+      if (cached) {
+        results[index] = cached;
+        pending--;
+        applyIfDone();
+        return;
+      }
+      fetch(url, { mode: 'cors' })
+        .then(res => { if (!res.ok) throw new Error('fetch failed'); return res.blob(); })
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            saveToCache(url, reader.result);
+            results[index] = reader.result;
+            pending--;
+            applyIfDone();
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch(function () {
+          pending--;
+          applyIfDone();
+        });
+    });
+  }
+
+  function cleanupStaleBackgroundCache() {
+    const validUrls = new Set();
+    document.querySelectorAll('.animated-logo').forEach(el => {
+      const computed = window.getComputedStyle(el).backgroundImage;
+      extractUrlsFromBackground(computed).forEach(u => validUrls.add(u));
+    });
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.indexOf(CACHE_PREFIX) === 0) {
+        const url = key.slice(CACHE_PREFIX.length);
+        if (url.indexOf('unsplash.com') !== -1 && !validUrls.has(url)) {
+          keysToRemove.push(key);
+        }
+      }
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+  }
+
+  function runLogoCache() {
+    cleanupStaleBackgroundCache();
+    document.querySelectorAll('.animated-logo').forEach(cacheBackgroundImage);
+  }
+
+  // ---------- সবকিছু একসাথে চালানো ----------
+  function runAll() {
+    processAllImages();
+    runLogoCache();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runAll);
+  } else {
+    runAll();
+  }
+
+  // পরবর্তীতে খোলা মডাল/প্যানেলের নতুন ছবির জন্যও কাজ করবে
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (node) {
+        if (node.nodeType === 1) {
+          if (node.tagName === 'IMG') processImage(node);
+          if (node.querySelectorAll) node.querySelectorAll('img[src]').forEach(processImage);
+        }
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+})();
+</script>
+<script>
+window.addEventListener('error', function(e) {
+  alert('এরর ধরা পড়েছে:\n' + e.message + '\nলাইন: ' + e.lineno);
+});
+</script>
 </body>
 </html>
